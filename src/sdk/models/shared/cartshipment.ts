@@ -6,7 +6,7 @@ import { SpeakeasyBase, SpeakeasyMetadata } from "../../../internal/utils";
 import { Amounts } from "./amounts";
 import { Expose, Type } from "class-transformer";
 
-export class CartShipmentInput extends SpeakeasyBase {
+export class CartShipment extends SpeakeasyBase {
     @SpeakeasyMetadata()
     @Expose({ name: "address" })
     address?: any;

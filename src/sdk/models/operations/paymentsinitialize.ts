@@ -22,7 +22,7 @@ export class PaymentsInitializeRequest extends SpeakeasyBase {
     xPublishableKey: string;
 
     @SpeakeasyMetadata({ data: "request, media_type=application/json" })
-    paymentMethodInitializeRequestInput: shared.PaymentMethodInitializeRequestInput;
+    paymentMethodInitializeRequest: shared.PaymentMethodInitializeRequest;
 }
 
 export class PaymentsInitializeResponse extends SpeakeasyBase {

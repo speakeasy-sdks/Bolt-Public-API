@@ -14,7 +14,7 @@ export class GuestPaymentsInitializeRequest extends SpeakeasyBase {
     xPublishableKey: string;
 
     @SpeakeasyMetadata({ data: "request, media_type=application/json" })
-    guestPaymentMethodInitializeRequestInput: shared.GuestPaymentMethodInitializeRequestInput;
+    guestPaymentMethodInitializeRequest: shared.GuestPaymentMethodInitializeRequest;
 }
 
 export class GuestPaymentsInitializeResponse extends SpeakeasyBase {

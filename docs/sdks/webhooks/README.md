@@ -24,7 +24,6 @@ Create a new webhook to receive notifications from Bolt about various events, su
 ```typescript
 import { BoltPublicAPI } from "Bolt-Public-API";
 import { WebhooksCreateResponse } from "Bolt-Public-API/dist/sdk/models/operations";
-import { EventGroupEventGroup, EventGroupTag, EventListEventList, EventListTag } from "Bolt-Public-API/dist/sdk/models/shared";
 
 const sdk = new BoltPublicAPI({
   security: {
@@ -33,12 +32,7 @@ const sdk = new BoltPublicAPI({
 });
 
 sdk.webhooks.webhooksCreate({
-  event: {
-    dotTag: EventListTag.List,
-    eventList: [
-      EventListEventList.Auth,
-    ],
-  },
+  event: "watt",
   url: "https://www.example.com/webhook",
 }).then((res: WebhooksCreateResponse) => {
   if (res.statusCode == 200) {

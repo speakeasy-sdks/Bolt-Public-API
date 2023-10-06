@@ -3,14 +3,14 @@
  */
 
 import { SpeakeasyBase, SpeakeasyMetadata } from "../../../internal/utils";
-import { CartInput } from "./cart";
+import { Cart } from "./cart";
 import { Expose, Type } from "class-transformer";
 
-export class PaymentMethodInitializeRequestInput extends SpeakeasyBase {
+export class PaymentMethodInitializeRequest extends SpeakeasyBase {
     @SpeakeasyMetadata()
     @Expose({ name: "cart" })
-    @Type(() => CartInput)
-    cart: CartInput;
+    @Type(() => Cart)
+    cart: Cart;
 
     @SpeakeasyMetadata()
     @Expose({ name: "payment_method" })

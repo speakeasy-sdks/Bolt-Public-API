@@ -1,4 +1,4 @@
-# CartShipmentInput
+# CartShipment
 
 
 ## Fields

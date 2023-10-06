@@ -6,10 +6,10 @@ import { SpeakeasyBase, SpeakeasyMetadata } from "../../../internal/utils";
 import { Amounts } from "./amounts";
 import { CartDiscount } from "./cartdiscount";
 import { CartItem } from "./cartitem";
-import { CartShipmentInput } from "./cartshipment";
+import { CartShipment } from "./cartshipment";
 import { Expose, Type } from "class-transformer";
 
-export class CartInput extends SpeakeasyBase {
+export class Cart extends SpeakeasyBase {
     @SpeakeasyMetadata()
     @Expose({ name: "amounts" })
     @Type(() => Amounts)
@@ -46,8 +46,8 @@ export class CartInput extends SpeakeasyBase {
     @Expose({ name: "order_reference" })
     orderReference: string;
 
-    @SpeakeasyMetadata({ elemType: CartShipmentInput })
+    @SpeakeasyMetadata({ elemType: CartShipment })
     @Expose({ name: "shipments" })
-    @Type(() => CartShipmentInput)
-    shipments?: CartShipmentInput[];
+    @Type(() => CartShipment)
+    shipments?: CartShipment[];
 }

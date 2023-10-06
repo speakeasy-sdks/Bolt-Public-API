@@ -23,7 +23,6 @@ Bolt when it is updated or finalized for guest shoppers.
 ```typescript
 import { BoltPublicAPI } from "Bolt-Public-API";
 import { GuestPaymentsInitializeResponse } from "Bolt-Public-API/dist/sdk/models/operations";
-import { AddressReferenceExplicitTag, AddressReferenceIdTag, PaymentMethodPaypalTag } from "Bolt-Public-API/dist/sdk/models/shared";
 
 const sdk = new BoltPublicAPI({
   security: {
@@ -33,7 +32,7 @@ const sdk = new BoltPublicAPI({
 
 sdk.payments.guestPaymentsInitialize({
   xPublishableKey: "Soap whereas input",
-  guestPaymentMethodInitializeRequestInput: {
+  guestPaymentMethodInitializeRequest: {
     cart: {
       amounts: {
         currency: "USD",
@@ -67,20 +66,7 @@ sdk.payments.guestPaymentsInitialize({
       orderReference: "order_100",
       shipments: [
         {
-          address: {
-            dotTag: AddressReferenceExplicitTag.Explicit,
-            company: "ACME Corporation",
-            countryCode: "US",
-            email: "alice@example.com",
-            firstName: "Alice",
-            lastName: "Baker",
-            locality: "San Francisco",
-            phone: "+14155550199",
-            postalCode: "94105",
-            region: "CA",
-            streetAddress1: "535 Mission St, Ste 1401",
-            streetAddress2: "c/o Shipping Department",
-          },
+          address: "Martin",
           carrier: "FedEx",
           cost: {
             currency: "USD",
@@ -90,11 +76,7 @@ sdk.payments.guestPaymentsInitialize({
         },
       ],
     },
-    paymentMethod: {
-      dotTag: PaymentMethodPaypalTag.Paypal,
-      cancel: "www.example.com/handle_paypal_cancel",
-      success: "www.example.com/handle_paypal_success",
-    },
+    paymentMethod: "perferendis",
   },
 }).then((res: GuestPaymentsInitializeResponse) => {
   if (res.statusCode == 200) {
@@ -127,11 +109,6 @@ Bolt when it is updated or finalized for logged in shoppers.
 ```typescript
 import { BoltPublicAPI } from "Bolt-Public-API";
 import { PaymentsInitializeResponse, PaymentsInitializeSecurity } from "Bolt-Public-API/dist/sdk/models/operations";
-import {
-  AddressReferenceExplicitTag,
-  AddressReferenceIdTag,
-  PaymentMethodSavedPaymentMethodTag,
-} from "Bolt-Public-API/dist/sdk/models/shared";
 
 const sdk = new BoltPublicAPI();
 const operationSecurity: PaymentsInitializeSecurity = {
@@ -141,7 +118,7 @@ const operationSecurity: PaymentsInitializeSecurity = {
 
 sdk.payments.paymentsInitialize({
   xPublishableKey: "possimus",
-  paymentMethodInitializeRequestInput: {
+  paymentMethodInitializeRequest: {
     cart: {
       amounts: {
         currency: "USD",
@@ -175,20 +152,7 @@ sdk.payments.paymentsInitialize({
       orderReference: "order_100",
       shipments: [
         {
-          address: {
-            dotTag: AddressReferenceExplicitTag.Explicit,
-            company: "ACME Corporation",
-            countryCode: "US",
-            email: "alice@example.com",
-            firstName: "Alice",
-            lastName: "Baker",
-            locality: "San Francisco",
-            phone: "+14155550199",
-            postalCode: "94105",
-            region: "CA",
-            streetAddress1: "535 Mission St, Ste 1401",
-            streetAddress2: "c/o Shipping Department",
-          },
+          address: "bin",
           carrier: "FedEx",
           cost: {
             currency: "USD",
@@ -198,10 +162,7 @@ sdk.payments.paymentsInitialize({
         },
       ],
     },
-    paymentMethod: {
-      dotTag: PaymentMethodSavedPaymentMethodTag.SavedPaymentMethod,
-      id: "id",
-    },
+    paymentMethod: "Cloned",
   },
 }, operationSecurity).then((res: PaymentsInitializeResponse) => {
   if (res.statusCode == 200) {

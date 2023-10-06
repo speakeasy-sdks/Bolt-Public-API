@@ -51,7 +51,7 @@ export class Payments {
         try {
             [reqBodyHeaders, reqBody] = utils.serializeRequestBody(
                 req,
-                "guestPaymentMethodInitializeRequestInput",
+                "guestPaymentMethodInitializeRequest",
                 "json"
             );
         } catch (e: unknown) {
@@ -159,7 +159,7 @@ export class Payments {
         try {
             [reqBodyHeaders, reqBody] = utils.serializeRequestBody(
                 req,
-                "paymentMethodInitializeRequestInput",
+                "paymentMethodInitializeRequest",
                 "json"
             );
         } catch (e: unknown) {
