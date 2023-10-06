@@ -5,6 +5,9 @@ management:
   speakeasyVersion: 1.94.0
   generationVersion: 2.147.0
 generation:
+  devContainers:
+      enabled: true
+      schemaPath: ./openapi.yaml
   comments:
     disableComments: false
     omitDescriptionIfSummaryPresent: false
