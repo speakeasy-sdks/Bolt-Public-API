@@ -22,67 +22,68 @@ Bolt when it is updated or finalized for guest shoppers.
 
 ```typescript
 import { BoltPublicAPI } from "Bolt-Public-API";
-import { GuestPaymentsInitializeResponse } from "Bolt-Public-API/dist/sdk/models/operations";
 
-const sdk = new BoltPublicAPI({
-  security: {
-    apiKey: "",
-  },
-});
-
-sdk.payments.guestPaymentsInitialize({
-  xPublishableKey: "Soap whereas input",
-  guestPaymentMethodInitializeRequest: {
-    cart: {
-      amounts: {
-        currency: "USD",
-        tax: 900,
-        total: 900,
-      },
-      discounts: [
-        {
-          amounts: {
-            currency: "USD",
-            tax: 900,
-            total: 900,
-          },
-          code: "SUMMER10DISCOUNT",
-          detailsUrl: "https://www.example.com/SUMMER-SALE",
-        },
-      ],
-      displayId: "215614191",
-      items: [
-        {
-          description: "Large tote with Bolt logo.",
-          imageUrl: "https://www.example.com/products/123456/images/1.png",
-          name: "Bolt Swag Bag",
-          quantity: 1,
-          reference: "item_100",
-          totalAmount: 1000,
-          unitPrice: 1000,
-        },
-      ],
-      orderDescription: "Order #1234567890",
-      orderReference: "order_100",
-      shipments: [
-        {
-          address: "Martin",
-          carrier: "FedEx",
-          cost: {
-            currency: "USD",
-            tax: 900,
-            total: 900,
-          },
-        },
-      ],
+(async() => {
+  const sdk = new BoltPublicAPI({
+    security: {
+      apiKey: "",
     },
-    paymentMethod: "perferendis",
-  },
-}).then((res: GuestPaymentsInitializeResponse) => {
+  });
+
+  const res = await sdk.payments.guestPaymentsInitialize({
+    xPublishableKey: "Soap whereas input",
+    guestPaymentMethodInitializeRequest: {
+      cart: {
+        amounts: {
+          currency: "USD",
+          tax: 900,
+          total: 900,
+        },
+        discounts: [
+          {
+            amounts: {
+              currency: "USD",
+              tax: 900,
+              total: 900,
+            },
+            code: "SUMMER10DISCOUNT",
+            detailsUrl: "https://www.example.com/SUMMER-SALE",
+          },
+        ],
+        displayId: "215614191",
+        items: [
+          {
+            description: "Large tote with Bolt logo.",
+            imageUrl: "https://www.example.com/products/123456/images/1.png",
+            name: "Bolt Swag Bag",
+            quantity: 1,
+            reference: "item_100",
+            totalAmount: 1000,
+            unitPrice: 1000,
+          },
+        ],
+        orderDescription: "Order #1234567890",
+        orderReference: "order_100",
+        shipments: [
+          {
+            address: "Martin",
+            carrier: "FedEx",
+            cost: {
+              currency: "USD",
+              tax: 900,
+              total: 900,
+            },
+          },
+        ],
+      },
+      paymentMethod: "perferendis",
+    },
+  });
+
   if (res.statusCode == 200) {
     // handle response
   }
-});
+})();
 ```
 
 ### Parameters
@@ -108,67 +109,69 @@ Bolt when it is updated or finalized for logged in shoppers.
 
 ```typescript
 import { BoltPublicAPI } from "Bolt-Public-API";
-import { PaymentsInitializeResponse, PaymentsInitializeSecurity } from "Bolt-Public-API/dist/sdk/models/operations";
+import { PaymentsInitializeSecurity } from "Bolt-Public-API/dist/sdk/models/operations";
 
-const sdk = new BoltPublicAPI();
+(async() => {
+  const sdk = new BoltPublicAPI();
 const operationSecurity: PaymentsInitializeSecurity = {
   apiKey: "",
   oauth: "",
 };
 
-sdk.payments.paymentsInitialize({
-  xPublishableKey: "possimus",
-  paymentMethodInitializeRequest: {
-    cart: {
-      amounts: {
-        currency: "USD",
-        tax: 900,
-        total: 900,
+  const res = await sdk.payments.paymentsInitialize({
+    xPublishableKey: "possimus",
+    paymentMethodInitializeRequest: {
+      cart: {
+        amounts: {
+          currency: "USD",
+          tax: 900,
+          total: 900,
+        },
+        discounts: [
+          {
+            amounts: {
+              currency: "USD",
+              tax: 900,
+              total: 900,
+            },
+            code: "SUMMER10DISCOUNT",
+            detailsUrl: "https://www.example.com/SUMMER-SALE",
+          },
+        ],
+        displayId: "215614191",
+        items: [
+          {
+            description: "Large tote with Bolt logo.",
+            imageUrl: "https://www.example.com/products/123456/images/1.png",
+            name: "Bolt Swag Bag",
+            quantity: 1,
+            reference: "item_100",
+            totalAmount: 1000,
+            unitPrice: 1000,
+          },
+        ],
+        orderDescription: "Order #1234567890",
+        orderReference: "order_100",
+        shipments: [
+          {
+            address: "bin",
+            carrier: "FedEx",
+            cost: {
+              currency: "USD",
+              tax: 900,
+              total: 900,
+            },
+          },
+        ],
       },
-      discounts: [
-        {
-          amounts: {
-            currency: "USD",
-            tax: 900,
-            total: 900,
-          },
-          code: "SUMMER10DISCOUNT",
-          detailsUrl: "https://www.example.com/SUMMER-SALE",
-        },
-      ],
-      displayId: "215614191",
-      items: [
-        {
-          description: "Large tote with Bolt logo.",
-          imageUrl: "https://www.example.com/products/123456/images/1.png",
-          name: "Bolt Swag Bag",
-          quantity: 1,
-          reference: "item_100",
-          totalAmount: 1000,
-          unitPrice: 1000,
-        },
-      ],
-      orderDescription: "Order #1234567890",
-      orderReference: "order_100",
-      shipments: [
-        {
-          address: "bin",
-          carrier: "FedEx",
-          cost: {
-            currency: "USD",
-            tax: 900,
-            total: 900,
-          },
-        },
-      ],
+      paymentMethod: "Cloned",
     },
-    paymentMethod: "Cloned",
-  },
-}, operationSecurity).then((res: PaymentsInitializeResponse) => {
+  }, operationSecurity);
+
   if (res.statusCode == 200) {
     // handle response
   }
-});
+})();
 ```
 
 ### Parameters

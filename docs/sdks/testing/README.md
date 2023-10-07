@@ -22,26 +22,27 @@ Create a Bolt shopper account for testing purposes.
 
 ```typescript
 import { BoltPublicAPI } from "Bolt-Public-API";
-import { TestingAccountCreateResponse } from "Bolt-Public-API/dist/sdk/models/operations";
 import { AccountTestCreationDataEmailState, AccountTestCreationDataPhoneState } from "Bolt-Public-API/dist/sdk/models/shared";
 
-const sdk = new BoltPublicAPI({
-  security: {
-    apiKey: "",
-  },
-});
+(async() => {
+  const sdk = new BoltPublicAPI({
+    security: {
+      apiKey: "",
+    },
+  });
 
-sdk.testing.testingAccountCreate({
-  deactivateAt: new Date("2017-07-21T17:32:28Z"),
-  emailState: AccountTestCreationDataEmailState.Unverified,
-  hasAddress: true,
-  isMigrated: true,
-  phoneState: AccountTestCreationDataPhoneState.Verified,
-}).then((res: TestingAccountCreateResponse) => {
+  const res = await sdk.testing.testingAccountCreate({
+    deactivateAt: new Date("2017-07-21T17:32:28Z"),
+    emailState: AccountTestCreationDataEmailState.Unverified,
+    hasAddress: true,
+    isMigrated: true,
+    phoneState: AccountTestCreationDataPhoneState.Verified,
+  });
+
   if (res.statusCode == 200) {
     // handle response
   }
-});
+})();
 ```
 
 ### Parameters
@@ -67,19 +68,20 @@ generated against the `4111 1111 1111 1004` test card.
 
 ```typescript
 import { BoltPublicAPI } from "Bolt-Public-API";
-import { TestingCreditCardGetResponse } from "Bolt-Public-API/dist/sdk/models/operations";
 
-const sdk = new BoltPublicAPI({
-  security: {
-    apiKey: "",
-  },
-});
+(async() => {
+  const sdk = new BoltPublicAPI({
+    security: {
+      apiKey: "",
+    },
+  });
 
-sdk.testing.testingCreditCardGet().then((res: TestingCreditCardGetResponse) => {
+  const res = await sdk.testing.testingCreditCardGet();
+
   if (res.statusCode == 200) {
     // handle response
   }
-});
+})();
 ```
 
 ### Parameters
@@ -105,35 +107,36 @@ information to shipments associated with orders.
 
 ```typescript
 import { BoltPublicAPI } from "Bolt-Public-API";
-import { TestingShipmentTrackingCreateResponse } from "Bolt-Public-API/dist/sdk/models/operations";
 import { ShipmentTrackingUpdateStatus, ShipmentTrackingUpdateTrackingDetailsStatus } from "Bolt-Public-API/dist/sdk/models/shared";
 
-const sdk = new BoltPublicAPI({
-  security: {
-    apiKey: "",
-  },
-});
-
-sdk.testing.testingShipmentTrackingCreate({
-  deliveryDate: new Date("2014-08-23:T06:00:00Z"),
-  status: ShipmentTrackingUpdateStatus.InTransit,
-  trackingDetails: [
-    {
-      countryCode: "US",
-      eventDate: "2014-08-21:T14:24:00Z",
-      locality: "San Francisco",
-      message: "Billing information received",
-      postalCode: "94105",
-      region: "CA",
-      status: ShipmentTrackingUpdateTrackingDetailsStatus.PreTransit,
+(async() => {
+  const sdk = new BoltPublicAPI({
+    security: {
+      apiKey: "",
     },
-  ],
-  trackingNumber: "MockBolt-143292",
-}).then((res: TestingShipmentTrackingCreateResponse) => {
+  });
+
+  const res = await sdk.testing.testingShipmentTrackingCreate({
+    deliveryDate: new Date("2014-08-23:T06:00:00Z"),
+    status: ShipmentTrackingUpdateStatus.InTransit,
+    trackingDetails: [
+      {
+        countryCode: "US",
+        eventDate: "2014-08-21:T14:24:00Z",
+        locality: "San Francisco",
+        message: "Billing information received",
+        postalCode: "94105",
+        region: "CA",
+        status: ShipmentTrackingUpdateTrackingDetailsStatus.PreTransit,
+      },
+    ],
+    trackingNumber: "MockBolt-143292",
+  });
+
   if (res.statusCode == 200) {
     // handle response
   }
-});
+})();
 ```
 
 ### Parameters

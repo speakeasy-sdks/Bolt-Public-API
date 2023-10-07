@@ -29,22 +29,24 @@ which is documented in [Install the Bolt Tokenizer](https://help.bolt.com/develo
 
 ```typescript
 import { BoltPublicAPI } from "Bolt-Public-API";
-import { AccountAddPaymentMethodResponse, AccountAddPaymentMethodSecurity } from "Bolt-Public-API/dist/sdk/models/operations";
+import { AccountAddPaymentMethodSecurity } from "Bolt-Public-API/dist/sdk/models/operations";
 
-const sdk = new BoltPublicAPI();
+(async() => {
+  const sdk = new BoltPublicAPI();
 const operationSecurity: AccountAddPaymentMethodSecurity = {
   apiKey: "",
   oauth: "",
 };
 
-sdk.account.accountAddPaymentMethod({
-  requestBody: "Officer",
-  xPublishableKey: "Silicon female",
-}, operationSecurity).then((res: AccountAddPaymentMethodResponse) => {
+  const res = await sdk.account.accountAddPaymentMethod({
+    requestBody: "Officer",
+    xPublishableKey: "Silicon female",
+  }, operationSecurity);
+
   if (res.statusCode == 200) {
     // handle response
   }
-});
+})();
 ```
 
 ### Parameters
@@ -69,35 +71,37 @@ Add an address to the shopper's account
 
 ```typescript
 import { BoltPublicAPI } from "Bolt-Public-API";
-import { AccountAddressCreateResponse, AccountAddressCreateSecurity } from "Bolt-Public-API/dist/sdk/models/operations";
+import { AccountAddressCreateSecurity } from "Bolt-Public-API/dist/sdk/models/operations";
 
-const sdk = new BoltPublicAPI();
+(async() => {
+  const sdk = new BoltPublicAPI();
 const operationSecurity: AccountAddressCreateSecurity = {
   apiKey: "",
   oauth: "",
 };
 
-sdk.account.accountAddressCreate({
-  xPublishableKey: "Corporate Designer",
-  addressListingInput: {
-    company: "ACME Corporation",
-    countryCode: "US",
-    email: "alice@example.com",
-    firstName: "Alice",
-    isDefault: true,
-    lastName: "Baker",
-    locality: "San Francisco",
-    phone: "+14155550199",
-    postalCode: "94105",
-    region: "CA",
-    streetAddress1: "535 Mission St, Ste 1401",
-    streetAddress2: "c/o Shipping Department",
-  },
-}, operationSecurity).then((res: AccountAddressCreateResponse) => {
+  const res = await sdk.account.accountAddressCreate({
+    xPublishableKey: "Corporate Designer",
+    addressListingInput: {
+      company: "ACME Corporation",
+      countryCode: "US",
+      email: "alice@example.com",
+      firstName: "Alice",
+      isDefault: true,
+      lastName: "Baker",
+      locality: "San Francisco",
+      phone: "+14155550199",
+      postalCode: "94105",
+      region: "CA",
+      streetAddress1: "535 Mission St, Ste 1401",
+      streetAddress2: "c/o Shipping Department",
+    },
+  }, operationSecurity);
+
   if (res.statusCode == 200) {
     // handle response
   }
-});
+})();
 ```
 
 ### Parameters
@@ -124,22 +128,24 @@ shipments that are associated with it.
 
 ```typescript
 import { BoltPublicAPI } from "Bolt-Public-API";
-import { AccountAddressDeleteResponse, AccountAddressDeleteSecurity } from "Bolt-Public-API/dist/sdk/models/operations";
+import { AccountAddressDeleteSecurity } from "Bolt-Public-API/dist/sdk/models/operations";
 
-const sdk = new BoltPublicAPI();
+(async() => {
+  const sdk = new BoltPublicAPI();
 const operationSecurity: AccountAddressDeleteSecurity = {
   apiKey: "",
   oauth: "",
 };
 
-sdk.account.accountAddressDelete({
-  xPublishableKey: "bypassing Interactions inasmuch",
-  id: "D4g3h5tBuVYK9",
-}, operationSecurity).then((res: AccountAddressDeleteResponse) => {
+  const res = await sdk.account.accountAddressDelete({
+    xPublishableKey: "bypassing Interactions inasmuch",
+    id: "D4g3h5tBuVYK9",
+  }, operationSecurity);
+
   if (res.statusCode == 200) {
     // handle response
   }
-});
+})();
 ```
 
 ### Parameters
@@ -167,36 +173,38 @@ shipments.
 
 ```typescript
 import { BoltPublicAPI } from "Bolt-Public-API";
-import { AccountAddressEditResponse, AccountAddressEditSecurity } from "Bolt-Public-API/dist/sdk/models/operations";
+import { AccountAddressEditSecurity } from "Bolt-Public-API/dist/sdk/models/operations";
 
-const sdk = new BoltPublicAPI();
+(async() => {
+  const sdk = new BoltPublicAPI();
 const operationSecurity: AccountAddressEditSecurity = {
   apiKey: "",
   oauth: "",
 };
 
-sdk.account.accountAddressEdit({
-  xPublishableKey: "Convertible",
-  addressListingInput: {
-    company: "ACME Corporation",
-    countryCode: "US",
-    email: "alice@example.com",
-    firstName: "Alice",
-    isDefault: true,
-    lastName: "Baker",
-    locality: "San Francisco",
-    phone: "+14155550199",
-    postalCode: "94105",
-    region: "CA",
-    streetAddress1: "535 Mission St, Ste 1401",
-    streetAddress2: "c/o Shipping Department",
-  },
-  id: "D4g3h5tBuVYK9",
-}, operationSecurity).then((res: AccountAddressEditResponse) => {
+  const res = await sdk.account.accountAddressEdit({
+    xPublishableKey: "Convertible",
+    addressListingInput: {
+      company: "ACME Corporation",
+      countryCode: "US",
+      email: "alice@example.com",
+      firstName: "Alice",
+      isDefault: true,
+      lastName: "Baker",
+      locality: "San Francisco",
+      phone: "+14155550199",
+      postalCode: "94105",
+      region: "CA",
+      streetAddress1: "535 Mission St, Ste 1401",
+      streetAddress2: "c/o Shipping Department",
+    },
+    id: "D4g3h5tBuVYK9",
+  }, operationSecurity);
+
   if (res.statusCode == 200) {
     // handle response
   }
-});
+})();
 ```
 
 ### Parameters
@@ -221,26 +229,27 @@ Determine whether or not an identifier is associated with an existing Bolt accou
 
 ```typescript
 import { BoltPublicAPI } from "Bolt-Public-API";
-import { AccountExistsResponse } from "Bolt-Public-API/dist/sdk/models/operations";
 import { IdentifierIdentifierType } from "Bolt-Public-API/dist/sdk/models/shared";
 
-const sdk = new BoltPublicAPI({
-  security: {
-    apiKey: "",
-  },
-});
+(async() => {
+  const sdk = new BoltPublicAPI({
+    security: {
+      apiKey: "",
+    },
+  });
 
-sdk.account.accountExists({
-  xPublishableKey: "productize South Manager",
-  identifier: {
-    identifierType: IdentifierIdentifierType.Email,
-    identifierValue: "alice@example.com",
-  },
-}).then((res: AccountExistsResponse) => {
+  const res = await sdk.account.accountExists({
+    xPublishableKey: "productize South Manager",
+    identifier: {
+      identifierType: IdentifierIdentifierType.Email,
+      identifierValue: "alice@example.com",
+    },
+  });
+
   if (res.statusCode == 200) {
     // handle response
   }
-});
+})();
 ```
 
 ### Parameters
@@ -264,21 +273,23 @@ Retrieve a shopper's account details, such as addresses and payment information
 
 ```typescript
 import { BoltPublicAPI } from "Bolt-Public-API";
-import { AccountGetResponse, AccountGetSecurity } from "Bolt-Public-API/dist/sdk/models/operations";
+import { AccountGetSecurity } from "Bolt-Public-API/dist/sdk/models/operations";
 
-const sdk = new BoltPublicAPI();
+(async() => {
+  const sdk = new BoltPublicAPI();
 const operationSecurity: AccountGetSecurity = {
   apiKey: "",
   oauth: "",
 };
 
-sdk.account.accountGet({
-  xPublishableKey: "shrilly",
-}, operationSecurity).then((res: AccountGetResponse) => {
+  const res = await sdk.account.accountGet({
+    xPublishableKey: "shrilly",
+  }, operationSecurity);
+
   if (res.statusCode == 200) {
     // handle response
   }
-});
+})();
 ```
 
 ### Parameters
@@ -305,22 +316,24 @@ orders that are associated with it.
 
 ```typescript
 import { BoltPublicAPI } from "Bolt-Public-API";
-import { AccountPaymentMethodDeleteResponse, AccountPaymentMethodDeleteSecurity } from "Bolt-Public-API/dist/sdk/models/operations";
+import { AccountPaymentMethodDeleteSecurity } from "Bolt-Public-API/dist/sdk/models/operations";
 
-const sdk = new BoltPublicAPI();
+(async() => {
+  const sdk = new BoltPublicAPI();
 const operationSecurity: AccountPaymentMethodDeleteSecurity = {
   apiKey: "",
   oauth: "",
 };
 
-sdk.account.accountPaymentMethodDelete({
-  xPublishableKey: "gold hack",
-  id: "D4g3h5tBuVYK9",
-}, operationSecurity).then((res: AccountPaymentMethodDeleteResponse) => {
+  const res = await sdk.account.accountPaymentMethodDelete({
+    xPublishableKey: "gold hack",
+    id: "D4g3h5tBuVYK9",
+  }, operationSecurity);
+
   if (res.statusCode == 200) {
     // handle response
   }
-});
+})();
 ```
 
 ### Parameters

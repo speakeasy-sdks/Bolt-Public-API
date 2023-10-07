@@ -23,22 +23,23 @@ Create a new webhook to receive notifications from Bolt about various events, su
 
 ```typescript
 import { BoltPublicAPI } from "Bolt-Public-API";
-import { WebhooksCreateResponse } from "Bolt-Public-API/dist/sdk/models/operations";
 
-const sdk = new BoltPublicAPI({
-  security: {
-    apiKey: "",
-  },
-});
+(async() => {
+  const sdk = new BoltPublicAPI({
+    security: {
+      apiKey: "",
+    },
+  });
 
-sdk.webhooks.webhooksCreate({
-  event: "watt",
-  url: "https://www.example.com/webhook",
-}).then((res: WebhooksCreateResponse) => {
+  const res = await sdk.webhooks.webhooksCreate({
+    event: "watt",
+    url: "https://www.example.com/webhook",
+  });
+
   if (res.statusCode == 200) {
     // handle response
   }
-});
+})();
 ```
 
 ### Parameters
@@ -62,21 +63,22 @@ Delete an existing webhook. You will no longer receive notifications from Bolt a
 
 ```typescript
 import { BoltPublicAPI } from "Bolt-Public-API";
-import { WebhooksDeleteResponse } from "Bolt-Public-API/dist/sdk/models/operations";
 
-const sdk = new BoltPublicAPI({
-  security: {
-    apiKey: "",
-  },
-});
+(async() => {
+  const sdk = new BoltPublicAPI({
+    security: {
+      apiKey: "",
+    },
+  });
 
-sdk.webhooks.webhooksDelete({
-  id: "wh_za7VbYcSQU2zRgGQXQAm-g",
-}).then((res: WebhooksDeleteResponse) => {
+  const res = await sdk.webhooks.webhooksDelete({
+    id: "wh_za7VbYcSQU2zRgGQXQAm-g",
+  });
+
   if (res.statusCode == 200) {
     // handle response
   }
-});
+})();
 ```
 
 ### Parameters
@@ -100,21 +102,22 @@ Retrieve information for an existing webhook.
 
 ```typescript
 import { BoltPublicAPI } from "Bolt-Public-API";
-import { WebhooksGetResponse } from "Bolt-Public-API/dist/sdk/models/operations";
 
-const sdk = new BoltPublicAPI({
-  security: {
-    apiKey: "",
-  },
-});
+(async() => {
+  const sdk = new BoltPublicAPI({
+    security: {
+      apiKey: "",
+    },
+  });
 
-sdk.webhooks.webhooksGet({
-  id: "wh_za7VbYcSQU2zRgGQXQAm-g",
-}).then((res: WebhooksGetResponse) => {
+  const res = await sdk.webhooks.webhooksGet({
+    id: "wh_za7VbYcSQU2zRgGQXQAm-g",
+  });
+
   if (res.statusCode == 200) {
     // handle response
   }
-});
+})();
 ```
 
 ### Parameters
@@ -138,21 +141,22 @@ Retrieve information about all existing webhooks.
 
 ```typescript
 import { BoltPublicAPI } from "Bolt-Public-API";
-import { WebhooksGetAllResponse } from "Bolt-Public-API/dist/sdk/models/operations";
 
-const sdk = new BoltPublicAPI({
-  security: {
-    apiKey: "",
-  },
-});
+(async() => {
+  const sdk = new BoltPublicAPI({
+    security: {
+      apiKey: "",
+    },
+  });
 
-sdk.webhooks.webhooksGetAll({
-  xPublishableKey: "maxime",
-}).then((res: WebhooksGetAllResponse) => {
+  const res = await sdk.webhooks.webhooksGetAll({
+    xPublishableKey: "maxime",
+  });
+
   if (res.statusCode == 200) {
     // handle response
   }
-});
+})();
 ```
 
 ### Parameters

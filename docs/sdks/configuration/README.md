@@ -22,21 +22,22 @@ Return callback URLs configured on the merchant such as OAuth URLs.
 
 ```typescript
 import { BoltPublicAPI } from "Bolt-Public-API";
-import { MerchantCallbacksGetResponse } from "Bolt-Public-API/dist/sdk/models/operations";
 
-const sdk = new BoltPublicAPI({
-  security: {
-    apiKey: "",
-  },
-});
+(async() => {
+  const sdk = new BoltPublicAPI({
+    security: {
+      apiKey: "",
+    },
+  });
 
-sdk.configuration.merchantCallbacksGet({
-  xPublishableKey: "North",
-}).then((res: MerchantCallbacksGetResponse) => {
+  const res = await sdk.configuration.merchantCallbacksGet({
+    xPublishableKey: "North",
+  });
+
   if (res.statusCode == 200) {
     // handle response
   }
-});
+})();
 ```
 
 ### Parameters
@@ -61,42 +62,43 @@ Update and configure callback URLs on the merchant such as OAuth URLs.
 
 ```typescript
 import { BoltPublicAPI } from "Bolt-Public-API";
-import { MerchantCallbacksUpdateResponse } from "Bolt-Public-API/dist/sdk/models/operations";
 
-const sdk = new BoltPublicAPI({
-  security: {
-    apiKey: "",
-  },
-});
+(async() => {
+  const sdk = new BoltPublicAPI({
+    security: {
+      apiKey: "",
+    },
+  });
 
-sdk.configuration.merchantCallbacksUpdate({
-  xPublishableKey: "Savings Analyst",
-  callbackUrls: {
-    accountPage: "https://www.example.com/account",
-    baseDomain: "https://www.example.com/",
-    confirmationRedirect: "https://www.example.com/bolt/redirect",
-    createOrder: "https://www.example.com/bolt/order",
-    debug: "https://www.example.com/bolt/debug",
-    getAccount: "https://www.example.com/bolt/account",
-    mobileAppDomain: "https://m.example.com/",
-    oauthLogout: "https://www.example.com/bolt/logout",
-    oauthRedirect: "https://www.example.com/bolt/oauth",
-    privacyPolicy: "https://www.example.com/privacy-policy",
-    productInfo: "https://www.example.com/bolt/product",
-    remoteApi: "https://www.example.com/bolt/remote-api",
-    shipping: "https://www.example.com/bolt/shipping",
-    supportPage: "https://www.example.com/help",
-    tax: "https://www.example.com/bolt/tax",
-    termsOfService: "https://www.example.com/terms-of-service",
-    universalMerchantApi: "https://www.example.com/bolt/merchant-api",
-    updateCart: "https://www.example.com/bolt/cart",
-    validateAdditionalAccountData: "https://www.example.com/bolt/validate-account",
-  },
-}).then((res: MerchantCallbacksUpdateResponse) => {
+  const res = await sdk.configuration.merchantCallbacksUpdate({
+    xPublishableKey: "Savings Analyst",
+    callbackUrls: {
+      accountPage: "https://www.example.com/account",
+      baseDomain: "https://www.example.com/",
+      confirmationRedirect: "https://www.example.com/bolt/redirect",
+      createOrder: "https://www.example.com/bolt/order",
+      debug: "https://www.example.com/bolt/debug",
+      getAccount: "https://www.example.com/bolt/account",
+      mobileAppDomain: "https://m.example.com/",
+      oauthLogout: "https://www.example.com/bolt/logout",
+      oauthRedirect: "https://www.example.com/bolt/oauth",
+      privacyPolicy: "https://www.example.com/privacy-policy",
+      productInfo: "https://www.example.com/bolt/product",
+      remoteApi: "https://www.example.com/bolt/remote-api",
+      shipping: "https://www.example.com/bolt/shipping",
+      supportPage: "https://www.example.com/help",
+      tax: "https://www.example.com/bolt/tax",
+      termsOfService: "https://www.example.com/terms-of-service",
+      universalMerchantApi: "https://www.example.com/bolt/merchant-api",
+      updateCart: "https://www.example.com/bolt/cart",
+      validateAdditionalAccountData: "https://www.example.com/bolt/validate-account",
+    },
+  });
+
   if (res.statusCode == 200) {
     // handle response
   }
-});
+})();
 ```
 
 ### Parameters
@@ -120,19 +122,20 @@ Return several identifiers for the merchant, such as public IDs, publishable key
 
 ```typescript
 import { BoltPublicAPI } from "Bolt-Public-API";
-import { MerchantIdentifiersGetResponse } from "Bolt-Public-API/dist/sdk/models/operations";
 
-const sdk = new BoltPublicAPI({
-  security: {
-    apiKey: "",
-  },
-});
+(async() => {
+  const sdk = new BoltPublicAPI({
+    security: {
+      apiKey: "",
+    },
+  });
 
-sdk.configuration.merchantIdentifiersGet().then((res: MerchantIdentifiersGetResponse) => {
+  const res = await sdk.configuration.merchantIdentifiersGet();
+
   if (res.statusCode == 200) {
     // handle response
   }
-});
+})();
 ```
 
 ### Parameters
