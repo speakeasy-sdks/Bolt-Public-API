@@ -1,17 +1,17 @@
 configVersion: 1.0.0
 management:
-  docChecksum: dee1d5b2fd179834ce1549ca97782a55
+  docChecksum: 85079c9de9de656462d71c01fee0df13
   docVersion: 3.0.1
-  speakeasyVersion: 1.96.1
-  generationVersion: 2.150.0
+  speakeasyVersion: 1.97.1
+  generationVersion: 2.152.1
 generation:
   comments:
     disableComments: false
     omitDescriptionIfSummaryPresent: false
+  baseServerURL: ""
   devContainers:
     enabled: true
     schemaPath: ./openapi.yaml
-  baseServerURL: ""
   sdkClassName: Bolt-Public-API
   singleTagPerOp: false
   tagNamespacingDisabled: false
@@ -24,7 +24,7 @@ features:
     inputOutputModels: 2.81.1
     methodSecurity: 2.82.0
 typescript:
-  version: 0.3.0
+  version: 0.3.1
   author: Bolt
   clientServerStatusCodesAsErrors: true
   flattenGlobalSecurity: false

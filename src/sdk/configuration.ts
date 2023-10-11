@@ -100,14 +100,29 @@ export class Configuration {
                     );
                 }
                 break;
-            case (httpRes?.status >= 400 && httpRes?.status < 500) ||
-                (httpRes?.status >= 500 && httpRes?.status < 600):
+            case httpRes?.status >= 400 && httpRes?.status < 500:
+                if (utils.matchContentType(contentType, `application/json`)) {
+                    const err = utils.objectToClass(JSON.parse(decodedRes), errors.ErrorT);
+                    err.rawResponse = httpRes;
+                    throw new errors.ErrorT(err);
+                } else {
+                    throw new errors.SDKError(
+                        "unknown content-type received: " + contentType,
+                        httpRes.status,
+                        decodedRes,
+                        httpRes
+                    );
+                }
+                break;
+            case httpRes?.status >= 500 && httpRes?.status < 600:
                 throw new errors.SDKError(
                     "API error occurred",
                     httpRes.status,
                     decodedRes,
                     httpRes
                 );
+            default:
+                break;
         }
 
         return res;
@@ -202,15 +217,29 @@ export class Configuration {
                     );
                 }
                 break;
-            case httpRes?.status == 400 ||
-                (httpRes?.status >= 400 && httpRes?.status < 500) ||
-                (httpRes?.status >= 500 && httpRes?.status < 600):
+            case httpRes?.status >= 400 && httpRes?.status < 500:
+                if (utils.matchContentType(contentType, `application/json`)) {
+                    const err = utils.objectToClass(JSON.parse(decodedRes), errors.ErrorT);
+                    err.rawResponse = httpRes;
+                    throw new errors.ErrorT(err);
+                } else {
+                    throw new errors.SDKError(
+                        "unknown content-type received: " + contentType,
+                        httpRes.status,
+                        decodedRes,
+                        httpRes
+                    );
+                }
+                break;
+            case httpRes?.status >= 500 && httpRes?.status < 600:
                 throw new errors.SDKError(
                     "API error occurred",
                     httpRes.status,
                     decodedRes,
                     httpRes
                 );
+            default:
+                break;
         }
 
         return res;
@@ -282,14 +311,29 @@ export class Configuration {
                     );
                 }
                 break;
-            case (httpRes?.status >= 400 && httpRes?.status < 500) ||
-                (httpRes?.status >= 500 && httpRes?.status < 600):
+            case httpRes?.status >= 400 && httpRes?.status < 500:
+                if (utils.matchContentType(contentType, `application/json`)) {
+                    const err = utils.objectToClass(JSON.parse(decodedRes), errors.ErrorT);
+                    err.rawResponse = httpRes;
+                    throw new errors.ErrorT(err);
+                } else {
+                    throw new errors.SDKError(
+                        "unknown content-type received: " + contentType,
+                        httpRes.status,
+                        decodedRes,
+                        httpRes
+                    );
+                }
+                break;
+            case httpRes?.status >= 500 && httpRes?.status < 600:
                 throw new errors.SDKError(
                     "API error occurred",
                     httpRes.status,
                     decodedRes,
                     httpRes
                 );
+            default:
+                break;
         }
 
         return res;

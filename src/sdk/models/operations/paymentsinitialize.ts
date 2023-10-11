@@ -22,7 +22,7 @@ export class PaymentsInitializeRequest extends SpeakeasyBase {
     xPublishableKey: string;
 
     @SpeakeasyMetadata({ data: "request, media_type=application/json" })
-    paymentMethodInitializeRequest: shared.PaymentMethodInitializeRequest;
+    paymentInitializeRequest: shared.PaymentInitializeRequest;
 }
 
 export class PaymentsInitializeResponse extends SpeakeasyBase {
@@ -45,8 +45,8 @@ export class PaymentsInitializeResponse extends SpeakeasyBase {
     rawResponse?: AxiosResponse;
 
     /**
-     * Payment token retrieved
+     * The payment was successfully initialized, and was either immediately finalized or is pending
      */
     @SpeakeasyMetadata()
-    paymentMethodInitializeResponse?: shared.PaymentMethodInitializeResponse;
+    paymentResponse?: any;
 }

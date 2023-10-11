@@ -3,7 +3,7 @@
  */
 
 import { SpeakeasyBase, SpeakeasyMetadata } from "../../../internal/utils";
-import { Amounts } from "./amounts";
+import { Amount } from "./amount";
 import { Expose, Type } from "class-transformer";
 
 export class CartShipment extends SpeakeasyBase {
@@ -18,8 +18,11 @@ export class CartShipment extends SpeakeasyBase {
     @Expose({ name: "carrier" })
     carrier?: string;
 
+    /**
+     * A monetary amount, i.e. a base unit amount and a supported currency.
+     */
     @SpeakeasyMetadata()
     @Expose({ name: "cost" })
-    @Type(() => Amounts)
-    cost?: Amounts;
+    @Type(() => Amount)
+    cost?: Amount;
 }

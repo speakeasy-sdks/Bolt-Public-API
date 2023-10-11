@@ -14,7 +14,7 @@ export class GuestPaymentsInitializeRequest extends SpeakeasyBase {
     xPublishableKey: string;
 
     @SpeakeasyMetadata({ data: "request, media_type=application/json" })
-    guestPaymentMethodInitializeRequest: shared.GuestPaymentMethodInitializeRequest;
+    guestPaymentInitializeRequest: shared.GuestPaymentInitializeRequest;
 }
 
 export class GuestPaymentsInitializeResponse extends SpeakeasyBase {
@@ -37,8 +37,8 @@ export class GuestPaymentsInitializeResponse extends SpeakeasyBase {
     rawResponse?: AxiosResponse;
 
     /**
-     * Payment token retrieved
+     * The payment was successfully initialized, and was either immediately finalized or is pending
      */
     @SpeakeasyMetadata()
-    paymentMethodInitializeResponse?: shared.PaymentMethodInitializeResponse;
+    paymentResponse?: any;
 }

@@ -28,22 +28,26 @@ yarn add https://github.com/speakeasy-sdks/Bolt-Public-API
 import { BoltPublicAPI } from "Bolt-Public-API";
 import { AccountAddPaymentMethodSecurity } from "Bolt-Public-API/dist/sdk/models/operations";
 
-(async() => {
-  const sdk = new BoltPublicAPI();
-const operationSecurity: AccountAddPaymentMethodSecurity = {
-  apiKey: "",
-  oauth: "",
-};
+(async () => {
+    const sdk = new BoltPublicAPI();
+    const operationSecurity: AccountAddPaymentMethodSecurity = {
+        apiKey: "",
+        oauth: "",
+    };
 
-  const res = await sdk.account.accountAddPaymentMethod({
-    requestBody: "Officer",
-    xPublishableKey: "Silicon female",
-  }, operationSecurity);
+    const res = await sdk.account.accountAddPaymentMethod(
+        {
+            requestBody: "Officer",
+            xPublishableKey: "Silicon female",
+        },
+        operationSecurity
+    );
 
-  if (res.statusCode == 200) {
-    // handle response
-  }
+    if (res.statusCode == 200) {
+        // handle response
+    }
 })();
+
 ```
 <!-- End SDK Example Usage -->
 
@@ -69,14 +73,24 @@ const operationSecurity: AccountAddPaymentMethodSecurity = {
 
 ### [payments](docs/sdks/payments/README.md)
 
+* [guestPaymentsAction](docs/sdks/payments/README.md#guestpaymentsaction) - Perform an irreversible action (e.g. finalize) on a pending guest payment
 * [guestPaymentsInitialize](docs/sdks/payments/README.md#guestpaymentsinitialize) - Initialize a Bolt payment for guest shoppers
+* [guestPaymentsUpdate](docs/sdks/payments/README.md#guestpaymentsupdate) - Update an existing guest payment
+* [paymentsAction](docs/sdks/payments/README.md#paymentsaction) - Perform an irreversible action (e.g. finalize) on a pending payment
 * [paymentsInitialize](docs/sdks/payments/README.md#paymentsinitialize) - Initialize a Bolt payment for logged in shoppers
+* [paymentsUpdate](docs/sdks/payments/README.md#paymentsupdate) - Update an existing payment
 
 ### [testing](docs/sdks/testing/README.md)
 
 * [testingAccountCreate](docs/sdks/testing/README.md#testingaccountcreate) - Create a test account
 * [testingCreditCardGet](docs/sdks/testing/README.md#testingcreditcardget) - Retrieve a test credit card, including its token
 * [testingShipmentTrackingCreate](docs/sdks/testing/README.md#testingshipmenttrackingcreate) - Simulate a shipment tracking update
+
+### [transactions](docs/sdks/transactions/README.md)
+
+* [transactionAction](docs/sdks/transactions/README.md#transactionaction) - Perform an irreversible action (e.g. capture, refund, void) on a transaction
+* [transactionGet](docs/sdks/transactions/README.md#transactionget) - Retrieve transaction details
+* [transactionUpdate](docs/sdks/transactions/README.md#transactionupdate) - Update certain transaction details
 
 ### [webhooks](docs/sdks/webhooks/README.md)
 

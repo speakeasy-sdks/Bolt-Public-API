@@ -118,6 +118,8 @@ export class Account {
                     decodedRes,
                     httpRes
                 );
+            default:
+                break;
         }
 
         return res;
@@ -212,8 +214,7 @@ export class Account {
                     );
                 }
                 break;
-            case httpRes?.status == 400 ||
-                (httpRes?.status >= 400 && httpRes?.status < 500) ||
+            case (httpRes?.status >= 400 && httpRes?.status < 500) ||
                 (httpRes?.status >= 500 && httpRes?.status < 600):
                 throw new errors.SDKError(
                     "API error occurred",
@@ -221,6 +222,8 @@ export class Account {
                     decodedRes,
                     httpRes
                 );
+            default:
+                break;
         }
 
         return res;
@@ -285,9 +288,7 @@ export class Account {
             });
         const decodedRes = new TextDecoder().decode(httpRes?.data);
         switch (true) {
-            case httpRes?.status == 200:
-                break;
-            case httpRes?.status == 422:
+            case httpRes?.status >= 400 && httpRes?.status < 500:
                 if (utils.matchContentType(contentType, `application/json`)) {
                     const err = utils.objectToClass(JSON.parse(decodedRes), errors.ErrorT);
                     err.rawResponse = httpRes;
@@ -301,14 +302,15 @@ export class Account {
                     );
                 }
                 break;
-            case (httpRes?.status >= 400 && httpRes?.status < 500) ||
-                (httpRes?.status >= 500 && httpRes?.status < 600):
+            case httpRes?.status >= 500 && httpRes?.status < 600:
                 throw new errors.SDKError(
                     "API error occurred",
                     httpRes.status,
                     decodedRes,
                     httpRes
                 );
+            default:
+                break;
         }
 
         return res;
@@ -406,8 +408,7 @@ export class Account {
                     );
                 }
                 break;
-            case httpRes?.status == 400 ||
-                (httpRes?.status >= 400 && httpRes?.status < 500) ||
+            case (httpRes?.status >= 400 && httpRes?.status < 500) ||
                 (httpRes?.status >= 500 && httpRes?.status < 600):
                 throw new errors.SDKError(
                     "API error occurred",
@@ -415,6 +416,8 @@ export class Account {
                     decodedRes,
                     httpRes
                 );
+            default:
+                break;
         }
 
         return res;
@@ -480,9 +483,7 @@ export class Account {
         });
         const decodedRes = new TextDecoder().decode(httpRes?.data);
         switch (true) {
-            case httpRes?.status == 200:
-                break;
-            case httpRes?.status == 422:
+            case httpRes?.status >= 400 && httpRes?.status < 500:
                 if (utils.matchContentType(contentType, `application/json`)) {
                     const err = utils.objectToClass(JSON.parse(decodedRes), errors.ErrorT);
                     err.rawResponse = httpRes;
@@ -496,14 +497,15 @@ export class Account {
                     );
                 }
                 break;
-            case (httpRes?.status >= 400 && httpRes?.status < 500) ||
-                (httpRes?.status >= 500 && httpRes?.status < 600):
+            case httpRes?.status >= 500 && httpRes?.status < 600:
                 throw new errors.SDKError(
                     "API error occurred",
                     httpRes.status,
                     decodedRes,
                     httpRes
                 );
+            default:
+                break;
         }
 
         return res;
@@ -577,14 +579,29 @@ export class Account {
                     );
                 }
                 break;
-            case (httpRes?.status >= 400 && httpRes?.status < 500) ||
-                (httpRes?.status >= 500 && httpRes?.status < 600):
+            case httpRes?.status >= 400 && httpRes?.status < 500:
+                if (utils.matchContentType(contentType, `application/json`)) {
+                    const err = utils.objectToClass(JSON.parse(decodedRes), errors.ErrorT);
+                    err.rawResponse = httpRes;
+                    throw new errors.ErrorT(err);
+                } else {
+                    throw new errors.SDKError(
+                        "unknown content-type received: " + contentType,
+                        httpRes.status,
+                        decodedRes,
+                        httpRes
+                    );
+                }
+                break;
+            case httpRes?.status >= 500 && httpRes?.status < 600:
                 throw new errors.SDKError(
                     "API error occurred",
                     httpRes.status,
                     decodedRes,
                     httpRes
                 );
+            default:
+                break;
         }
 
         return res;
@@ -649,9 +666,7 @@ export class Account {
             });
         const decodedRes = new TextDecoder().decode(httpRes?.data);
         switch (true) {
-            case httpRes?.status == 200:
-                break;
-            case httpRes?.status == 422:
+            case httpRes?.status >= 400 && httpRes?.status < 500:
                 if (utils.matchContentType(contentType, `application/json`)) {
                     const err = utils.objectToClass(JSON.parse(decodedRes), errors.ErrorT);
                     err.rawResponse = httpRes;
@@ -665,14 +680,15 @@ export class Account {
                     );
                 }
                 break;
-            case (httpRes?.status >= 400 && httpRes?.status < 500) ||
-                (httpRes?.status >= 500 && httpRes?.status < 600):
+            case httpRes?.status >= 500 && httpRes?.status < 600:
                 throw new errors.SDKError(
                     "API error occurred",
                     httpRes.status,
                     decodedRes,
                     httpRes
                 );
+            default:
+                break;
         }
 
         return res;

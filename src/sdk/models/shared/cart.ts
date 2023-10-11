@@ -3,25 +3,20 @@
  */
 
 import { SpeakeasyBase, SpeakeasyMetadata } from "../../../internal/utils";
-import { Amounts } from "./amounts";
+import { Amount } from "./amount";
 import { CartDiscount } from "./cartdiscount";
 import { CartItem } from "./cartitem";
 import { CartShipment } from "./cartshipment";
 import { Expose, Type } from "class-transformer";
 
 export class Cart extends SpeakeasyBase {
-    @SpeakeasyMetadata()
-    @Expose({ name: "amounts" })
-    @Type(() => Amounts)
-    amounts: Amounts;
-
     @SpeakeasyMetadata({ elemType: CartDiscount })
     @Expose({ name: "discounts" })
     @Type(() => CartDiscount)
     discounts?: CartDiscount[];
 
     /**
-     * This field corresponds to the merchant's order reference associated with this Bolt transaction.
+     * A shopper-facing identifier corresponding to the order reference associated with this transaction.
      */
     @SpeakeasyMetadata()
     @Expose({ name: "display_id" })
@@ -50,4 +45,20 @@ export class Cart extends SpeakeasyBase {
     @Expose({ name: "shipments" })
     @Type(() => CartShipment)
     shipments?: CartShipment[];
+
+    /**
+     * A monetary amount, i.e. a base unit amount and a supported currency.
+     */
+    @SpeakeasyMetadata()
+    @Expose({ name: "tax" })
+    @Type(() => Amount)
+    tax: Amount;
+
+    /**
+     * A monetary amount, i.e. a base unit amount and a supported currency.
+     */
+    @SpeakeasyMetadata()
+    @Expose({ name: "total" })
+    @Type(() => Amount)
+    total: Amount;
 }

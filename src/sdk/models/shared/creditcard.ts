@@ -6,7 +6,7 @@ import { SpeakeasyBase, SpeakeasyMetadata } from "../../../internal/utils";
 import { Expose } from "class-transformer";
 
 /**
- * The credit card network.
+ * The credit card's network.
  */
 export enum CreditCardNetwork {
     Visa = "visa",
@@ -21,21 +21,21 @@ export enum CreditCardNetwork {
 
 export class CreditCardOutput extends SpeakeasyBase {
     /**
-     * The expiration date of the credit card. TODO TO MAKE EXPIRATION REUSABLE
+     * The expiration date, in YYYY-MM format.
      */
     @SpeakeasyMetadata()
     @Expose({ name: "expiration" })
     expiration: string;
 
     /**
-     * The last 4 digits of the credit card number.
+     * The account number's last four digits.
      */
     @SpeakeasyMetadata()
     @Expose({ name: "last4" })
     last4: string;
 
     /**
-     * The credit card network.
+     * The credit card's network.
      */
     @SpeakeasyMetadata()
     @Expose({ name: "network" })

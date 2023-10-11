@@ -7,28 +7,28 @@ import { Expose } from "class-transformer";
 
 export class Profile extends SpeakeasyBase {
     /**
-     * An email address.
+     * The email address asscoiated with this profile.
      */
     @SpeakeasyMetadata()
     @Expose({ name: "email" })
-    email?: string;
+    email: string;
 
     /**
-     * The given name of the person associated with this record.
+     * The given name of the person associated with this profile.
      */
     @SpeakeasyMetadata()
     @Expose({ name: "first_name" })
-    firstName?: string;
+    firstName: string;
 
     /**
-     * The last name of the person associated with this record.
+     * The last name of the person associated with this profile.
      */
     @SpeakeasyMetadata()
     @Expose({ name: "last_name" })
-    lastName?: string;
+    lastName: string;
 
     /**
-     * A phone number following E164 standards, in its globalized format, i.e. prepended with a plus sign.
+     * The phone number associated with this profile.
      */
     @SpeakeasyMetadata()
     @Expose({ name: "phone" })

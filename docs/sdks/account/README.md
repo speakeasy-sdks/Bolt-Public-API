@@ -72,6 +72,7 @@ Add an address to the shopper's account
 ```typescript
 import { BoltPublicAPI } from "Bolt-Public-API";
 import { AccountAddressCreateSecurity } from "Bolt-Public-API/dist/sdk/models/operations";
+import { AddressListingCountryCode } from "Bolt-Public-API/dist/sdk/models/shared";
 
 (async() => {
   const sdk = new BoltPublicAPI();
@@ -84,7 +85,7 @@ const operationSecurity: AccountAddressCreateSecurity = {
     xPublishableKey: "Corporate Designer",
     addressListingInput: {
       company: "ACME Corporation",
-      countryCode: "US",
+      countryCode: AddressListingCountryCode.Us,
       email: "alice@example.com",
       firstName: "Alice",
       isDefault: true,
@@ -174,6 +175,7 @@ shipments.
 ```typescript
 import { BoltPublicAPI } from "Bolt-Public-API";
 import { AccountAddressEditSecurity } from "Bolt-Public-API/dist/sdk/models/operations";
+import { AddressListingCountryCode } from "Bolt-Public-API/dist/sdk/models/shared";
 
 (async() => {
   const sdk = new BoltPublicAPI();
@@ -186,7 +188,7 @@ const operationSecurity: AccountAddressEditSecurity = {
     xPublishableKey: "Convertible",
     addressListingInput: {
       company: "ACME Corporation",
-      countryCode: "US",
+      countryCode: AddressListingCountryCode.Us,
       email: "alice@example.com",
       firstName: "Alice",
       isDefault: true,

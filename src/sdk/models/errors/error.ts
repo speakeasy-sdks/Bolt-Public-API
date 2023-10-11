@@ -5,13 +5,22 @@
 import { SpeakeasyMetadata } from "../../../internal/utils";
 import { classToPlain, Expose } from "class-transformer";
 
+/**
+ * The type of error returned
+ */
+export enum ErrorTag {
+    MissingInputParameter = "missing_input_parameter",
+    InvalidInputParameter = "invalid_input_parameter",
+    NotFound = "not_found",
+}
+
 export class ErrorT extends Error {
     /**
      * The type of error returned
      */
     @SpeakeasyMetadata()
     @Expose({ name: ".tag" })
-    dotTag: string;
+    dotTag: ErrorTag;
 
     /**
      * A human-readable error message, which might include information specific to

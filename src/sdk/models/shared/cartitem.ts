@@ -3,7 +3,8 @@
  */
 
 import { SpeakeasyBase, SpeakeasyMetadata } from "../../../internal/utils";
-import { Expose } from "class-transformer";
+import { Amount } from "./amount";
+import { Expose, Type } from "class-transformer";
 
 export class CartItem extends SpeakeasyBase {
     /**
@@ -42,14 +43,15 @@ export class CartItem extends SpeakeasyBase {
     reference: string;
 
     /**
-     * The total amount, in cents, of the item including its taxes if applicable.
+     * A monetary amount, i.e. a base unit amount and a supported currency.
      */
     @SpeakeasyMetadata()
     @Expose({ name: "total_amount" })
-    totalAmount: number;
+    @Type(() => Amount)
+    totalAmount: Amount;
 
     /**
-     * The price of one unit of the item; for example, the price of one pack of socks.
+     * The item's unit price, i.e. the cost of a single item exclusive of tax and discounts.
      */
     @SpeakeasyMetadata()
     @Expose({ name: "unit_price" })

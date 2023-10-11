@@ -3,14 +3,17 @@
  */
 
 import { SpeakeasyBase, SpeakeasyMetadata } from "../../../internal/utils";
-import { Amounts } from "./amounts";
+import { Amount } from "./amount";
 import { Expose, Type } from "class-transformer";
 
 export class CartDiscount extends SpeakeasyBase {
+    /**
+     * A monetary amount, i.e. a base unit amount and a supported currency.
+     */
     @SpeakeasyMetadata()
-    @Expose({ name: "amounts" })
-    @Type(() => Amounts)
-    amounts: Amounts;
+    @Expose({ name: "amount" })
+    @Type(() => Amount)
+    amount: Amount;
 
     /**
      * Discount code.
