@@ -177,9 +177,8 @@ function formSerializerExplode(params: Record<string, any>): string {
 
             if (qpDecorator == null) return;
 
-            return `${paramKey}=${encodeURIComponent(
-              valToString(value[paramKey])
-            )}`;
+            const key = qpDecorator.ParamName || paramKey;
+            return `${key}=${encodeURIComponent(valToString(value[paramKey]))}`;
           })
           .join("&")
       );
