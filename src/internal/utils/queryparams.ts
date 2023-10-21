@@ -135,7 +135,8 @@ function noExplodeSerializer(params: Record<string, any>, delimiter = ","): stri
 
           if (qpDecorator == null) return;
 
-          return `${paramKey}${delimiter}${valToString(value[paramKey])}`;
+          const key = qpDecorator.ParamName || paramKey
+          return `${key}${delimiter}${valToString(value[paramKey])}`;
         })
         .join(delimiter);
       query.push(`${key}=${encodeURIComponent(values)}`);

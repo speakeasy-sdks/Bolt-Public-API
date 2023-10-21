@@ -32,7 +32,7 @@ import { BoltPublicAPI } from "Bolt-Public-API";
   });
 
   const res = await sdk.webhooks.webhooksCreate({
-    event: "watt",
+    event: "string",
     url: "https://www.example.com/webhook",
   });
 
@@ -150,7 +150,7 @@ import { BoltPublicAPI } from "Bolt-Public-API";
   });
 
   const res = await sdk.webhooks.webhooksGetAll({
-    xPublishableKey: "maxime",
+    xPublishableKey: "string",
   });
 
   if (res.statusCode == 200) {

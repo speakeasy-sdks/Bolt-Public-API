@@ -2,8 +2,8 @@ configVersion: 1.0.0
 management:
   docChecksum: 85079c9de9de656462d71c01fee0df13
   docVersion: 3.0.1
-  speakeasyVersion: 1.97.1
-  generationVersion: 2.152.1
+  speakeasyVersion: 1.104.0
+  generationVersion: 2.169.0
 generation:
   comments:
     disableComments: false
@@ -12,21 +12,24 @@ generation:
   devContainers:
     enabled: true
     schemaPath: ./openapi.yaml
+  repoURL: https://github.com/speakeasy-sdks/Bolt-Public-API.git
   sdkClassName: Bolt-Public-API
   singleTagPerOp: false
   tagNamespacingDisabled: false
 features:
   typescript:
-    core: 2.90.4
+    core: 2.93.0
     devContainers: 2.88.0
     globalSecurity: 2.82.0
     globalServerURLs: 2.82.0
     inputOutputModels: 2.81.1
     methodSecurity: 2.82.0
 typescript:
-  version: 0.3.1
+  version: 0.4.0
   author: Bolt
   clientServerStatusCodesAsErrors: true
   flattenGlobalSecurity: false
+  installationURL: https://github.com/speakeasy-sdks/Bolt-Public-API
   maxMethodParams: 0
   packageName: Bolt-Public-API
+  repoSubDirectory: .

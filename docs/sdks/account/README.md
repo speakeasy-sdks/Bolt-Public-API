@@ -39,8 +39,8 @@ const operationSecurity: AccountAddPaymentMethodSecurity = {
 };
 
   const res = await sdk.account.accountAddPaymentMethod({
-    requestBody: "Officer",
-    xPublishableKey: "Silicon female",
+    requestBody: "string",
+    xPublishableKey: "string",
   }, operationSecurity);
 
   if (res.statusCode == 200) {
@@ -82,7 +82,7 @@ const operationSecurity: AccountAddressCreateSecurity = {
 };
 
   const res = await sdk.account.accountAddressCreate({
-    xPublishableKey: "Corporate Designer",
+    xPublishableKey: "string",
     addressListingInput: {
       company: "ACME Corporation",
       countryCode: AddressListingCountryCode.Us,
@@ -139,7 +139,7 @@ const operationSecurity: AccountAddressDeleteSecurity = {
 };
 
   const res = await sdk.account.accountAddressDelete({
-    xPublishableKey: "bypassing Interactions inasmuch",
+    xPublishableKey: "string",
     id: "D4g3h5tBuVYK9",
   }, operationSecurity);
 
@@ -185,7 +185,7 @@ const operationSecurity: AccountAddressEditSecurity = {
 };
 
   const res = await sdk.account.accountAddressEdit({
-    xPublishableKey: "Convertible",
+    xPublishableKey: "string",
     addressListingInput: {
       company: "ACME Corporation",
       countryCode: AddressListingCountryCode.Us,
@@ -241,7 +241,7 @@ import { IdentifierIdentifierType } from "Bolt-Public-API/dist/sdk/models/shared
   });
 
   const res = await sdk.account.accountExists({
-    xPublishableKey: "productize South Manager",
+    xPublishableKey: "string",
     identifier: {
       identifierType: IdentifierIdentifierType.Email,
       identifierValue: "alice@example.com",
@@ -285,7 +285,7 @@ const operationSecurity: AccountGetSecurity = {
 };
 
   const res = await sdk.account.accountGet({
-    xPublishableKey: "shrilly",
+    xPublishableKey: "string",
   }, operationSecurity);
 
   if (res.statusCode == 200) {
@@ -328,7 +328,7 @@ const operationSecurity: AccountPaymentMethodDeleteSecurity = {
 };
 
   const res = await sdk.account.accountPaymentMethodDelete({
-    xPublishableKey: "gold hack",
+    xPublishableKey: "string",
     id: "D4g3h5tBuVYK9",
   }, operationSecurity);
 

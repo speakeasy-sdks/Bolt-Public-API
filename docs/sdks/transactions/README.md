@@ -31,10 +31,10 @@ import { BoltPublicAPI } from "Bolt-Public-API";
   });
 
   const res = await sdk.transactions.transactionAction({
-    xPublishableKey: "South 1080p",
+    xPublishableKey: "string",
     id: "OBYG-X1PX-FN55",
     transactionActionRequest: {
-      action: "Tesla",
+      action: "string",
     },
   });
 
@@ -74,7 +74,7 @@ import { BoltPublicAPI } from "Bolt-Public-API";
   });
 
   const res = await sdk.transactions.transactionGet({
-    xPublishableKey: "National Planner Davie",
+    xPublishableKey: "string",
     id: "OBYG-X1PX-FN55",
   });
 
@@ -114,7 +114,7 @@ import { BoltPublicAPI } from "Bolt-Public-API";
   });
 
   const res = await sdk.transactions.transactionUpdate({
-    xPublishableKey: "Planner productize",
+    xPublishableKey: "string",
     id: "OBYG-X1PX-FN55",
     transactionUpdateRequest: {
       order: {

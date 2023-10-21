@@ -35,7 +35,7 @@ import { PaymentActionRequestTag } from "Bolt-Public-API/dist/sdk/models/shared"
   });
 
   const res = await sdk.payments.guestPaymentsAction({
-    xPublishableKey: "Optimization",
+    xPublishableKey: "string",
     id: "iKv7t5bgt1gg",
     paymentActionRequest: {
       dotTag: PaymentActionRequestTag.Finalize,
@@ -81,7 +81,7 @@ import { AmountCurrency } from "Bolt-Public-API/dist/sdk/models/shared";
   });
 
   const res = await sdk.payments.guestPaymentsInitialize({
-    xPublishableKey: "Soap whereas input",
+    xPublishableKey: "string",
     guestPaymentInitializeRequest: {
       cart: {
         discounts: [
@@ -113,7 +113,7 @@ import { AmountCurrency } from "Bolt-Public-API/dist/sdk/models/shared";
         orderReference: "order_100",
         shipments: [
           {
-            address: "Martin",
+            address: "string",
             carrier: "FedEx",
             cost: {
               currency: AmountCurrency.Usd,
@@ -130,7 +130,7 @@ import { AmountCurrency } from "Bolt-Public-API/dist/sdk/models/shared";
           units: 900,
         },
       },
-      paymentMethod: "perferendis",
+      paymentMethod: "string",
       profile: {
         createAccount: true,
         email: "alice@example.com",
@@ -179,7 +179,7 @@ import { AmountCurrency } from "Bolt-Public-API/dist/sdk/models/shared";
   });
 
   const res = await sdk.payments.guestPaymentsUpdate({
-    xPublishableKey: "female index",
+    xPublishableKey: "string",
     id: "iKv7t5bgt1gg",
     paymentUpdateRequest: {
       cart: {
@@ -212,7 +212,7 @@ import { AmountCurrency } from "Bolt-Public-API/dist/sdk/models/shared";
         orderReference: "order_100",
         shipments: [
           {
-            address: "Helium",
+            address: "string",
             carrier: "FedEx",
             cost: {
               currency: AmountCurrency.Usd,
@@ -271,7 +271,7 @@ const operationSecurity: PaymentsActionSecurity = {
 };
 
   const res = await sdk.payments.paymentsAction({
-    xPublishableKey: "Calcium navigating",
+    xPublishableKey: "string",
     id: "iKv7t5bgt1gg",
     paymentActionRequest: {
       dotTag: PaymentActionRequestTag.Finalize,
@@ -319,7 +319,7 @@ const operationSecurity: PaymentsInitializeSecurity = {
 };
 
   const res = await sdk.payments.paymentsInitialize({
-    xPublishableKey: "possimus",
+    xPublishableKey: "string",
     paymentInitializeRequest: {
       cart: {
         discounts: [
@@ -351,7 +351,7 @@ const operationSecurity: PaymentsInitializeSecurity = {
         orderReference: "order_100",
         shipments: [
           {
-            address: "bin",
+            address: "string",
             carrier: "FedEx",
             cost: {
               currency: AmountCurrency.Usd,
@@ -415,7 +415,7 @@ const operationSecurity: PaymentsUpdateSecurity = {
 };
 
   const res = await sdk.payments.paymentsUpdate({
-    xPublishableKey: "Officer",
+    xPublishableKey: "string",
     id: "iKv7t5bgt1gg",
     paymentUpdateRequest: {
       cart: {
@@ -448,7 +448,7 @@ const operationSecurity: PaymentsUpdateSecurity = {
         orderReference: "order_100",
         shipments: [
           {
-            address: "Intelligent",
+            address: "string",
             carrier: "FedEx",
             cost: {
               currency: AmountCurrency.Usd,

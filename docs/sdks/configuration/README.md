@@ -31,7 +31,7 @@ import { BoltPublicAPI } from "Bolt-Public-API";
   });
 
   const res = await sdk.configuration.merchantCallbacksGet({
-    xPublishableKey: "North",
+    xPublishableKey: "string",
   });
 
   if (res.statusCode == 200) {
@@ -71,7 +71,7 @@ import { BoltPublicAPI } from "Bolt-Public-API";
   });
 
   const res = await sdk.configuration.merchantCallbacksUpdate({
-    xPublishableKey: "Savings Analyst",
+    xPublishableKey: "string",
     callbackUrls: {
       accountPage: "https://www.example.com/account",
       baseDomain: "https://www.example.com/",

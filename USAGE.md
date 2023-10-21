@@ -14,8 +14,8 @@ import { AccountAddPaymentMethodSecurity } from "Bolt-Public-API/dist/sdk/models
 
     const res = await sdk.account.accountAddPaymentMethod(
         {
-            requestBody: "Officer",
-            xPublishableKey: "Silicon female",
+            requestBody: "string",
+            xPublishableKey: "string",
         },
         operationSecurity
     );
