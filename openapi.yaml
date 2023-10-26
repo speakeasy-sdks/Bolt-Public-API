@@ -14,7 +14,7 @@ servers:
       username:
         description: Your local username
         default: xwang
-  - url: https://{environment}.bolt.com/v3
+  - url: https://{environment}.bolt.com/v1
     variables:
       environment:
         enum:
@@ -50,6 +50,12 @@ tags:
     description: |
       Endpoints that allow you to generate and retrieve test data to verify certain
       flows in non-production environments.
+  - name: OAuth
+    description: |
+      Use this endpoint to retrieve an OAuth token. Use the token to allow your ecommerce server to make calls to the Account 
+      endpoint and create a one-click checkout experience for shoppers.
+    externalDocs:
+      url: https://help.bolt.com/products/accounts/direct-api/oauth-guide/
 paths:
   /account:
     get:
@@ -853,6 +859,8 @@ paths:
         - Testing
       security:
         - api-key: []
+      parameters:
+        - $ref: '#/components/parameters/x-publishable-key'
       requestBody:
         required: true
         content:
@@ -913,6 +921,34 @@ paths:
       responses:
         '200':
           description: The shipment update was ingested successfully
+        4XX:
+          $ref: '#/components/responses/response-4xx'
+        default:
+          $ref: '#/components/responses/response-default'
+  /oauth/token:
+    post:
+      summary: Get OAuth token
+      operationId: OAuthGetToken
+      description: Endpoint for receiving access, ID, and refresh tokens from Bolt's OAuth server.
+      tags:
+        - OAuth
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              oneOf:
+                - $ref: '#/components/schemas/get-access-token-request'
+                - $ref: '#/components/schemas/refresh-token-request'
+      responses:
+        '200':
+          description: Access token is successfully fetched
+          content:
+            application/json:
+              schema:
+                oneOf:
+                  - $ref: '#/components/schemas/get-access-token-response'
+                  - $ref: '#/components/schemas/base-oauth-token-response'
         4XX:
           $ref: '#/components/responses/response-4xx'
         default:
@@ -2114,7 +2150,6 @@ components:
         - phone_state
         - otp_code
         - oauth_code
-        - deactivate_at
       properties:
         email:
           type: string
@@ -2156,10 +2191,6 @@ components:
           type: string
           readOnly: true
           example: 7GSjMRSHs6Ak7C_zvVW6P2IhZOHxMK7HZKW1fMX85ms
-        deactivate_at:
-          type: string
-          format: date-time
-          example: '2017-07-21T17:32:28Z'
     shipment-tracking-update:
       type: object
       required:
@@ -2229,6 +2260,86 @@ components:
           format: date-time
           description: The shipment's actual or estimated delivery date.
           example: 2014-08-23:T06:00:00Z
+    base-oauth-token-request:
+      type: object
+      required:
+        - client_id
+        - client_secret
+        - code
+        - grant_type
+        - scope
+      properties:
+        client_id:
+          type: string
+          description: Merchant publishable key which can be found in the merchant dashboard
+        client_secret:
+          type: string
+          description: Your Bolt API Key.
+        grant_type:
+          description: |
+            The type of OAuth 2.0 grant being utilized. 
+
+            The value will always be `authorization_code` when exchanging an authorization code for an access token.
+          enum:
+            - authorization_code
+          type: string
+        scope:
+          description: The scope issued to the merchant when receiving an authorization code. Options include `bolt.account.manage`, `bolt.account.view`, `openid`. You can find more information on these options in our [OAuth scope documentation](https://help.bolt.com/developers/references/bolt-oauth/#scopes).
+          enum:
+            - bolt.account.manage
+            - bolt.account.view
+            - openid
+          type: string
+        state:
+          description: A randomly generated string issued to the merchant when receiving an authorization code used to prevent CSRF attacks
+          type: string
+    get-access-token-request:
+      type: object
+      allOf:
+        - type: object
+          properties:
+            code:
+              description: Fetched value using OTP value from the Authorization Modal.
+              type: string
+        - $ref: '#/components/schemas/base-oauth-token-request'
+    refresh-token-request:
+      type: object
+      allOf:
+        - type: object
+          properties:
+            refresh_token:
+              description: The value of the refresh token issued to you in the originating OAuth token request.
+              type: string
+        - $ref: '#/components/schemas/base-oauth-token-request'
+    base-oauth-token-response:
+      type: object
+      properties:
+        access_token:
+          description: An access token you can use to make requests on behalf of a Bolt Account.
+          type: string
+        expires_in:
+          description: Access token’s expiration in seconds.
+          type: integer
+        refresh_token:
+          description: A refresh token you can use to issue a brand new access token without obtaining a new authorization code.
+          type: string
+        refresh_token_scope:
+          description: The scope granted to the refresh token. Currently this will always be bolt.account.view.
+          type: string
+        scope:
+          description: The scope granted to access token, depending on the scope granted to the authorization code as well as the scope parameter. Options include `bolt.account.manage`, `bolt.account.view`, `openid`.
+          type: string
+        token_type:
+          description: The token_type will always be bearer.
+          type: string
+    get-access-token-response:
+      allOf:
+        - type: object
+          properties:
+            id_token:
+              description: A JWT token issued when the request includes the scope open_id.
+              type: string
+        - $ref: '#/components/schemas/base-oauth-token-response'
   examples:
     address-all-fields:
       summary: A sample address where all fields, including optional fields, are set
