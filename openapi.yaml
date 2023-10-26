@@ -52,7 +52,7 @@ tags:
       flows in non-production environments.
   - name: OAuth
     description: |
-      Use this endpoint to retrieve an OAuth token. Use the token to allow your ecommerce server to make calls to the Account 
+      Use this endpoint to retrieve an OAuth token. Use the token to allow your ecommerce server to make calls to the Account
       endpoint and create a one-click checkout experience for shoppers.
     externalDocs:
       url: https://help.bolt.com/products/accounts/direct-api/oauth-guide/
@@ -937,18 +937,14 @@ paths:
         content:
           application/x-www-form-urlencoded:
             schema:
-              oneOf:
-                - $ref: '#/components/schemas/get-access-token-request'
-                - $ref: '#/components/schemas/refresh-token-request'
+              $ref: '#/components/schemas/get-access-token-request'
       responses:
         '200':
           description: Access token is successfully fetched
           content:
             application/json:
               schema:
-                oneOf:
-                  - $ref: '#/components/schemas/get-access-token-response'
-                  - $ref: '#/components/schemas/base-oauth-token-response'
+                $ref: '#/components/schemas/get-access-token-response'
         4XX:
           $ref: '#/components/responses/response-4xx'
         default:
@@ -2277,14 +2273,18 @@ components:
           description: Your Bolt API Key.
         grant_type:
           description: |
-            The type of OAuth 2.0 grant being utilized. 
+            The type of OAuth 2.0 grant being utilized.
 
             The value will always be `authorization_code` when exchanging an authorization code for an access token.
           enum:
             - authorization_code
           type: string
         scope:
-          description: The scope issued to the merchant when receiving an authorization code. Options include `bolt.account.manage`, `bolt.account.view`, `openid`. You can find more information on these options in our [OAuth scope documentation](https://help.bolt.com/developers/references/bolt-oauth/#scopes).
+          description: |
+            The scope issued to the merchant when receiving an authorization code.
+            Options include `bolt.account.manage`, `bolt.account.view`, `openid`.
+            You can find more information on these options in our
+            [OAuth scope documentation](https://help.bolt.com/developers/references/bolt-oauth/#scopes).
           enum:
             - bolt.account.manage
             - bolt.account.view
@@ -2300,15 +2300,6 @@ components:
           properties:
             code:
               description: Fetched value using OTP value from the Authorization Modal.
-              type: string
-        - $ref: '#/components/schemas/base-oauth-token-request'
-    refresh-token-request:
-      type: object
-      allOf:
-        - type: object
-          properties:
-            refresh_token:
-              description: The value of the refresh token issued to you in the originating OAuth token request.
               type: string
         - $ref: '#/components/schemas/base-oauth-token-request'
     base-oauth-token-response:
@@ -2327,7 +2318,9 @@ components:
           description: The scope granted to the refresh token. Currently this will always be bolt.account.view.
           type: string
         scope:
-          description: The scope granted to access token, depending on the scope granted to the authorization code as well as the scope parameter. Options include `bolt.account.manage`, `bolt.account.view`, `openid`.
+          description: |
+            The scope granted to access token, depending on the scope granted to the authorization code as well as the scope parameter.
+            Options include `bolt.account.manage`, `bolt.account.view`, `openid`.'
           type: string
         token_type:
           description: The token_type will always be bearer.
