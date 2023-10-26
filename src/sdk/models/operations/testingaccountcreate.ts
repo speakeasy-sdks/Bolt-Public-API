@@ -6,6 +6,17 @@ import { SpeakeasyBase, SpeakeasyMetadata } from "../../../internal/utils";
 import * as shared from "../shared";
 import { AxiosResponse } from "axios";
 
+export class TestingAccountCreateRequest extends SpeakeasyBase {
+    /**
+     * The publicly viewable identifier used to identify a merchant division.
+     */
+    @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Publishable-Key" })
+    xPublishableKey: string;
+
+    @SpeakeasyMetadata({ data: "request, media_type=application/json" })
+    accountTestCreationDataInput: shared.AccountTestCreationDataInput;
+}
+
 export class TestingAccountCreateResponse extends SpeakeasyBase {
     /**
      * HTTP response content type for this operation

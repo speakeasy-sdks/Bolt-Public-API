@@ -1,5 +1,6 @@
 src/sdk/account.ts
 src/sdk/configuration.ts
+src/sdk/oauth.ts
 src/sdk/payments.ts
 src/sdk/testing.ts
 src/sdk/transactions.ts
@@ -34,6 +35,7 @@ src/sdk/models/operations/accountpaymentmethoddelete.ts
 src/sdk/models/operations/merchantcallbacksget.ts
 src/sdk/models/operations/merchantcallbacksupdate.ts
 src/sdk/models/operations/merchantidentifiersget.ts
+src/sdk/models/operations/oauthgettoken.ts
 src/sdk/models/operations/guestpaymentsaction.ts
 src/sdk/models/operations/guestpaymentsinitialize.ts
 src/sdk/models/operations/guestpaymentsupdate.ts
@@ -107,6 +109,7 @@ docs/models/operations/merchantcallbacksgetresponse.md
 docs/models/operations/merchantcallbacksupdaterequest.md
 docs/models/operations/merchantcallbacksupdateresponse.md
 docs/models/operations/merchantidentifiersgetresponse.md
+docs/models/operations/oauthgettokenresponse.md
 docs/models/operations/guestpaymentsactionrequest.md
 docs/models/operations/guestpaymentsactionresponse.md
 docs/models/operations/guestpaymentsinitializerequest.md
@@ -122,6 +125,7 @@ docs/models/operations/paymentsinitializeresponse.md
 docs/models/operations/paymentsupdatesecurity.md
 docs/models/operations/paymentsupdaterequest.md
 docs/models/operations/paymentsupdateresponse.md
+docs/models/operations/testingaccountcreaterequest.md
 docs/models/operations/testingaccountcreateresponse.md
 docs/models/operations/testingcreditcardgetresponse.md
 docs/models/operations/testingshipmenttrackingcreateresponse.md
@@ -188,6 +192,7 @@ docs/models/callbacks/webhookscreatewebhookeventrequestbody.md
 docs/sdks/boltpublicapi/README.md
 docs/sdks/account/README.md
 docs/sdks/configuration/README.md
+docs/sdks/oauth/README.md
 docs/sdks/payments/README.md
 docs/sdks/testing/README.md
 docs/sdks/transactions/README.md

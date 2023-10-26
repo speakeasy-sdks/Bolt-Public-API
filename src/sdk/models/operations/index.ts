@@ -15,6 +15,7 @@ export * from "./guestpaymentsupdate";
 export * from "./merchantcallbacksget";
 export * from "./merchantcallbacksupdate";
 export * from "./merchantidentifiersget";
+export * from "./oauthgettoken";
 export * from "./paymentsaction";
 export * from "./paymentsinitialize";
 export * from "./paymentsupdate";

@@ -6,6 +6,7 @@ import * as utils from "../internal/utils";
 import { Account } from "./account";
 import { Configuration } from "./configuration";
 import * as shared from "./models/shared";
+import { OAuth } from "./oauth";
 import { Payments } from "./payments";
 import { Testing } from "./testing";
 import { Transactions } from "./transactions";
@@ -18,7 +19,7 @@ import { AxiosInstance } from "axios";
  */
 export const ServerList = [
     "https://api.{username}.dev.bolt.me/v3",
-    "https://{environment}.bolt.com/v3",
+    "https://{environment}.bolt.com/v1",
 ] as const;
 
 export enum ServerEnvironment {
@@ -73,9 +74,9 @@ export class SDKConfiguration {
     serverDefaults: any;
     language = "typescript";
     openapiDocVersion = "3.0.1";
-    sdkVersion = "0.6.0";
-    genVersion = "2.171.0";
-    userAgent = "speakeasy-sdk/typescript 0.6.0 2.171.0 3.0.1 Bolt-Public-API";
+    sdkVersion = "0.6.1";
+    genVersion = "2.172.0";
+    userAgent = "speakeasy-sdk/typescript 0.6.1 2.172.0 3.0.1 Bolt-Public-API";
     retryConfig?: utils.RetryConfig;
     public constructor(init?: Partial<SDKConfiguration>) {
         Object.assign(this, init);
@@ -102,6 +103,16 @@ export class BoltPublicAPI {
      *
      */
     public configuration: Configuration;
+    /**
+     * Use this endpoint to retrieve an OAuth token. Use the token to allow your ecommerce server to make calls to the Account
+     *
+     * @remarks
+     * endpoint and create a one-click checkout experience for shoppers.
+     *
+     *
+     * @see {@link https://help.bolt.com/products/accounts/direct-api/oauth-guide/}
+     */
+    public oAuth: OAuth;
     /**
      * Use the Payments API to tokenize and process alternative payment methods including Paypal with Bolt. This API is for the Bolt
      *
@@ -170,6 +181,7 @@ export class BoltPublicAPI {
 
         this.account = new Account(this.sdkConfiguration);
         this.configuration = new Configuration(this.sdkConfiguration);
+        this.oAuth = new OAuth(this.sdkConfiguration);
         this.payments = new Payments(this.sdkConfiguration);
         this.testing = new Testing(this.sdkConfiguration);
         this.transactions = new Transactions(this.sdkConfiguration);

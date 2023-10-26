@@ -32,11 +32,13 @@ import { AccountTestCreationDataEmailState, AccountTestCreationDataPhoneState } 
   });
 
   const res = await sdk.testing.testingAccountCreate({
-    deactivateAt: new Date("2017-07-21T17:32:28Z"),
-    emailState: AccountTestCreationDataEmailState.Unverified,
-    hasAddress: true,
-    isMigrated: true,
-    phoneState: AccountTestCreationDataPhoneState.Verified,
+    xPublishableKey: "string",
+    accountTestCreationDataInput: {
+      emailState: AccountTestCreationDataEmailState.Unverified,
+      hasAddress: true,
+      isMigrated: true,
+      phoneState: AccountTestCreationDataPhoneState.Verified,
+    },
   });
 
   if (res.statusCode == 200) {
@@ -47,10 +49,10 @@ import { AccountTestCreationDataEmailState, AccountTestCreationDataPhoneState } 
 
 ### Parameters
 
-| Parameter                                                                                  | Type                                                                                       | Required                                                                                   | Description                                                                                |
-| ------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------ |
-| `request`                                                                                  | [shared.AccountTestCreationDataInput](../../models/shared/accounttestcreationdatainput.md) | :heavy_check_mark:                                                                         | The request object to use for the request.                                                 |
-| `config`                                                                                   | [AxiosRequestConfig](https://axios-http.com/docs/req_config)                               | :heavy_minus_sign:                                                                         | Available config options for making requests.                                              |
+| Parameter                                                                                        | Type                                                                                             | Required                                                                                         | Description                                                                                      |
+| ------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------ |
+| `request`                                                                                        | [operations.TestingAccountCreateRequest](../../models/operations/testingaccountcreaterequest.md) | :heavy_check_mark:                                                                               | The request object to use for the request.                                                       |
+| `config`                                                                                         | [AxiosRequestConfig](https://axios-http.com/docs/req_config)                                     | :heavy_minus_sign:                                                                               | Available config options for making requests.                                                    |
 
 
 ### Response

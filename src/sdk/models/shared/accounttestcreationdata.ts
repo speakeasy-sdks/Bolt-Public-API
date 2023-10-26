@@ -3,7 +3,7 @@
  */
 
 import { SpeakeasyBase, SpeakeasyMetadata } from "../../../internal/utils";
-import { Expose, Transform } from "class-transformer";
+import { Expose } from "class-transformer";
 
 export enum AccountTestCreationDataEmailState {
     Missing = "missing",
@@ -18,11 +18,6 @@ export enum AccountTestCreationDataPhoneState {
 }
 
 export class AccountTestCreationDataInput extends SpeakeasyBase {
-    @SpeakeasyMetadata()
-    @Expose({ name: "deactivate_at" })
-    @Transform(({ value }) => new Date(value), { toClassOnly: true })
-    deactivateAt: Date;
-
     @SpeakeasyMetadata()
     @Expose({ name: "email_state" })
     emailState: AccountTestCreationDataEmailState;
@@ -41,11 +36,6 @@ export class AccountTestCreationDataInput extends SpeakeasyBase {
 }
 
 export class AccountTestCreationDataOutput extends SpeakeasyBase {
-    @SpeakeasyMetadata()
-    @Expose({ name: "deactivate_at" })
-    @Transform(({ value }) => new Date(value), { toClassOnly: true })
-    deactivateAt: Date;
-
     @SpeakeasyMetadata()
     @Expose({ name: "email" })
     email: string;

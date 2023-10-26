@@ -71,6 +71,10 @@ import { AccountAddPaymentMethodSecurity } from "Bolt-Public-API/dist/sdk/models
 * [merchantCallbacksUpdate](docs/sdks/configuration/README.md#merchantcallbacksupdate) - Update callback URLs for the merchant
 * [merchantIdentifiersGet](docs/sdks/configuration/README.md#merchantidentifiersget) - Retrieve identifiers for the merchant
 
+### [oAuth](docs/sdks/oauth/README.md)
+
+* [oAuthGetToken](docs/sdks/oauth/README.md#oauthgettoken) - Get OAuth token
+
 ### [payments](docs/sdks/payments/README.md)
 
 * [guestPaymentsAction](docs/sdks/payments/README.md#guestpaymentsaction) - Perform an irreversible action (e.g. finalize) on a pending guest payment
@@ -121,6 +125,72 @@ return value of `next` is `null`, then there are no more pages to be fetched.
 
 Here's an example of one such pagination call:
 <!-- End Pagination -->
+
+
+
+<!-- Start Error Handling -->
+# Error Handling
+
+Handling errors in your SDK should largely match your expectations.  All operations return a response object or throw an error.  If Error objects are specified in your OpenAPI Spec, the SDK will throw the appropriate Error type.
+
+
+## Example
+
+```typescript
+import { BoltPublicAPI } from "Bolt-Public-API";
+import { AccountAddressDeleteSecurity } from "Bolt-Public-API/dist/sdk/models/operations";
+
+(async() => {
+  const sdk = new BoltPublicAPI();
+const operationSecurity: AccountAddressDeleteSecurity = {
+  apiKey: "",
+  oauth: "",
+};
+
+  
+  let res;
+  try {
+    res = await sdk.account.accountAddressDelete({
+    xPublishableKey: "string",
+    id: "D4g3h5tBuVYK9",
+  }, operationSecurity);
+  } catch (e) { 
+    if (e instanceof error) {
+      console.error(e) // handle exception 
+    
+  }
+
+  if (res.statusCode == 200) {
+    // handle response
+  }
+})();
+```
+<!-- End Error Handling -->
+
+
+
+<!-- Start Custom HTTP Client -->
+# Custom HTTP Client
+
+The Typescript SDK makes API calls using the (axios)[https://axios-http.com/docs/intro] HTTP library.  In order to provide a convenient way to configure timeouts, cookies, proxies, custom headers, and other low-level configuration, you can initialize the SDK client with a custom `AxiosInstance` object.
+
+
+For example, you could specify a header for every request that your sdk makes as follows:
+
+```typescript
+from Bolt-Public-API import BoltPublicAPI;
+import axios;
+
+const httpClient = axios.create({
+    headers: {'x-custom-header': 'someValue'}
+})
+
+
+const sdk = new BoltPublicAPI({defaultClient: httpClient});
+```
+
+
+<!-- End Custom HTTP Client -->
 
 <!-- Placeholder for Future Speakeasy SDK Sections -->
 

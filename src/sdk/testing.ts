@@ -32,11 +32,11 @@ export class Testing {
      *
      */
     async testingAccountCreate(
-        req: shared.AccountTestCreationDataInput,
+        req: operations.TestingAccountCreateRequest,
         config?: AxiosRequestConfig
     ): Promise<operations.TestingAccountCreateResponse> {
         if (!(req instanceof utils.SpeakeasyBase)) {
-            req = new shared.AccountTestCreationDataInput(req);
+            req = new operations.TestingAccountCreateRequest(req);
         }
 
         const baseURL: string = utils.templateUrl(
@@ -48,7 +48,11 @@ export class Testing {
         let [reqBodyHeaders, reqBody]: [object, any] = [{}, null];
 
         try {
-            [reqBodyHeaders, reqBody] = utils.serializeRequestBody(req, "request", "json");
+            [reqBodyHeaders, reqBody] = utils.serializeRequestBody(
+                req,
+                "accountTestCreationDataInput",
+                "json"
+            );
         } catch (e: unknown) {
             if (e instanceof Error) {
                 throw new Error(`Error serializing request body, cause: ${e.message}`);
@@ -64,6 +68,7 @@ export class Testing {
         }
         const properties = utils.parseSecurityProperties(globalSecurity);
         const headers: RawAxiosRequestHeaders = {
+            ...utils.getHeadersFromRequest(req),
             ...reqBodyHeaders,
             ...config?.headers,
             ...properties.headers,
