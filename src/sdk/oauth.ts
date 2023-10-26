@@ -33,9 +33,13 @@ export class OAuth {
      * Endpoint for receiving access, ID, and refresh tokens from Bolt's OAuth server.
      */
     async oAuthGetToken(
-        req: any,
+        req: shared.GetAccessTokenRequest,
         config?: AxiosRequestConfig
     ): Promise<operations.OAuthGetTokenResponse> {
+        if (!(req instanceof utils.SpeakeasyBase)) {
+            req = new shared.GetAccessTokenRequest(req);
+        }
+
         const baseURL: string = utils.templateUrl(
             this.sdkConfiguration.serverURL,
             this.sdkConfiguration.serverDefaults
@@ -95,7 +99,10 @@ export class OAuth {
         switch (true) {
             case httpRes?.status == 200:
                 if (utils.matchContentType(contentType, `application/json`)) {
-                    res.oAuthGetToken200ApplicationJSONOneOf = JSON.parse(decodedRes);
+                    res.getAccessTokenResponse = utils.objectToClass(
+                        JSON.parse(decodedRes),
+                        shared.GetAccessTokenResponse
+                    );
                 } else {
                     throw new errors.SDKError(
                         "unknown content-type received: " + contentType,

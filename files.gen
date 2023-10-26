@@ -59,6 +59,8 @@ src/sdk/models/shared/account.ts
 src/sdk/models/shared/profile.ts
 src/sdk/models/shared/callbackurls.ts
 src/sdk/models/shared/identifiers.ts
+src/sdk/models/shared/getaccesstokenresponse.ts
+src/sdk/models/shared/getaccesstokenrequest.ts
 src/sdk/models/shared/paymentactionrequest.ts
 src/sdk/models/shared/guestpaymentinitializerequest.ts
 src/sdk/models/shared/profilecreationdata.ts
@@ -153,6 +155,10 @@ docs/models/shared/profile.md
 docs/models/shared/callbackurls.md
 docs/models/shared/identifiersmerchantdivisions.md
 docs/models/shared/identifiers.md
+docs/models/shared/getaccesstokenresponse.md
+docs/models/shared/getaccesstokenrequestgranttype.md
+docs/models/shared/getaccesstokenrequestscope.md
+docs/models/shared/getaccesstokenrequest.md
 docs/models/shared/paymentactionrequesttag.md
 docs/models/shared/paymentactionrequest.md
 docs/models/shared/guestpaymentinitializerequest.md

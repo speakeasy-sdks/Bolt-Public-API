@@ -188,8 +188,6 @@ const httpClient = axios.create({
 
 const sdk = new BoltPublicAPI({defaultClient: httpClient});
 ```
-
-
 <!-- End Custom HTTP Client -->
 
 <!-- Placeholder for Future Speakeasy SDK Sections -->

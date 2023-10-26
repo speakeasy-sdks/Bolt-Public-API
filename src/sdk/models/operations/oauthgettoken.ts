@@ -3,6 +3,7 @@
  */
 
 import { SpeakeasyBase, SpeakeasyMetadata } from "../../../internal/utils";
+import * as shared from "../shared";
 import { AxiosResponse } from "axios";
 
 export class OAuthGetTokenResponse extends SpeakeasyBase {
@@ -11,12 +12,6 @@ export class OAuthGetTokenResponse extends SpeakeasyBase {
      */
     @SpeakeasyMetadata()
     contentType: string;
-
-    /**
-     * Access token is successfully fetched
-     */
-    @SpeakeasyMetadata()
-    oAuthGetToken200ApplicationJSONOneOf?: any;
 
     /**
      * HTTP response status code for this operation
@@ -29,4 +24,10 @@ export class OAuthGetTokenResponse extends SpeakeasyBase {
      */
     @SpeakeasyMetadata()
     rawResponse?: AxiosResponse;
+
+    /**
+     * Access token is successfully fetched
+     */
+    @SpeakeasyMetadata()
+    getAccessTokenResponse?: shared.GetAccessTokenResponse;
 }
