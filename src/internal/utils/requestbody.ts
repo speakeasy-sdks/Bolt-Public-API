@@ -105,7 +105,13 @@ const encodeFormUrlEncodedData = (data: any): string => {
 
   if (isNumberRecord(data) || isBooleanRecord(data) || isStringRecord(data)) {
     fieldNames.forEach((fname) => {
-      appendPair(fname, data[fname].toString());
+      const formAnn: string = Reflect.getMetadata("form", data, fname);
+      if (formAnn === null) {
+        return;
+      }
+      const formDecorator: FormDecorator = parseFormDecorator(formAnn);
+      const name = formDecorator.Name ?? fname;
+      appendPair(name, data[fname].toString());
     });
   } else {
     fieldNames.forEach((fname) => {
@@ -121,10 +127,11 @@ const encodeFormUrlEncodedData = (data: any): string => {
         appendPair(name, val);
       } else if (formDecorator.Style === "form") {
         let parsed: Record<string, string[]>;
+        const name = formDecorator.Name ?? fname;
         if (formDecorator.Explode === true) {
-          parsed = formExplode(fname, data[fname]);
+          parsed = formExplode(name, data[fname]);
         } else {
-          parsed = formNotExplode(fname, data[fname]);
+          parsed = formNotExplode(name, data[fname]);
         }
 
         Object.keys(parsed).forEach((key) => {
