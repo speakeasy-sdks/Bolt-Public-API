@@ -8,10 +8,11 @@ generation:
   comments:
     disableComments: false
     omitDescriptionIfSummaryPresent: false
-  baseServerURL: ""
   devContainers:
     enabled: true
     schemaPath: ./openapi.yaml
+  baseServerURL: ""
+  flattenGlobalSecurity: true
   repoURL: https://github.com/speakeasy-sdks/Bolt-Public-API.git
   sdkClassName: Bolt-Public-API
   singleTagPerOp: false
