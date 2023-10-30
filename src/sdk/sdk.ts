@@ -13,15 +13,11 @@ import { AxiosInstance } from "axios";
 /**
  * Contains the list of servers available to the SDK
  */
-export const ServerList = [
-    "https://api.{username}.dev.bolt.me/v3",
-    "https://{environment}.bolt.com/v1",
-] as const;
+export const ServerList = ["https://{environment}.bolt.com/v3"] as const;
 
 export enum ServerEnvironment {
     Api = "api",
     ApiSandbox = "api-sandbox",
-    ApiStaging = "api-staging",
 }
 
 /**
@@ -49,11 +45,6 @@ export type SDKProps = {
     environment?: ServerEnvironment;
 
     /**
-     * Allows setting the username variable for url substitution
-     */
-    username?: string;
-
-    /**
      * Allows overriding the default server URL used by the SDK
      */
     serverURL?: string;
@@ -70,9 +61,9 @@ export class SDKConfiguration {
     serverDefaults: any;
     language = "typescript";
     openapiDocVersion = "3.0.1";
-    sdkVersion = "0.6.7";
+    sdkVersion = "0.6.8";
     genVersion = "2.173.0";
-    userAgent = "speakeasy-sdk/typescript 0.6.7 2.173.0 3.0.1 Bolt-Public-API";
+    userAgent = "speakeasy-sdk/typescript 0.6.8 2.173.0 3.0.1 Bolt-Public-API";
     retryConfig?: utils.RetryConfig;
     public constructor(init?: Partial<SDKConfiguration>) {
         Object.assign(this, init);
@@ -108,9 +99,6 @@ export class BoltPublicAPI {
         let defaults: any = {};
 
         const serverDefaults = [
-            {
-                username: props?.username?.toString() ?? "xwang",
-            },
             {
                 environment: props?.environment?.toString() ?? "api-sandbox",
             },
