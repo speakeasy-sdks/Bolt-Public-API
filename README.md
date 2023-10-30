@@ -26,33 +26,11 @@ yarn add https://github.com/speakeasy-sdks/Bolt-Public-API
 <!-- Start SDK Example Usage -->
 ```typescript
 import { BoltPublicAPI } from "Bolt-Public-API";
-import { AddressListingCountryCode } from "Bolt-Public-API/dist/sdk/models/shared";
 
 (async () => {
-    const sdk = new BoltPublicAPI({
-        security: {
-            apiKey: "",
-            oauth: "",
-        },
-    });
+    const sdk = new BoltPublicAPI();
 
-    const res = await sdk.account.addAddress({
-        xPublishableKey: "string",
-        addressListingInput: {
-            company: "ACME Corporation",
-            countryCode: AddressListingCountryCode.Us,
-            email: "alice@example.com",
-            firstName: "Alice",
-            isDefault: true,
-            lastName: "Baker",
-            locality: "San Francisco",
-            phone: "+14155550199",
-            postalCode: "94105",
-            region: "CA",
-            streetAddress1: "535 Mission St, Ste 1401",
-            streetAddress2: "c/o Shipping Department",
-        },
-    });
+    const res = await sdk.pets.createPets();
 
     if (res.statusCode == 200) {
         // handle response
@@ -66,33 +44,11 @@ import { AddressListingCountryCode } from "Bolt-Public-API/dist/sdk/models/share
 ## Available Resources and Operations
 
 
-### [account](docs/sdks/account/README.md)
+### [pets](docs/sdks/pets/README.md)
 
-* [addAddress](docs/sdks/account/README.md#addaddress) - Add an address
-* [addPaymentMethod](docs/sdks/account/README.md#addpaymentmethod) - Add a payment method to a shopper's Bolt account Wallet.
-* [deleteAddress](docs/sdks/account/README.md#deleteaddress) - Delete an existing address
-* [deletePaymentMethod](docs/sdks/account/README.md#deletepaymentmethod) - Delete an existing payment method
-* [detect](docs/sdks/account/README.md#detect) - Determine the existence of a Bolt account
-* [getDetails](docs/sdks/account/README.md#getdetails) - Retrieve account details
-* [updateAddress](docs/sdks/account/README.md#updateaddress) - Edit an existing address
-
-
-### [payments.guest](docs/sdks/paymentsguest/README.md)
-
-* [initialize](docs/sdks/paymentsguest/README.md#initialize) - Initialize a Bolt payment for guest shoppers
-* [performAction](docs/sdks/paymentsguest/README.md#performaction) - Perform an irreversible action (e.g. finalize) on a pending guest payment
-* [update](docs/sdks/paymentsguest/README.md#update) - Update an existing guest payment
-
-### [payments.loggedIn](docs/sdks/paymentsloggedin/README.md)
-
-* [initialize](docs/sdks/paymentsloggedin/README.md#initialize) - Initialize a Bolt payment for logged in shoppers
-* [performAction](docs/sdks/paymentsloggedin/README.md#performaction) - Perform an irreversible action (e.g. finalize) on a pending payment
-* [update](docs/sdks/paymentsloggedin/README.md#update) - Update an existing payment
-
-### [testing](docs/sdks/testing/README.md)
-
-* [createAccount](docs/sdks/testing/README.md#createaccount) - Create a test account
-* [getCreditCard](docs/sdks/testing/README.md#getcreditcard) - Retrieve a test credit card, including its token
+* [createPets](docs/sdks/pets/README.md#createpets) - Create a pet
+* [listPets](docs/sdks/pets/README.md#listpets) - List all pets
+* [showPetById](docs/sdks/pets/README.md#showpetbyid) - Info for a specific pet
 <!-- End SDK Available Operations -->
 
 <!-- Start Dev Containers -->
@@ -123,40 +79,6 @@ Here's an example of one such pagination call:
 # Error Handling
 
 Handling errors in your SDK should largely match your expectations.  All operations return a response object or throw an error.  If Error objects are specified in your OpenAPI Spec, the SDK will throw the appropriate Error type.
-
-
-## Example
-
-```typescript
-import { BoltPublicAPI } from "Bolt-Public-API";
-
-(async() => {
-  const sdk = new BoltPublicAPI({
-    security: {
-      apiKey: "",
-      oauth: "",
-    },
-  });
-
-  
-  let res;
-  try {
-    res = await sdk.account.deleteAddress({
-    xPublishableKey: "string",
-    id: "D4g3h5tBuVYK9",
-  });
-  } catch (e) { 
-    if (e instanceof error) {
-      console.error(e) // handle exception 
-    
-  }
-
-
-  if (res.statusCode == 200) {
-    // handle response
-  }
-})();
-```
 <!-- End Error Handling -->
 
 
@@ -193,45 +115,20 @@ You can override the default server globally by passing a server index to the `s
 
 | # | Server | Variables |
 | - | ------ | --------- |
-| 0 | `https://{environment}.bolt.com/v3` | `environment` (default is `api-sandbox`) |
-
-
-Some of the server options above contain variables. If you want to set the values of those variables, the following options are provided for doing so:
- * `environment: ServerEnvironment`
+| 0 | `http://petstore.swagger.io/v1` | None |
 
 For example:
 
 
 ```typescript
 import { BoltPublicAPI } from "Bolt-Public-API";
-import { AddressListingCountryCode } from "Bolt-Public-API/dist/sdk/models/shared";
 
 (async () => {
     const sdk = new BoltPublicAPI({
-        security: {
-            apiKey: "",
-            oauth: "",
-        },
         serverIdx: 0,
     });
 
-    const res = await sdk.account.addAddress({
-        xPublishableKey: "string",
-        addressListingInput: {
-            company: "ACME Corporation",
-            countryCode: AddressListingCountryCode.Us,
-            email: "alice@example.com",
-            firstName: "Alice",
-            isDefault: true,
-            lastName: "Baker",
-            locality: "San Francisco",
-            phone: "+14155550199",
-            postalCode: "94105",
-            region: "CA",
-            streetAddress1: "535 Mission St, Ste 1401",
-            streetAddress2: "c/o Shipping Department",
-        },
-    });
+    const res = await sdk.pets.createPets();
 
     if (res.statusCode == 200) {
         // handle response
@@ -248,34 +145,13 @@ The default server can also be overridden globally by passing a URL to the `serv
 
 ```typescript
 import { BoltPublicAPI } from "Bolt-Public-API";
-import { AddressListingCountryCode } from "Bolt-Public-API/dist/sdk/models/shared";
 
 (async () => {
     const sdk = new BoltPublicAPI({
-        security: {
-            apiKey: "",
-            oauth: "",
-        },
-        serverURL: "https://{environment}.bolt.com/v3",
+        serverURL: "http://petstore.swagger.io/v1",
     });
 
-    const res = await sdk.account.addAddress({
-        xPublishableKey: "string",
-        addressListingInput: {
-            company: "ACME Corporation",
-            countryCode: AddressListingCountryCode.Us,
-            email: "alice@example.com",
-            firstName: "Alice",
-            isDefault: true,
-            lastName: "Baker",
-            locality: "San Francisco",
-            phone: "+14155550199",
-            postalCode: "94105",
-            region: "CA",
-            streetAddress1: "535 Mission St, Ste 1401",
-            streetAddress2: "c/o Shipping Department",
-        },
-    });
+    const res = await sdk.pets.createPets();
 
     if (res.statusCode == 200) {
         // handle response
