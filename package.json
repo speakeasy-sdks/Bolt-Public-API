@@ -1,6 +1,6 @@
 {
   "name": "Bolt-Public-API",
-  "version": "0.6.3",
+  "version": "0.6.4",
   "author": "Bolt",
   "scripts": {
     "prepare": "tsc --build",
