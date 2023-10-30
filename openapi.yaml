@@ -567,10 +567,6 @@ paths:
           application/x-www-form-urlencoded:
             schema:
               $ref: '#/components/schemas/get-access-token-request'
-            encoding:
-              scope:
-                style: spaceDelimited
-                explode: false
       responses:
         '200':
           description: Access token is successfully fetched
