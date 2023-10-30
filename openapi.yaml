@@ -9,12 +9,18 @@ info:
     email: api-help@bolt.com
     url: https://help.bolt.com/api-bolt/
 servers:
-  - url: https://{environment}.bolt.com/v3
+  - url: https://api.{username}.dev.bolt.me/v3
+    variables:
+      username:
+        description: Your local username
+        default: xwang
+  - url: https://{environment}.bolt.com/v1
     variables:
       environment:
         enum:
           - api
           - api-sandbox
+          - api-staging
         default: api-sandbox
 tags:
   - name: Account
