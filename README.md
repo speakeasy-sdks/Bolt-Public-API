@@ -76,6 +76,10 @@ import { AddressListingCountryCode } from "Bolt-Public-API/dist/sdk/models/share
 * [getDetails](docs/sdks/account/README.md#getdetails) - Retrieve account details
 * [updateAddress](docs/sdks/account/README.md#updateaddress) - Edit an existing address
 
+### [oAuth](docs/sdks/oauth/README.md)
+
+* [getToken](docs/sdks/oauth/README.md#gettoken) - Get OAuth token
+
 
 ### [payments.guest](docs/sdks/paymentsguest/README.md)
 
@@ -193,14 +197,11 @@ You can override the default server globally by passing a server index to the `s
 
 | # | Server | Variables |
 | - | ------ | --------- |
-| 0 | `https://api.{username}.dev.bolt.me/v3` | `username` (default is `xwang`) |
-| 1 | `https://{environment}.bolt.com/v1` | `environment` (default is `api-sandbox`) |
+| 0 | `https://{environment}.bolt.com/v3` | `environment` (default is `api-sandbox`) |
 
 
 Some of the server options above contain variables. If you want to set the values of those variables, the following options are provided for doing so:
  * `environment: ServerEnvironment`
-
- * `username: string`
 
 For example:
 
@@ -215,7 +216,7 @@ import { AddressListingCountryCode } from "Bolt-Public-API/dist/sdk/models/share
             apiKey: "",
             oauth: "",
         },
-        serverIdx: 1,
+        serverIdx: 0,
     });
 
     const res = await sdk.account.addAddress({
@@ -259,7 +260,7 @@ import { AddressListingCountryCode } from "Bolt-Public-API/dist/sdk/models/share
             apiKey: "",
             oauth: "",
         },
-        serverURL: "https://api.{username}.dev.bolt.me/v3",
+        serverURL: "https://{environment}.bolt.com/v3",
     });
 
     const res = await sdk.account.addAddress({
