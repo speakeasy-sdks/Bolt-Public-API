@@ -1,0 +1,10 @@
+# GuestPaymentsUpdateRequest
+
+
+## Fields
+
+| Field                                                                      | Type                                                                       | Required                                                                   | Description                                                                | Example                                                                    |
+| -------------------------------------------------------------------------- | -------------------------------------------------------------------------- | -------------------------------------------------------------------------- | -------------------------------------------------------------------------- | -------------------------------------------------------------------------- |
+| `xPublishableKey`                                                          | *string*                                                                   | :heavy_check_mark:                                                         | The publicly viewable identifier used to identify a merchant division.     |                                                                            |
+| `id`                                                                       | *string*                                                                   | :heavy_check_mark:                                                         | The ID of the guest payment to update                                      | iKv7t5bgt1gg                                                               |
+| `paymentUpdateRequest`                                                     | [shared.PaymentUpdateRequest](../../models/shared/paymentupdaterequest.md) | :heavy_check_mark:                                                         | N/A                                                                        |                                                                            |
