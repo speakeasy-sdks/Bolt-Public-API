@@ -9,18 +9,12 @@ info:
     email: api-help@bolt.com
     url: https://help.bolt.com/api-bolt/
 servers:
-  - url: https://api.{username}.dev.bolt.me/v3
-    variables:
-      username:
-        description: Your local username
-        default: xwang
-  - url: https://{environment}.bolt.com/v1
+  - url: https://{environment}.bolt.com/v3
     variables:
       environment:
         enum:
           - api
           - api-sandbox
-          - api-staging
         default: api-sandbox
 tags:
   - name: Account
@@ -36,31 +30,16 @@ tags:
       Transaction endpoints allow you to manage transactions. For example, you can capture
       funds, void transactions, or issue refunds. You can also update certain fields for existing
       transactions.
-  - name: Configuration
-    description: |
-      Merchant configuration endpoints allow you to retrieve and configure merchant-level
-      configuration, such as callback URLs, identifiers, secrets, etc...
-  - name: Webhooks
-    description: |
-      Set up webhooks to notify your backend of events within Bolt. These webhooks
-      can communicate with your OMS or other systems to keep them up to date with Bolt.
-    externalDocs:
-      url: https://help.bolt.com/get-started/during-checkout/webhooks/
   - name: Testing
     description: |
       Endpoints that allow you to generate and retrieve test data to verify certain
       flows in non-production environments.
-  - name: OAuth
-    description: |
-      Use this endpoint to retrieve an OAuth token. Use the token to allow your ecommerce server to make calls to the Account
-      endpoint and create a one-click checkout experience for shoppers.
-    externalDocs:
-      url: https://help.bolt.com/products/accounts/direct-api/oauth-guide/
 paths:
   /account:
     get:
       summary: Retrieve account details
       operationId: accountGet
+      x-speakeasy-name-override: GetDetails
       description: Retrieve a shopper's account details, such as addresses and payment information
       tags:
         - Account
@@ -86,6 +65,7 @@ paths:
     post:
       summary: Add an address
       operationId: accountAddressCreate
+      x-speakeasy-name-override: AddAddress
       description: Add an address to the shopper's account
       tags:
         - Account
@@ -121,6 +101,7 @@ paths:
     put:
       summary: Edit an existing address
       operationId: accountAddressEdit
+      x-speakeasy-name-override: UpdateAddress
       description: |
         Edit an existing address on the shopper's account. This does not edit addresses
         that are already associated with other resources, such as transactions or
@@ -165,6 +146,7 @@ paths:
     delete:
       summary: Delete an existing address
       operationId: accountAddressDelete
+      x-speakeasy-name-override: DeleteAddress
       description: |
         Delete an existing address. Deleting an address does not invalidate transactions or
         shipments that are associated with it.
@@ -194,6 +176,7 @@ paths:
     get:
       summary: Determine the existence of a Bolt account
       operationId: accountExists
+      x-speakeasy-name-override: Detect
       description: Determine whether or not an identifier is associated with an existing Bolt account.
       tags:
         - Account
@@ -212,6 +195,7 @@ paths:
     post:
       summary: Add a payment method to a shopper's Bolt account Wallet.
       operationId: accountAddPaymentMethod
+      x-speakeasy-name-override: AddPaymentMethod
       description: |
         Add a payment method to a shopper's Bolt account Wallet. For security purposes, this request must come from
         your backend because authentication requires the use of your private key.<br />
@@ -251,6 +235,7 @@ paths:
     delete:
       summary: Delete an existing payment method
       operationId: accountPaymentMethodDelete
+      x-speakeasy-name-override: DeletePaymentMethod
       description: |
         Delete an existing payment method. Deleting a payment method does not invalidate transactions or
         orders that are associated with it.
@@ -280,6 +265,8 @@ paths:
     post:
       summary: Initialize a Bolt payment for logged in shoppers
       operationId: paymentsInitialize
+      x-speakeasy-group: Payments.LoggedIn
+      x-speakeasy-name-override: Initialize
       description: |
         Initialize a Bolt payment token that will be used to reference this payment to
         Bolt when it is updated or finalized for logged in shoppers.
@@ -320,6 +307,8 @@ paths:
     patch:
       summary: Update an existing payment
       operationId: paymentsUpdate
+      x-speakeasy-group: Payments.LoggedIn
+      x-speakeasy-name-override: Update
       description: |
         Update a pending payment
       tags:
@@ -357,6 +346,8 @@ paths:
     post:
       summary: Perform an irreversible action (e.g. finalize) on a pending payment
       operationId: paymentsAction
+      x-speakeasy-group: Payments.LoggedIn
+      x-speakeasy-name-override: PerformAction
       description: |
         Perform an irreversible action on a pending payment, such as finalizing it.
       tags:
@@ -395,6 +386,8 @@ paths:
     post:
       summary: Initialize a Bolt payment for guest shoppers
       operationId: guestPaymentsInitialize
+      x-speakeasy-group: Payments.Guest
+      x-speakeasy-name-override: Initialize
       description: |
         Initialize a Bolt payment token that will be used to reference this payment to
         Bolt when it is updated or finalized for guest shoppers.
@@ -435,6 +428,8 @@ paths:
     patch:
       summary: Update an existing guest payment
       operationId: guestPaymentsUpdate
+      x-speakeasy-group: Payments.Guest
+      x-speakeasy-name-override: Update
       description: |
         Update a pending guest payment
       tags:
@@ -470,6 +465,8 @@ paths:
     post:
       summary: Perform an irreversible action (e.g. finalize) on a pending guest payment
       operationId: guestPaymentsAction
+      x-speakeasy-group: Payments.Guest
+      x-speakeasy-name-override: PerformAction
       description: |
         Perform an irreversible action on a pending guest payment, such as finalizing it.
       tags:
@@ -506,6 +503,7 @@ paths:
     get:
       summary: Retrieve transaction details
       operationId: transactionGet
+      x-speakeasy-name-override: GetDetails
       description: Retrieve information for a specific transaction
       tags:
         - Transactions
@@ -534,6 +532,7 @@ paths:
     post:
       summary: Perform an irreversible action (e.g. capture, refund, void) on a transaction
       operationId: transactionAction
+      x-speakeasy-name-override: PerformAction
       description: Perform an irreversible action (e.g. capture, refund, void) on a transaction
       tags:
         - Transactions
@@ -575,6 +574,7 @@ paths:
     patch:
       summary: Update certain transaction details
       operationId: transactionUpdate
+      x-speakeasy-name-override: Update
       description: Update certain transaction details, such as the user-facing ID of its associate order
       tags:
         - Transactions
@@ -606,253 +606,11 @@ paths:
           $ref: '#/components/responses/response-4xx'
         default:
           $ref: '#/components/responses/response-default'
-  /merchant/callbacks:
-    get:
-      summary: Retrieve callback URLs for the merchant
-      operationId: merchantCallbacksGet
-      description: |
-        Return callback URLs configured on the merchant such as OAuth URLs.
-      tags:
-        - Configuration
-      security:
-        - api-key: []
-      parameters:
-        - $ref: '#/components/parameters/x-publishable-key'
-      responses:
-        '200':
-          description: Callbacks URLs were successfully retrieved
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/callback-urls'
-        4XX:
-          $ref: '#/components/responses/response-4xx'
-        default:
-          $ref: '#/components/responses/response-default'
-    patch:
-      summary: Update callback URLs for the merchant
-      operationId: merchantCallbacksUpdate
-      description: |
-        Update and configure callback URLs on the merchant such as OAuth URLs.
-      tags:
-        - Configuration
-      security:
-        - api-key: []
-      parameters:
-        - $ref: '#/components/parameters/x-publishable-key'
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/callback-urls'
-            examples:
-              update-all:
-                summary: Update all URLs
-                value:
-                  oauth_redirect: https://www.example.com/bolt/oauth
-                  oauth_logout: https://www.example.com/bolt/logout
-                  get_account: https://www.example.com/bolt/account
-                  create_order: https://www.example.com/bolt/order
-                  universal_merchant_api: https://www.example.com/bolt/merchant-api
-                  shipping: https://www.example.com/bolt/shipping
-                  tax: https://www.example.com/bolt/tax
-                  update_cart: https://www.example.com/bolt/cart
-                  debug: https://www.example.com/bolt/debug
-                  remote_api: https://www.example.com/bolt/remote-api
-                  product_info: https://www.example.com/bolt/product
-                  support_page: https://www.example.com/help
-                  account_page: https://www.example.com/account
-                  mobile_app_domain: https://m.example.com/
-                  validate_additional_account_data: https://www.example.com/bolt/validate-account
-                  terms_of_service: https://www.example.com/terms-of-service
-                  privacy_policy: https://www.example.com/privacy-policy
-                  base_domain: https://www.example.com/
-                  confirmation_redirect: https://www.example.com/bolt/redirect
-              update-terms-of-service-and-privacy-policy:
-                summary: Update a subset of URLs preserving existing URLs
-                value:
-                  privacy_policy: https://www.example.com/privacy-policy
-                  terms_of_service: https://www.example.com/privacy-policy
-      responses:
-        '200':
-          description: Callbacks URLs were successfully updated
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/callback-urls'
-        4XX:
-          $ref: '#/components/responses/response-4xx'
-        default:
-          $ref: '#/components/responses/response-default'
-  /merchant/identifiers:
-    get:
-      summary: Retrieve identifiers for the merchant
-      operationId: merchantIdentifiersGet
-      description: Return several identifiers for the merchant, such as public IDs, publishable keys, signing secrets, etc...
-      tags:
-        - Configuration
-      security:
-        - api-key: []
-      responses:
-        '200':
-          description: Identifiers were successfully retrieved
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/identifiers'
-        4XX:
-          $ref: '#/components/responses/response-4xx'
-        default:
-          $ref: '#/components/responses/response-default'
-  /webhooks:
-    put:
-      summary: Create a webhook to subscribe to certain events
-      operationId: webhooksCreate
-      description: Create a new webhook to receive notifications from Bolt about various events, such as transaction status.
-      tags:
-        - Webhooks
-      security:
-        - api-key: []
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/webhook'
-            examples:
-              all-events:
-                summary: Subscribe to all events
-                value:
-                  event:
-                    .tag: group
-                    event_group: all
-                  url: https://www.example.com/webhook
-              some-events:
-                summary: Subscribe to a subset of events
-                value:
-                  event:
-                    .tag: list
-                    event_list:
-                      - auth
-                      - capture
-                  url: https://www.example.com/webhook
-      responses:
-        '200':
-          description: The webhook was successfully created
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/webhook'
-        4XX:
-          $ref: '#/components/responses/response-4xx'
-        default:
-          $ref: '#/components/responses/response-default'
-      callbacks:
-        Webhook Event:
-          '{$request.body#/url}':
-            post:
-              summary: An event was triggered
-              description: |
-                An event was triggered. The payload contains all relevant event data.
-              security: []
-              requestBody:
-                required: true
-                content:
-                  application/json:
-                    schema:
-                      type: object
-                      properties:
-                        message:
-                          type: string
-                          example: Some event happened
-                      required:
-                        - message
-              responses:
-                '200':
-                  description: Your server returns this code if it accepts the callback
-                4XX:
-                  description: Your server returns this code if it rejects the callback. Bolt will backoff and retry
-    get:
-      summary: Retrieve information about all existing webhooks
-      operationId: webhooksGetAll
-      description: Retrieve information about all existing webhooks.
-      tags:
-        - Webhooks
-      security:
-        - api-key: []
-      parameters:
-        - $ref: '#/components/parameters/x-publishable-key'
-      responses:
-        '200':
-          description: All existing webhook information has been retrieved
-          content:
-            application/json:
-              schema:
-                properties:
-                  webhooks:
-                    type: array
-                    items:
-                      $ref: '#/components/schemas/webhook'
-        4XX:
-          $ref: '#/components/responses/response-4xx'
-        default:
-          $ref: '#/components/responses/response-default'
-  /webhooks/{id}:
-    get:
-      summary: Retrieve information for a specific webhook
-      operationId: webhooksGet
-      description: Retrieve information for an existing webhook.
-      tags:
-        - Webhooks
-      security:
-        - api-key: []
-      parameters:
-        - in: path
-          name: id
-          schema:
-            type: string
-            example: wh_za7VbYcSQU2zRgGQXQAm-g
-          required: true
-          description: The ID of the webhook whose information to retrieve
-      responses:
-        '200':
-          description: Webhook information has been retrieved
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/webhook'
-        4XX:
-          $ref: '#/components/responses/response-4xx'
-        default:
-          $ref: '#/components/responses/response-default'
-    delete:
-      summary: Delete an existing webhook
-      operationId: webhooksDelete
-      description: Delete an existing webhook. You will no longer receive notifications from Bolt about its events.
-      tags:
-        - Webhooks
-      security:
-        - api-key: []
-      parameters:
-        - in: path
-          name: id
-          schema:
-            type: string
-            example: wh_za7VbYcSQU2zRgGQXQAm-g
-          required: true
-          description: The ID of the webhook to delete
-      responses:
-        '200':
-          description: The webhook was successfully deleted
-        4XX:
-          $ref: '#/components/responses/response-4xx'
-        default:
-          $ref: '#/components/responses/response-default'
   /testing/accounts:
     post:
       summary: Create a test account
       operationId: testingAccountCreate
+      x-speakeasy-name-override: CreateAccount
       description: |
         Create a Bolt shopper account for testing purposes.
       tags:
@@ -882,6 +640,7 @@ paths:
     get:
       summary: Retrieve a test credit card, including its token
       operationId: testingCreditCardGet
+      x-speakeasy-name-override: GetCreditCard
       description: |
         Retrieve test credit card information. This includes its token, which is
         generated against the `4111 1111 1111 1004` test card.
@@ -900,31 +659,6 @@ paths:
           $ref: '#/components/responses/response-4xx'
         default:
           $ref: '#/components/responses/response-default'
-  /testing/shipments:
-    post:
-      summary: Simulate a shipment tracking update
-      operationId: testingShipmentTrackingCreate
-      description: |
-        Simulate a shipment tracking update, such as those that Bolt would ingest from
-        third-party shipping providers that would allow updating tracking and delivery
-        information to shipments associated with orders.
-      tags:
-        - Testing
-      security:
-        - api-key: []
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/shipment-tracking-update'
-      responses:
-        '200':
-          description: The shipment update was ingested successfully
-        4XX:
-          $ref: '#/components/responses/response-4xx'
-        default:
-          $ref: '#/components/responses/response-default'
   /oauth/token:
     post:
       summary: Get OAuth token
@@ -938,6 +672,10 @@ paths:
           application/x-www-form-urlencoded:
             schema:
               $ref: '#/components/schemas/get-access-token-request'
+            encoding:
+              scope:
+                style: spaceDelimited
+                explode: false
       responses:
         '200':
           description: Access token is successfully fetched
@@ -1953,190 +1691,6 @@ components:
                   description: A shopper-facing identifier corresponding to the order reference associated with this transaction.
                   maxLength: 128
                   example: '215614191'
-    callback-urls:
-      type: object
-      properties:
-        oauth_redirect:
-          type: string
-          format: uri
-          example: https://www.example.com/bolt/oauth
-        oauth_logout:
-          type: string
-          format: uri
-          example: https://www.example.com/bolt/logout
-        get_account:
-          type: string
-          format: uri
-          example: https://www.example.com/bolt/account
-        create_order:
-          type: string
-          format: uri
-          example: https://www.example.com/bolt/order
-        universal_merchant_api:
-          type: string
-          format: uri
-          example: https://www.example.com/bolt/merchant-api
-        shipping:
-          type: string
-          format: uri
-          example: https://www.example.com/bolt/shipping
-        tax:
-          type: string
-          format: uri
-          example: https://www.example.com/bolt/tax
-        update_cart:
-          type: string
-          format: uri
-          example: https://www.example.com/bolt/cart
-        debug:
-          type: string
-          format: uri
-          example: https://www.example.com/bolt/debug
-        remote_api:
-          type: string
-          format: uri
-          example: https://www.example.com/bolt/remote-api
-        product_info:
-          type: string
-          format: uri
-          example: https://www.example.com/bolt/product
-        support_page:
-          type: string
-          format: uri
-          example: https://www.example.com/help
-        account_page:
-          type: string
-          format: uri
-          example: https://www.example.com/account
-        mobile_app_domain:
-          type: string
-          format: uri
-          example: https://m.example.com/
-        validate_additional_account_data:
-          type: string
-          format: uri
-          example: https://www.example.com/bolt/validate-account
-        terms_of_service:
-          type: string
-          format: uri
-          example: https://www.example.com/terms-of-service
-        privacy_policy:
-          type: string
-          format: uri
-          example: https://www.example.com/privacy-policy
-        base_domain:
-          type: string
-          format: uri
-          example: https://www.example.com/
-        confirmation_redirect:
-          type: string
-          format: uri
-          example: https://www.example.com/bolt/redirect
-    identifiers:
-      type: object
-      required:
-        - merchant_id
-        - merchant_divisions
-        - signing_secret
-      properties:
-        merchant_id:
-          type: string
-          example: 8fd9diIy59sj
-        merchant_divisions:
-          type: array
-          items:
-            type: object
-            required:
-              - publishable_key
-            properties:
-              publishable_key:
-                type: string
-                example: 8fd9diIy59sj.IraJdeIgmdsO.fd233434fg2c616cgo932aa6e1e4fc627a9385045gr395222a127gi93c595rg4
-            example:
-              - publishable_key: 8fd9diIy59sj.IraJdeIgmdsO.fd233434fg2c616cgo932aa6e1e4fc627a9385045gr395222a127gi93c595rg4
-              - publishable_key: 8fd9diIy59sj.eT08QBZpdyTf.2a97f59b84c1a822b333aa1bc53fa7a43632b9102df9e6af4f3ff6d7d3a85f48
-        signing_secret:
-          type: string
-          example: xf833434fg2cffos92632aa6e1e4fc627a9385045gdj937fg2a127gi93cgos873
-    webhook-event-group:
-      type: object
-      properties:
-        .tag:
-          type: string
-          enum:
-            - group
-          example: group
-        event_group:
-          type: string
-          enum:
-            - all
-          example: all
-      required:
-        - .tag
-        - event_group
-    webhook-event-list:
-      type: object
-      properties:
-        .tag:
-          type: string
-          enum:
-            - list
-          example: list
-        event_list:
-          type: array
-          items:
-            type: string
-            enum:
-              - payment
-              - credit
-              - capture
-              - void
-              - auth
-              - pending
-              - rejected_irreversible
-              - rejected_reversible
-              - failed_payment
-              - newsletter_subscription
-              - risk_insights
-              - credit_card_deleted
-            example: auth
-          example:
-            - auth
-            - capture
-      required:
-        - .tag
-        - event_list
-    webhook:
-      type: object
-      properties:
-        id:
-          type: string
-          description: The webhook's ID
-          readOnly: true
-          example: wh_za7VbYcSQU2zRgGQXQAm-g
-        created_at:
-          type: string
-          description: The time at which the webhook was created
-          format: date-time
-          readOnly: true
-          example: '2017-07-21T17:32:28Z'
-        event:
-          oneOf:
-            - $ref: '#/components/schemas/webhook-event-group'
-            - $ref: '#/components/schemas/webhook-event-list'
-          discriminator:
-            propertyName: .tag
-            mapping:
-              group: '#/components/schemas/webhook-event-group'
-              list: '#/components/schemas/webhook-event-list'
-        url:
-          type: string
-          description: The webhook's URL
-          format: uri
-          example: https://www.example.com/webhook
-      required:
-        - event
-        - url
     account-test-creation-data:
       type: object
       required:
@@ -2187,75 +1741,6 @@ components:
           type: string
           readOnly: true
           example: 7GSjMRSHs6Ak7C_zvVW6P2IhZOHxMK7HZKW1fMX85ms
-    shipment-tracking-update:
-      type: object
-      required:
-        - tracking_number
-        - tracking_details
-        - status
-      properties:
-        tracking_number:
-          type: string
-          description: The carrier's tracking number for the shipment. Must be prefixed with `MockBolt`.
-          example: MockBolt-143292
-        tracking_details:
-          type: array
-          description: A list of tracking updates that contain the shipment's status, location, and any unique messages.
-          items:
-            type: object
-            properties:
-              event_date:
-                type: string
-                description: The tracking detail's timestamp.
-                example: 2014-08-21:T14:24:00Z
-              status:
-                type: string
-                enum:
-                  - unknown
-                  - pre_transit
-                  - in_transit
-                  - out_for_delivery
-                  - delivered
-                  - available_for_pickup
-                  - return_to_sender
-                  - failure
-                  - cancelled
-                  - error
-                example: pre_transit
-              message:
-                type: string
-                description: An arbitrary, human-readable message associated with this set of tracking details.
-                example: Billing information received
-              locality:
-                type: string
-                description: The locality associated this this set of tracking details, if any.
-                example: San Francisco
-              region:
-                type: string
-                description: The region associated this this set of tracking details, if any.
-                example: CA
-              postal_code:
-                type: string
-                description: The postal associated this this set of tracking details, if any.
-                example: 94105
-              country_code:
-                type: string
-                description: The country associated this this set of tracking details, if any.
-                example: US
-        status:
-          type: string
-          enum:
-            - in_transit
-            - cancelled
-            - failure
-            - delivered
-          description: The shipment's status.
-          example: in_transit
-        delivery_date:
-          type: string
-          format: date-time
-          description: The shipment's actual or estimated delivery date.
-          example: 2014-08-23:T06:00:00Z
     base-oauth-token-request:
       type: object
       required:
@@ -2285,11 +1770,13 @@ components:
             Options include `bolt.account.manage`, `bolt.account.view`, `openid`.
             You can find more information on these options in our
             [OAuth scope documentation](https://help.bolt.com/developers/references/bolt-oauth/#scopes).
-          enum:
-            - bolt.account.manage
-            - bolt.account.view
-            - openid
-          type: string
+          type: array
+          items:
+            type: string
+            enum:
+              - bolt.account.manage
+              - bolt.account.view
+              - openid
         state:
           description: A randomly generated string issued to the merchant when receiving an authorization code used to prevent CSRF attacks
           type: string
