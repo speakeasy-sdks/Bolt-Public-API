@@ -1,6 +1,6 @@
 configVersion: 1.0.0
 management:
-  docChecksum: 487eb72ce4a72d71640a61729cd3de52
+  docChecksum: e3cd27f7876b40f8561a2c642cb71830
   docVersion: 3.0.1
   speakeasyVersion: 1.109.0
   generationVersion: 2.173.0
@@ -28,7 +28,7 @@ features:
     methodSecurity: 2.82.0
     nameOverrides: 2.81.1
 typescript:
-  version: 0.8.0
+  version: 0.9.0
   author: Bolt
   clientServerStatusCodesAsErrors: true
   flattenGlobalSecurity: false
