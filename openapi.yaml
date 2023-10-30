@@ -669,6 +669,7 @@ paths:
     post:
       summary: Get OAuth token
       operationId: OAuthGetToken
+      x-speakeasy-name-override: GetToken
       description: Endpoint for receiving access, ID, and refresh tokens from Bolt's OAuth server.
       tags:
         - OAuth
