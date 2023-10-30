@@ -1,0 +1,9 @@
+# AccountExistsRequest
+
+
+## Fields
+
+| Field                                                                                                 | Type                                                                                                  | Required                                                                                              | Description                                                                                           |
+| ----------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------- |
+| `xPublishableKey`                                                                                     | *string*                                                                                              | :heavy_check_mark:                                                                                    | The publicly viewable identifier used to identify a merchant division.                                |
+| `identifier`                                                                                          | [shared.Identifier](../../models/shared/identifier.md)                                                | :heavy_check_mark:                                                                                    | A type and value combination that defines the identifier used to detect<br/>the existence of an account.<br/> |
