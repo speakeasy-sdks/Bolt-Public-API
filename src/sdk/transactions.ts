@@ -26,13 +26,113 @@ export class Transactions {
     }
 
     /**
+     * Retrieve transaction details
+     *
+     * @remarks
+     * Retrieve information for a specific transaction
+     */
+    async getDetails(
+        req: operations.TransactionGetRequest,
+        security: operations.TransactionGetSecurity,
+        config?: AxiosRequestConfig
+    ): Promise<operations.TransactionGetResponse> {
+        if (!(req instanceof utils.SpeakeasyBase)) {
+            req = new operations.TransactionGetRequest(req);
+        }
+
+        const baseURL: string = utils.templateUrl(
+            this.sdkConfiguration.serverURL,
+            this.sdkConfiguration.serverDefaults
+        );
+        const url: string = utils.generateURL(baseURL, "/transactions/{id}", req);
+        const client: AxiosInstance = this.sdkConfiguration.defaultClient;
+        if (!(security instanceof utils.SpeakeasyBase)) {
+            security = new operations.TransactionGetSecurity(security);
+        }
+        const properties = utils.parseSecurityProperties(security);
+        const headers: RawAxiosRequestHeaders = {
+            ...utils.getHeadersFromRequest(req),
+            ...config?.headers,
+            ...properties.headers,
+        };
+        headers["Accept"] = "application/json";
+
+        headers["user-agent"] = this.sdkConfiguration.userAgent;
+
+        const httpRes: AxiosResponse = await client.request({
+            validateStatus: () => true,
+            url: url,
+            method: "get",
+            headers: headers,
+            responseType: "arraybuffer",
+            ...config,
+        });
+
+        const contentType: string = httpRes?.headers?.["content-type"] ?? "";
+
+        if (httpRes?.status == null) {
+            throw new Error(`status code not found in response: ${httpRes}`);
+        }
+
+        const res: operations.TransactionGetResponse = new operations.TransactionGetResponse({
+            statusCode: httpRes.status,
+            contentType: contentType,
+            rawResponse: httpRes,
+        });
+        const decodedRes = new TextDecoder().decode(httpRes?.data);
+        switch (true) {
+            case httpRes?.status == 200:
+                if (utils.matchContentType(contentType, `application/json`)) {
+                    res.transaction = utils.objectToClass(
+                        JSON.parse(decodedRes),
+                        shared.Transaction
+                    );
+                } else {
+                    throw new errors.SDKError(
+                        "unknown content-type received: " + contentType,
+                        httpRes.status,
+                        decodedRes,
+                        httpRes
+                    );
+                }
+                break;
+            case httpRes?.status >= 400 && httpRes?.status < 500:
+                if (utils.matchContentType(contentType, `application/json`)) {
+                    const err = utils.objectToClass(JSON.parse(decodedRes), errors.ErrorT);
+                    err.rawResponse = httpRes;
+                    throw new errors.ErrorT(err);
+                } else {
+                    throw new errors.SDKError(
+                        "unknown content-type received: " + contentType,
+                        httpRes.status,
+                        decodedRes,
+                        httpRes
+                    );
+                }
+                break;
+            case httpRes?.status >= 500 && httpRes?.status < 600:
+                throw new errors.SDKError(
+                    "API error occurred",
+                    httpRes.status,
+                    decodedRes,
+                    httpRes
+                );
+            default:
+                break;
+        }
+
+        return res;
+    }
+
+    /**
      * Perform an irreversible action (e.g. capture, refund, void) on a transaction
      *
      * @remarks
      * Perform an irreversible action (e.g. capture, refund, void) on a transaction
      */
-    async transactionAction(
+    async performAction(
         req: operations.TransactionActionRequest,
+        security: operations.TransactionActionSecurity,
         config?: AxiosRequestConfig
     ): Promise<operations.TransactionActionResponse> {
         if (!(req instanceof utils.SpeakeasyBase)) {
@@ -59,14 +159,10 @@ export class Transactions {
             }
         }
         const client: AxiosInstance = this.sdkConfiguration.defaultClient;
-        let globalSecurity = this.sdkConfiguration.security;
-        if (typeof globalSecurity === "function") {
-            globalSecurity = await globalSecurity();
+        if (!(security instanceof utils.SpeakeasyBase)) {
+            security = new operations.TransactionActionSecurity(security);
         }
-        if (!(globalSecurity instanceof utils.SpeakeasyBase)) {
-            globalSecurity = new shared.Security(globalSecurity);
-        }
-        const properties = utils.parseSecurityProperties(globalSecurity);
+        const properties = utils.parseSecurityProperties(security);
         const headers: RawAxiosRequestHeaders = {
             ...utils.getHeadersFromRequest(req),
             ...reqBodyHeaders,
@@ -145,115 +241,14 @@ export class Transactions {
     }
 
     /**
-     * Retrieve transaction details
-     *
-     * @remarks
-     * Retrieve information for a specific transaction
-     */
-    async transactionGet(
-        req: operations.TransactionGetRequest,
-        config?: AxiosRequestConfig
-    ): Promise<operations.TransactionGetResponse> {
-        if (!(req instanceof utils.SpeakeasyBase)) {
-            req = new operations.TransactionGetRequest(req);
-        }
-
-        const baseURL: string = utils.templateUrl(
-            this.sdkConfiguration.serverURL,
-            this.sdkConfiguration.serverDefaults
-        );
-        const url: string = utils.generateURL(baseURL, "/transactions/{id}", req);
-        const client: AxiosInstance = this.sdkConfiguration.defaultClient;
-        let globalSecurity = this.sdkConfiguration.security;
-        if (typeof globalSecurity === "function") {
-            globalSecurity = await globalSecurity();
-        }
-        if (!(globalSecurity instanceof utils.SpeakeasyBase)) {
-            globalSecurity = new shared.Security(globalSecurity);
-        }
-        const properties = utils.parseSecurityProperties(globalSecurity);
-        const headers: RawAxiosRequestHeaders = {
-            ...utils.getHeadersFromRequest(req),
-            ...config?.headers,
-            ...properties.headers,
-        };
-        headers["Accept"] = "application/json";
-
-        headers["user-agent"] = this.sdkConfiguration.userAgent;
-
-        const httpRes: AxiosResponse = await client.request({
-            validateStatus: () => true,
-            url: url,
-            method: "get",
-            headers: headers,
-            responseType: "arraybuffer",
-            ...config,
-        });
-
-        const contentType: string = httpRes?.headers?.["content-type"] ?? "";
-
-        if (httpRes?.status == null) {
-            throw new Error(`status code not found in response: ${httpRes}`);
-        }
-
-        const res: operations.TransactionGetResponse = new operations.TransactionGetResponse({
-            statusCode: httpRes.status,
-            contentType: contentType,
-            rawResponse: httpRes,
-        });
-        const decodedRes = new TextDecoder().decode(httpRes?.data);
-        switch (true) {
-            case httpRes?.status == 200:
-                if (utils.matchContentType(contentType, `application/json`)) {
-                    res.transaction = utils.objectToClass(
-                        JSON.parse(decodedRes),
-                        shared.Transaction
-                    );
-                } else {
-                    throw new errors.SDKError(
-                        "unknown content-type received: " + contentType,
-                        httpRes.status,
-                        decodedRes,
-                        httpRes
-                    );
-                }
-                break;
-            case httpRes?.status >= 400 && httpRes?.status < 500:
-                if (utils.matchContentType(contentType, `application/json`)) {
-                    const err = utils.objectToClass(JSON.parse(decodedRes), errors.ErrorT);
-                    err.rawResponse = httpRes;
-                    throw new errors.ErrorT(err);
-                } else {
-                    throw new errors.SDKError(
-                        "unknown content-type received: " + contentType,
-                        httpRes.status,
-                        decodedRes,
-                        httpRes
-                    );
-                }
-                break;
-            case httpRes?.status >= 500 && httpRes?.status < 600:
-                throw new errors.SDKError(
-                    "API error occurred",
-                    httpRes.status,
-                    decodedRes,
-                    httpRes
-                );
-            default:
-                break;
-        }
-
-        return res;
-    }
-
-    /**
      * Update certain transaction details
      *
      * @remarks
      * Update certain transaction details, such as the user-facing ID of its associate order
      */
-    async transactionUpdate(
+    async update(
         req: operations.TransactionUpdateRequest,
+        security: operations.TransactionUpdateSecurity,
         config?: AxiosRequestConfig
     ): Promise<operations.TransactionUpdateResponse> {
         if (!(req instanceof utils.SpeakeasyBase)) {
@@ -280,14 +275,10 @@ export class Transactions {
             }
         }
         const client: AxiosInstance = this.sdkConfiguration.defaultClient;
-        let globalSecurity = this.sdkConfiguration.security;
-        if (typeof globalSecurity === "function") {
-            globalSecurity = await globalSecurity();
+        if (!(security instanceof utils.SpeakeasyBase)) {
+            security = new operations.TransactionUpdateSecurity(security);
         }
-        if (!(globalSecurity instanceof utils.SpeakeasyBase)) {
-            globalSecurity = new shared.Security(globalSecurity);
-        }
-        const properties = utils.parseSecurityProperties(globalSecurity);
+        const properties = utils.parseSecurityProperties(security);
         const headers: RawAxiosRequestHeaders = {
             ...utils.getHeadersFromRequest(req),
             ...reqBodyHeaders,

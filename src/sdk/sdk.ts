@@ -4,28 +4,21 @@
 
 import * as utils from "../internal/utils";
 import { Account } from "./account";
-import { Configuration } from "./configuration";
 import * as shared from "./models/shared";
-import { OAuth } from "./oauth";
 import { Payments } from "./payments";
 import { Testing } from "./testing";
 import { Transactions } from "./transactions";
-import { Webhooks } from "./webhooks";
 import axios from "axios";
 import { AxiosInstance } from "axios";
 
 /**
  * Contains the list of servers available to the SDK
  */
-export const ServerList = [
-    "https://api.{username}.dev.bolt.me/v3",
-    "https://{environment}.bolt.com/v1",
-] as const;
+export const ServerList = ["https://{environment}.bolt.com/v3"] as const;
 
 export enum ServerEnvironment {
     Api = "api",
     ApiSandbox = "api-sandbox",
-    ApiStaging = "api-staging",
 }
 
 /**
@@ -53,11 +46,6 @@ export type SDKProps = {
     environment?: ServerEnvironment;
 
     /**
-     * Allows setting the username variable for url substitution
-     */
-    username?: string;
-
-    /**
      * Allows overriding the default server URL used by the SDK
      */
     serverURL?: string;
@@ -74,9 +62,9 @@ export class SDKConfiguration {
     serverDefaults: any;
     language = "typescript";
     openapiDocVersion = "3.0.1";
-    sdkVersion = "0.6.2";
-    genVersion = "2.172.0";
-    userAgent = "speakeasy-sdk/typescript 0.6.2 2.172.0 3.0.1 Bolt-Public-API";
+    sdkVersion = "0.6.3";
+    genVersion = "2.173.0";
+    userAgent = "speakeasy-sdk/typescript 0.6.3 2.173.0 3.0.1 Bolt-Public-API";
     retryConfig?: utils.RetryConfig;
     public constructor(init?: Partial<SDKConfiguration>) {
         Object.assign(this, init);
@@ -95,31 +83,6 @@ export class BoltPublicAPI {
      *
      */
     public account: Account;
-    /**
-     * Merchant configuration endpoints allow you to retrieve and configure merchant-level
-     *
-     * @remarks
-     * configuration, such as callback URLs, identifiers, secrets, etc...
-     *
-     */
-    public configuration: Configuration;
-    /**
-     * Use this endpoint to retrieve an OAuth token. Use the token to allow your ecommerce server to make calls to the Account
-     *
-     * @remarks
-     * endpoint and create a one-click checkout experience for shoppers.
-     *
-     *
-     * @see {@link https://help.bolt.com/products/accounts/direct-api/oauth-guide/}
-     */
-    public oAuth: OAuth;
-    /**
-     * Use the Payments API to tokenize and process alternative payment methods including Paypal with Bolt. This API is for the Bolt
-     *
-     * @remarks
-     * Accounts package.
-     *
-     */
     public payments: Payments;
     /**
      * Endpoints that allow you to generate and retrieve test data to verify certain
@@ -138,16 +101,6 @@ export class BoltPublicAPI {
      *
      */
     public transactions: Transactions;
-    /**
-     * Set up webhooks to notify your backend of events within Bolt. These webhooks
-     *
-     * @remarks
-     * can communicate with your OMS or other systems to keep them up to date with Bolt.
-     *
-     *
-     * @see {@link https://help.bolt.com/get-started/during-checkout/webhooks/}
-     */
-    public webhooks: Webhooks;
 
     private sdkConfiguration: SDKConfiguration;
 
@@ -156,9 +109,6 @@ export class BoltPublicAPI {
         let defaults: any = {};
 
         const serverDefaults = [
-            {
-                username: props?.username?.toString() ?? "xwang",
-            },
             {
                 environment: props?.environment?.toString() ?? "api-sandbox",
             },
@@ -180,11 +130,8 @@ export class BoltPublicAPI {
         });
 
         this.account = new Account(this.sdkConfiguration);
-        this.configuration = new Configuration(this.sdkConfiguration);
-        this.oAuth = new OAuth(this.sdkConfiguration);
         this.payments = new Payments(this.sdkConfiguration);
         this.testing = new Testing(this.sdkConfiguration);
         this.transactions = new Transactions(this.sdkConfiguration);
-        this.webhooks = new Webhooks(this.sdkConfiguration);
     }
 }

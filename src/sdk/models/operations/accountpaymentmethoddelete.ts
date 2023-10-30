@@ -5,14 +5,6 @@
 import { SpeakeasyBase, SpeakeasyMetadata } from "../../../internal/utils";
 import { AxiosResponse } from "axios";
 
-export class AccountPaymentMethodDeleteSecurity extends SpeakeasyBase {
-    @SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=header;name=X-API-Key" })
-    apiKey: string;
-
-    @SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2;name=Authorization" })
-    oauth: string;
-}
-
 export class AccountPaymentMethodDeleteRequest extends SpeakeasyBase {
     /**
      * The publicly viewable identifier used to identify a merchant division.

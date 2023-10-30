@@ -26,22 +26,33 @@ yarn add https://github.com/speakeasy-sdks/Bolt-Public-API
 <!-- Start SDK Example Usage -->
 ```typescript
 import { BoltPublicAPI } from "Bolt-Public-API";
-import { AccountAddPaymentMethodSecurity } from "Bolt-Public-API/dist/sdk/models/operations";
+import { AddressListingCountryCode } from "Bolt-Public-API/dist/sdk/models/shared";
 
 (async () => {
-    const sdk = new BoltPublicAPI();
-    const operationSecurity: AccountAddPaymentMethodSecurity = {
-        apiKey: "",
-        oauth: "",
-    };
-
-    const res = await sdk.account.accountAddPaymentMethod(
-        {
-            requestBody: "string",
-            xPublishableKey: "string",
+    const sdk = new BoltPublicAPI({
+        security: {
+            apiKey: "",
+            oauth: "",
         },
-        operationSecurity
-    );
+    });
+
+    const res = await sdk.account.addAddress({
+        xPublishableKey: "string",
+        addressListingInput: {
+            company: "ACME Corporation",
+            countryCode: AddressListingCountryCode.Us,
+            email: "alice@example.com",
+            firstName: "Alice",
+            isDefault: true,
+            lastName: "Baker",
+            locality: "San Francisco",
+            phone: "+14155550199",
+            postalCode: "94105",
+            region: "CA",
+            streetAddress1: "535 Mission St, Ste 1401",
+            streetAddress2: "c/o Shipping Department",
+        },
+    });
 
     if (res.statusCode == 200) {
         // handle response
@@ -57,51 +68,37 @@ import { AccountAddPaymentMethodSecurity } from "Bolt-Public-API/dist/sdk/models
 
 ### [account](docs/sdks/account/README.md)
 
-* [accountAddPaymentMethod](docs/sdks/account/README.md#accountaddpaymentmethod) - Add a payment method to a shopper's Bolt account Wallet.
-* [accountAddressCreate](docs/sdks/account/README.md#accountaddresscreate) - Add an address
-* [accountAddressDelete](docs/sdks/account/README.md#accountaddressdelete) - Delete an existing address
-* [accountAddressEdit](docs/sdks/account/README.md#accountaddressedit) - Edit an existing address
-* [accountExists](docs/sdks/account/README.md#accountexists) - Determine the existence of a Bolt account
-* [accountGet](docs/sdks/account/README.md#accountget) - Retrieve account details
-* [accountPaymentMethodDelete](docs/sdks/account/README.md#accountpaymentmethoddelete) - Delete an existing payment method
+* [addAddress](docs/sdks/account/README.md#addaddress) - Add an address
+* [addPaymentMethod](docs/sdks/account/README.md#addpaymentmethod) - Add a payment method to a shopper's Bolt account Wallet.
+* [deleteAddress](docs/sdks/account/README.md#deleteaddress) - Delete an existing address
+* [deletePaymentMethod](docs/sdks/account/README.md#deletepaymentmethod) - Delete an existing payment method
+* [detect](docs/sdks/account/README.md#detect) - Determine the existence of a Bolt account
+* [getDetails](docs/sdks/account/README.md#getdetails) - Retrieve account details
+* [updateAddress](docs/sdks/account/README.md#updateaddress) - Edit an existing address
 
-### [configuration](docs/sdks/configuration/README.md)
 
-* [merchantCallbacksGet](docs/sdks/configuration/README.md#merchantcallbacksget) - Retrieve callback URLs for the merchant
-* [merchantCallbacksUpdate](docs/sdks/configuration/README.md#merchantcallbacksupdate) - Update callback URLs for the merchant
-* [merchantIdentifiersGet](docs/sdks/configuration/README.md#merchantidentifiersget) - Retrieve identifiers for the merchant
+### [payments.guest](docs/sdks/paymentsguest/README.md)
 
-### [oAuth](docs/sdks/oauth/README.md)
+* [initialize](docs/sdks/paymentsguest/README.md#initialize) - Initialize a Bolt payment for guest shoppers
+* [performAction](docs/sdks/paymentsguest/README.md#performaction) - Perform an irreversible action (e.g. finalize) on a pending guest payment
+* [update](docs/sdks/paymentsguest/README.md#update) - Update an existing guest payment
 
-* [oAuthGetToken](docs/sdks/oauth/README.md#oauthgettoken) - Get OAuth token
+### [payments.loggedIn](docs/sdks/paymentsloggedin/README.md)
 
-### [payments](docs/sdks/payments/README.md)
-
-* [guestPaymentsAction](docs/sdks/payments/README.md#guestpaymentsaction) - Perform an irreversible action (e.g. finalize) on a pending guest payment
-* [guestPaymentsInitialize](docs/sdks/payments/README.md#guestpaymentsinitialize) - Initialize a Bolt payment for guest shoppers
-* [guestPaymentsUpdate](docs/sdks/payments/README.md#guestpaymentsupdate) - Update an existing guest payment
-* [paymentsAction](docs/sdks/payments/README.md#paymentsaction) - Perform an irreversible action (e.g. finalize) on a pending payment
-* [paymentsInitialize](docs/sdks/payments/README.md#paymentsinitialize) - Initialize a Bolt payment for logged in shoppers
-* [paymentsUpdate](docs/sdks/payments/README.md#paymentsupdate) - Update an existing payment
+* [initialize](docs/sdks/paymentsloggedin/README.md#initialize) - Initialize a Bolt payment for logged in shoppers
+* [performAction](docs/sdks/paymentsloggedin/README.md#performaction) - Perform an irreversible action (e.g. finalize) on a pending payment
+* [update](docs/sdks/paymentsloggedin/README.md#update) - Update an existing payment
 
 ### [testing](docs/sdks/testing/README.md)
 
-* [testingAccountCreate](docs/sdks/testing/README.md#testingaccountcreate) - Create a test account
-* [testingCreditCardGet](docs/sdks/testing/README.md#testingcreditcardget) - Retrieve a test credit card, including its token
-* [testingShipmentTrackingCreate](docs/sdks/testing/README.md#testingshipmenttrackingcreate) - Simulate a shipment tracking update
+* [createAccount](docs/sdks/testing/README.md#createaccount) - Create a test account
+* [getCreditCard](docs/sdks/testing/README.md#getcreditcard) - Retrieve a test credit card, including its token
 
 ### [transactions](docs/sdks/transactions/README.md)
 
-* [transactionAction](docs/sdks/transactions/README.md#transactionaction) - Perform an irreversible action (e.g. capture, refund, void) on a transaction
-* [transactionGet](docs/sdks/transactions/README.md#transactionget) - Retrieve transaction details
-* [transactionUpdate](docs/sdks/transactions/README.md#transactionupdate) - Update certain transaction details
-
-### [webhooks](docs/sdks/webhooks/README.md)
-
-* [webhooksCreate](docs/sdks/webhooks/README.md#webhookscreate) - Create a webhook to subscribe to certain events
-* [webhooksDelete](docs/sdks/webhooks/README.md#webhooksdelete) - Delete an existing webhook
-* [webhooksGet](docs/sdks/webhooks/README.md#webhooksget) - Retrieve information for a specific webhook
-* [webhooksGetAll](docs/sdks/webhooks/README.md#webhooksgetall) - Retrieve information about all existing webhooks
+* [getDetails](docs/sdks/transactions/README.md#getdetails) - Retrieve transaction details
+* [performAction](docs/sdks/transactions/README.md#performaction) - Perform an irreversible action (e.g. capture, refund, void) on a transaction
+* [update](docs/sdks/transactions/README.md#update) - Update certain transaction details
 <!-- End SDK Available Operations -->
 
 <!-- Start Dev Containers -->
@@ -138,27 +135,28 @@ Handling errors in your SDK should largely match your expectations.  All operati
 
 ```typescript
 import { BoltPublicAPI } from "Bolt-Public-API";
-import { AccountAddressDeleteSecurity } from "Bolt-Public-API/dist/sdk/models/operations";
 
 (async() => {
-  const sdk = new BoltPublicAPI();
-const operationSecurity: AccountAddressDeleteSecurity = {
-  apiKey: "",
-  oauth: "",
-};
+  const sdk = new BoltPublicAPI({
+    security: {
+      apiKey: "",
+      oauth: "",
+    },
+  });
 
   
   let res;
   try {
-    res = await sdk.account.accountAddressDelete({
+    res = await sdk.account.deleteAddress({
     xPublishableKey: "string",
     id: "D4g3h5tBuVYK9",
-  }, operationSecurity);
+  });
   } catch (e) { 
     if (e instanceof error) {
       console.error(e) // handle exception 
     
   }
+
 
   if (res.statusCode == 200) {
     // handle response
@@ -189,6 +187,109 @@ const httpClient = axios.create({
 const sdk = new BoltPublicAPI({defaultClient: httpClient});
 ```
 <!-- End Custom HTTP Client -->
+
+
+
+<!-- Start Server Selection -->
+# Server Selection
+
+## Select Server by Index
+
+You can override the default server globally by passing a server index to the `serverIdx: number` optional parameter when initializing the SDK client instance. The selected server will then be used as the default on the operations that use it. This table lists the indexes associated with the available servers:
+
+| # | Server | Variables |
+| - | ------ | --------- |
+| 0 | `https://{environment}.bolt.com/v3` | `environment` (default is `api-sandbox`) |
+
+
+Some of the server options above contain variables. If you want to set the values of those variables, the following options are provided for doing so:
+ * `environment: ServerEnvironment`
+
+For example:
+
+
+```typescript
+import { BoltPublicAPI } from "Bolt-Public-API";
+import { AddressListingCountryCode } from "Bolt-Public-API/dist/sdk/models/shared";
+
+(async () => {
+    const sdk = new BoltPublicAPI({
+        security: {
+            apiKey: "",
+            oauth: "",
+        },
+        serverIdx: 0,
+    });
+
+    const res = await sdk.account.addAddress({
+        xPublishableKey: "string",
+        addressListingInput: {
+            company: "ACME Corporation",
+            countryCode: AddressListingCountryCode.Us,
+            email: "alice@example.com",
+            firstName: "Alice",
+            isDefault: true,
+            lastName: "Baker",
+            locality: "San Francisco",
+            phone: "+14155550199",
+            postalCode: "94105",
+            region: "CA",
+            streetAddress1: "535 Mission St, Ste 1401",
+            streetAddress2: "c/o Shipping Department",
+        },
+    });
+
+    if (res.statusCode == 200) {
+        // handle response
+    }
+})();
+
+```
+
+
+## Override Server URL Per-Client
+
+The default server can also be overridden globally by passing a URL to the `serverURL: str` optional parameter when initializing the SDK client instance. For example:
+
+
+```typescript
+import { BoltPublicAPI } from "Bolt-Public-API";
+import { AddressListingCountryCode } from "Bolt-Public-API/dist/sdk/models/shared";
+
+(async () => {
+    const sdk = new BoltPublicAPI({
+        security: {
+            apiKey: "",
+            oauth: "",
+        },
+        serverURL: "https://{environment}.bolt.com/v3",
+    });
+
+    const res = await sdk.account.addAddress({
+        xPublishableKey: "string",
+        addressListingInput: {
+            company: "ACME Corporation",
+            countryCode: AddressListingCountryCode.Us,
+            email: "alice@example.com",
+            firstName: "Alice",
+            isDefault: true,
+            lastName: "Baker",
+            locality: "San Francisco",
+            phone: "+14155550199",
+            postalCode: "94105",
+            region: "CA",
+            streetAddress1: "535 Mission St, Ste 1401",
+            streetAddress2: "c/o Shipping Department",
+        },
+    });
+
+    if (res.statusCode == 200) {
+        // handle response
+    }
+})();
+
+```
+<!-- End Server Selection -->
 
 <!-- Placeholder for Future Speakeasy SDK Sections -->
 

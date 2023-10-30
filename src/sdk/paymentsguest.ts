@@ -5,21 +5,10 @@
 import * as utils from "../internal/utils";
 import * as errors from "./models/errors";
 import * as operations from "./models/operations";
-import * as shared from "./models/shared";
 import { SDKConfiguration } from "./sdk";
 import { AxiosInstance, AxiosRequestConfig, AxiosResponse, RawAxiosRequestHeaders } from "axios";
 
-/**
- * Set up webhooks to notify your backend of events within Bolt. These webhooks
- *
- * @remarks
- * can communicate with your OMS or other systems to keep them up to date with Bolt.
- *
- *
- * @see {@link https://help.bolt.com/get-started/during-checkout/webhooks/}
- */
-
-export class Webhooks {
+export class PaymentsGuest {
     private sdkConfiguration: SDKConfiguration;
 
     constructor(sdkConfig: SDKConfiguration) {
@@ -27,44 +16,48 @@ export class Webhooks {
     }
 
     /**
-     * Create a webhook to subscribe to certain events
+     * Initialize a Bolt payment for guest shoppers
      *
      * @remarks
-     * Create a new webhook to receive notifications from Bolt about various events, such as transaction status.
+     * Initialize a Bolt payment token that will be used to reference this payment to
+     * Bolt when it is updated or finalized for guest shoppers.
+     *
      */
-    async webhooksCreate(
-        req: shared.WebhookInput,
+    async initialize(
+        req: operations.GuestPaymentsInitializeRequest,
+        security: operations.GuestPaymentsInitializeSecurity,
         config?: AxiosRequestConfig
-    ): Promise<operations.WebhooksCreateResponse> {
+    ): Promise<operations.GuestPaymentsInitializeResponse> {
         if (!(req instanceof utils.SpeakeasyBase)) {
-            req = new shared.WebhookInput(req);
+            req = new operations.GuestPaymentsInitializeRequest(req);
         }
 
         const baseURL: string = utils.templateUrl(
             this.sdkConfiguration.serverURL,
             this.sdkConfiguration.serverDefaults
         );
-        const url: string = baseURL.replace(/\/$/, "") + "/webhooks";
+        const url: string = baseURL.replace(/\/$/, "") + "/guest/payments";
 
         let [reqBodyHeaders, reqBody]: [object, any] = [{}, null];
 
         try {
-            [reqBodyHeaders, reqBody] = utils.serializeRequestBody(req, "request", "json");
+            [reqBodyHeaders, reqBody] = utils.serializeRequestBody(
+                req,
+                "guestPaymentInitializeRequest",
+                "json"
+            );
         } catch (e: unknown) {
             if (e instanceof Error) {
                 throw new Error(`Error serializing request body, cause: ${e.message}`);
             }
         }
         const client: AxiosInstance = this.sdkConfiguration.defaultClient;
-        let globalSecurity = this.sdkConfiguration.security;
-        if (typeof globalSecurity === "function") {
-            globalSecurity = await globalSecurity();
+        if (!(security instanceof utils.SpeakeasyBase)) {
+            security = new operations.GuestPaymentsInitializeSecurity(security);
         }
-        if (!(globalSecurity instanceof utils.SpeakeasyBase)) {
-            globalSecurity = new shared.Security(globalSecurity);
-        }
-        const properties = utils.parseSecurityProperties(globalSecurity);
+        const properties = utils.parseSecurityProperties(security);
         const headers: RawAxiosRequestHeaders = {
+            ...utils.getHeadersFromRequest(req),
             ...reqBodyHeaders,
             ...config?.headers,
             ...properties.headers,
@@ -77,7 +70,7 @@ export class Webhooks {
         const httpRes: AxiosResponse = await client.request({
             validateStatus: () => true,
             url: url,
-            method: "put",
+            method: "post",
             headers: headers,
             responseType: "arraybuffer",
             data: reqBody,
@@ -90,16 +83,17 @@ export class Webhooks {
             throw new Error(`status code not found in response: ${httpRes}`);
         }
 
-        const res: operations.WebhooksCreateResponse = new operations.WebhooksCreateResponse({
-            statusCode: httpRes.status,
-            contentType: contentType,
-            rawResponse: httpRes,
-        });
+        const res: operations.GuestPaymentsInitializeResponse =
+            new operations.GuestPaymentsInitializeResponse({
+                statusCode: httpRes.status,
+                contentType: contentType,
+                rawResponse: httpRes,
+            });
         const decodedRes = new TextDecoder().decode(httpRes?.data);
         switch (true) {
             case httpRes?.status == 200:
                 if (utils.matchContentType(contentType, `application/json`)) {
-                    res.webhook = utils.objectToClass(JSON.parse(decodedRes), shared.Webhook);
+                    res.paymentResponse = JSON.parse(decodedRes);
                 } else {
                     throw new errors.SDKError(
                         "unknown content-type received: " + contentType,
@@ -138,216 +132,52 @@ export class Webhooks {
     }
 
     /**
-     * Delete an existing webhook
+     * Perform an irreversible action (e.g. finalize) on a pending guest payment
      *
      * @remarks
-     * Delete an existing webhook. You will no longer receive notifications from Bolt about its events.
+     * Perform an irreversible action on a pending guest payment, such as finalizing it.
+     *
      */
-    async webhooksDelete(
-        req: operations.WebhooksDeleteRequest,
+    async performAction(
+        req: operations.GuestPaymentsActionRequest,
+        security: operations.GuestPaymentsActionSecurity,
         config?: AxiosRequestConfig
-    ): Promise<operations.WebhooksDeleteResponse> {
+    ): Promise<operations.GuestPaymentsActionResponse> {
         if (!(req instanceof utils.SpeakeasyBase)) {
-            req = new operations.WebhooksDeleteRequest(req);
+            req = new operations.GuestPaymentsActionRequest(req);
         }
 
         const baseURL: string = utils.templateUrl(
             this.sdkConfiguration.serverURL,
             this.sdkConfiguration.serverDefaults
         );
-        const url: string = utils.generateURL(baseURL, "/webhooks/{id}", req);
+        const url: string = utils.generateURL(baseURL, "/guest/payments/{id}", req);
+
+        let [reqBodyHeaders, reqBody]: [object, any] = [{}, null];
+
+        try {
+            [reqBodyHeaders, reqBody] = utils.serializeRequestBody(
+                req,
+                "paymentActionRequest",
+                "json"
+            );
+        } catch (e: unknown) {
+            if (e instanceof Error) {
+                throw new Error(`Error serializing request body, cause: ${e.message}`);
+            }
+        }
         const client: AxiosInstance = this.sdkConfiguration.defaultClient;
-        let globalSecurity = this.sdkConfiguration.security;
-        if (typeof globalSecurity === "function") {
-            globalSecurity = await globalSecurity();
+        if (!(security instanceof utils.SpeakeasyBase)) {
+            security = new operations.GuestPaymentsActionSecurity(security);
         }
-        if (!(globalSecurity instanceof utils.SpeakeasyBase)) {
-            globalSecurity = new shared.Security(globalSecurity);
-        }
-        const properties = utils.parseSecurityProperties(globalSecurity);
-        const headers: RawAxiosRequestHeaders = { ...config?.headers, ...properties.headers };
-        headers["Accept"] = "application/json";
-
-        headers["user-agent"] = this.sdkConfiguration.userAgent;
-
-        const httpRes: AxiosResponse = await client.request({
-            validateStatus: () => true,
-            url: url,
-            method: "delete",
-            headers: headers,
-            responseType: "arraybuffer",
-            ...config,
-        });
-
-        const contentType: string = httpRes?.headers?.["content-type"] ?? "";
-
-        if (httpRes?.status == null) {
-            throw new Error(`status code not found in response: ${httpRes}`);
-        }
-
-        const res: operations.WebhooksDeleteResponse = new operations.WebhooksDeleteResponse({
-            statusCode: httpRes.status,
-            contentType: contentType,
-            rawResponse: httpRes,
-        });
-        const decodedRes = new TextDecoder().decode(httpRes?.data);
-        switch (true) {
-            case httpRes?.status >= 400 && httpRes?.status < 500:
-                if (utils.matchContentType(contentType, `application/json`)) {
-                    const err = utils.objectToClass(JSON.parse(decodedRes), errors.ErrorT);
-                    err.rawResponse = httpRes;
-                    throw new errors.ErrorT(err);
-                } else {
-                    throw new errors.SDKError(
-                        "unknown content-type received: " + contentType,
-                        httpRes.status,
-                        decodedRes,
-                        httpRes
-                    );
-                }
-                break;
-            case httpRes?.status >= 500 && httpRes?.status < 600:
-                throw new errors.SDKError(
-                    "API error occurred",
-                    httpRes.status,
-                    decodedRes,
-                    httpRes
-                );
-            default:
-                break;
-        }
-
-        return res;
-    }
-
-    /**
-     * Retrieve information for a specific webhook
-     *
-     * @remarks
-     * Retrieve information for an existing webhook.
-     */
-    async webhooksGet(
-        req: operations.WebhooksGetRequest,
-        config?: AxiosRequestConfig
-    ): Promise<operations.WebhooksGetResponse> {
-        if (!(req instanceof utils.SpeakeasyBase)) {
-            req = new operations.WebhooksGetRequest(req);
-        }
-
-        const baseURL: string = utils.templateUrl(
-            this.sdkConfiguration.serverURL,
-            this.sdkConfiguration.serverDefaults
-        );
-        const url: string = utils.generateURL(baseURL, "/webhooks/{id}", req);
-        const client: AxiosInstance = this.sdkConfiguration.defaultClient;
-        let globalSecurity = this.sdkConfiguration.security;
-        if (typeof globalSecurity === "function") {
-            globalSecurity = await globalSecurity();
-        }
-        if (!(globalSecurity instanceof utils.SpeakeasyBase)) {
-            globalSecurity = new shared.Security(globalSecurity);
-        }
-        const properties = utils.parseSecurityProperties(globalSecurity);
-        const headers: RawAxiosRequestHeaders = { ...config?.headers, ...properties.headers };
-        headers["Accept"] = "application/json";
-
-        headers["user-agent"] = this.sdkConfiguration.userAgent;
-
-        const httpRes: AxiosResponse = await client.request({
-            validateStatus: () => true,
-            url: url,
-            method: "get",
-            headers: headers,
-            responseType: "arraybuffer",
-            ...config,
-        });
-
-        const contentType: string = httpRes?.headers?.["content-type"] ?? "";
-
-        if (httpRes?.status == null) {
-            throw new Error(`status code not found in response: ${httpRes}`);
-        }
-
-        const res: operations.WebhooksGetResponse = new operations.WebhooksGetResponse({
-            statusCode: httpRes.status,
-            contentType: contentType,
-            rawResponse: httpRes,
-        });
-        const decodedRes = new TextDecoder().decode(httpRes?.data);
-        switch (true) {
-            case httpRes?.status == 200:
-                if (utils.matchContentType(contentType, `application/json`)) {
-                    res.webhook = utils.objectToClass(JSON.parse(decodedRes), shared.Webhook);
-                } else {
-                    throw new errors.SDKError(
-                        "unknown content-type received: " + contentType,
-                        httpRes.status,
-                        decodedRes,
-                        httpRes
-                    );
-                }
-                break;
-            case httpRes?.status >= 400 && httpRes?.status < 500:
-                if (utils.matchContentType(contentType, `application/json`)) {
-                    const err = utils.objectToClass(JSON.parse(decodedRes), errors.ErrorT);
-                    err.rawResponse = httpRes;
-                    throw new errors.ErrorT(err);
-                } else {
-                    throw new errors.SDKError(
-                        "unknown content-type received: " + contentType,
-                        httpRes.status,
-                        decodedRes,
-                        httpRes
-                    );
-                }
-                break;
-            case httpRes?.status >= 500 && httpRes?.status < 600:
-                throw new errors.SDKError(
-                    "API error occurred",
-                    httpRes.status,
-                    decodedRes,
-                    httpRes
-                );
-            default:
-                break;
-        }
-
-        return res;
-    }
-
-    /**
-     * Retrieve information about all existing webhooks
-     *
-     * @remarks
-     * Retrieve information about all existing webhooks.
-     */
-    async webhooksGetAll(
-        req: operations.WebhooksGetAllRequest,
-        config?: AxiosRequestConfig
-    ): Promise<operations.WebhooksGetAllResponse> {
-        if (!(req instanceof utils.SpeakeasyBase)) {
-            req = new operations.WebhooksGetAllRequest(req);
-        }
-
-        const baseURL: string = utils.templateUrl(
-            this.sdkConfiguration.serverURL,
-            this.sdkConfiguration.serverDefaults
-        );
-        const url: string = baseURL.replace(/\/$/, "") + "/webhooks";
-        const client: AxiosInstance = this.sdkConfiguration.defaultClient;
-        let globalSecurity = this.sdkConfiguration.security;
-        if (typeof globalSecurity === "function") {
-            globalSecurity = await globalSecurity();
-        }
-        if (!(globalSecurity instanceof utils.SpeakeasyBase)) {
-            globalSecurity = new shared.Security(globalSecurity);
-        }
-        const properties = utils.parseSecurityProperties(globalSecurity);
+        const properties = utils.parseSecurityProperties(security);
         const headers: RawAxiosRequestHeaders = {
             ...utils.getHeadersFromRequest(req),
+            ...reqBodyHeaders,
             ...config?.headers,
             ...properties.headers,
         };
+        if (reqBody == null) throw new Error("request body is required");
         headers["Accept"] = "application/json";
 
         headers["user-agent"] = this.sdkConfiguration.userAgent;
@@ -355,9 +185,10 @@ export class Webhooks {
         const httpRes: AxiosResponse = await client.request({
             validateStatus: () => true,
             url: url,
-            method: "get",
+            method: "post",
             headers: headers,
             responseType: "arraybuffer",
+            data: reqBody,
             ...config,
         });
 
@@ -367,19 +198,132 @@ export class Webhooks {
             throw new Error(`status code not found in response: ${httpRes}`);
         }
 
-        const res: operations.WebhooksGetAllResponse = new operations.WebhooksGetAllResponse({
-            statusCode: httpRes.status,
-            contentType: contentType,
-            rawResponse: httpRes,
-        });
+        const res: operations.GuestPaymentsActionResponse =
+            new operations.GuestPaymentsActionResponse({
+                statusCode: httpRes.status,
+                contentType: contentType,
+                rawResponse: httpRes,
+            });
         const decodedRes = new TextDecoder().decode(httpRes?.data);
         switch (true) {
             case httpRes?.status == 200:
                 if (utils.matchContentType(contentType, `application/json`)) {
-                    res.webhooksGetAll200ApplicationJSONObject = utils.objectToClass(
-                        JSON.parse(decodedRes),
-                        operations.WebhooksGetAll200ApplicationJSON
+                    res.paymentResponse = JSON.parse(decodedRes);
+                } else {
+                    throw new errors.SDKError(
+                        "unknown content-type received: " + contentType,
+                        httpRes.status,
+                        decodedRes,
+                        httpRes
                     );
+                }
+                break;
+            case httpRes?.status >= 400 && httpRes?.status < 500:
+                if (utils.matchContentType(contentType, `application/json`)) {
+                    const err = utils.objectToClass(JSON.parse(decodedRes), errors.ErrorT);
+                    err.rawResponse = httpRes;
+                    throw new errors.ErrorT(err);
+                } else {
+                    throw new errors.SDKError(
+                        "unknown content-type received: " + contentType,
+                        httpRes.status,
+                        decodedRes,
+                        httpRes
+                    );
+                }
+                break;
+            case httpRes?.status >= 500 && httpRes?.status < 600:
+                throw new errors.SDKError(
+                    "API error occurred",
+                    httpRes.status,
+                    decodedRes,
+                    httpRes
+                );
+            default:
+                break;
+        }
+
+        return res;
+    }
+
+    /**
+     * Update an existing guest payment
+     *
+     * @remarks
+     * Update a pending guest payment
+     *
+     */
+    async update(
+        req: operations.GuestPaymentsUpdateRequest,
+        security: operations.GuestPaymentsUpdateSecurity,
+        config?: AxiosRequestConfig
+    ): Promise<operations.GuestPaymentsUpdateResponse> {
+        if (!(req instanceof utils.SpeakeasyBase)) {
+            req = new operations.GuestPaymentsUpdateRequest(req);
+        }
+
+        const baseURL: string = utils.templateUrl(
+            this.sdkConfiguration.serverURL,
+            this.sdkConfiguration.serverDefaults
+        );
+        const url: string = utils.generateURL(baseURL, "/guest/payments/{id}", req);
+
+        let [reqBodyHeaders, reqBody]: [object, any] = [{}, null];
+
+        try {
+            [reqBodyHeaders, reqBody] = utils.serializeRequestBody(
+                req,
+                "paymentUpdateRequest",
+                "json"
+            );
+        } catch (e: unknown) {
+            if (e instanceof Error) {
+                throw new Error(`Error serializing request body, cause: ${e.message}`);
+            }
+        }
+        const client: AxiosInstance = this.sdkConfiguration.defaultClient;
+        if (!(security instanceof utils.SpeakeasyBase)) {
+            security = new operations.GuestPaymentsUpdateSecurity(security);
+        }
+        const properties = utils.parseSecurityProperties(security);
+        const headers: RawAxiosRequestHeaders = {
+            ...utils.getHeadersFromRequest(req),
+            ...reqBodyHeaders,
+            ...config?.headers,
+            ...properties.headers,
+        };
+        if (reqBody == null) throw new Error("request body is required");
+        headers["Accept"] = "application/json";
+
+        headers["user-agent"] = this.sdkConfiguration.userAgent;
+
+        const httpRes: AxiosResponse = await client.request({
+            validateStatus: () => true,
+            url: url,
+            method: "patch",
+            headers: headers,
+            responseType: "arraybuffer",
+            data: reqBody,
+            ...config,
+        });
+
+        const contentType: string = httpRes?.headers?.["content-type"] ?? "";
+
+        if (httpRes?.status == null) {
+            throw new Error(`status code not found in response: ${httpRes}`);
+        }
+
+        const res: operations.GuestPaymentsUpdateResponse =
+            new operations.GuestPaymentsUpdateResponse({
+                statusCode: httpRes.status,
+                contentType: contentType,
+                rawResponse: httpRes,
+            });
+        const decodedRes = new TextDecoder().decode(httpRes?.data);
+        switch (true) {
+            case httpRes?.status == 200:
+                if (utils.matchContentType(contentType, `application/json`)) {
+                    res.paymentResponse = JSON.parse(decodedRes);
                 } else {
                     throw new errors.SDKError(
                         "unknown content-type received: " + contentType,

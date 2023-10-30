@@ -6,6 +6,11 @@ import { SpeakeasyBase, SpeakeasyMetadata } from "../../../internal/utils";
 import * as shared from "../shared";
 import { AxiosResponse } from "axios";
 
+export class GuestPaymentsInitializeSecurity extends SpeakeasyBase {
+    @SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=header;name=X-API-Key" })
+    apiKey: string;
+}
+
 export class GuestPaymentsInitializeRequest extends SpeakeasyBase {
     /**
      * The publicly viewable identifier used to identify a merchant division.

@@ -25,115 +25,13 @@ export class Account {
     }
 
     /**
-     * Add a payment method to a shopper's Bolt account Wallet.
-     *
-     * @remarks
-     * Add a payment method to a shopper's Bolt account Wallet. For security purposes, this request must come from
-     * your backend because authentication requires the use of your private key.<br />
-     * **Note**: Before using this API, the credit card details must be tokenized using Bolt's JavaScript library function,
-     * which is documented in [Install the Bolt Tokenizer](https://help.bolt.com/developers/references/bolt-tokenizer).
-     *
-     */
-    async accountAddPaymentMethod(
-        req: operations.AccountAddPaymentMethodRequest,
-        security: operations.AccountAddPaymentMethodSecurity,
-        config?: AxiosRequestConfig
-    ): Promise<operations.AccountAddPaymentMethodResponse> {
-        if (!(req instanceof utils.SpeakeasyBase)) {
-            req = new operations.AccountAddPaymentMethodRequest(req);
-        }
-
-        const baseURL: string = utils.templateUrl(
-            this.sdkConfiguration.serverURL,
-            this.sdkConfiguration.serverDefaults
-        );
-        const url: string = baseURL.replace(/\/$/, "") + "/account/payment-methods";
-
-        let [reqBodyHeaders, reqBody]: [object, any] = [{}, null];
-
-        try {
-            [reqBodyHeaders, reqBody] = utils.serializeRequestBody(req, "requestBody", "json");
-        } catch (e: unknown) {
-            if (e instanceof Error) {
-                throw new Error(`Error serializing request body, cause: ${e.message}`);
-            }
-        }
-        const client: AxiosInstance = this.sdkConfiguration.defaultClient;
-        if (!(security instanceof utils.SpeakeasyBase)) {
-            security = new operations.AccountAddPaymentMethodSecurity(security);
-        }
-        const properties = utils.parseSecurityProperties(security);
-        const headers: RawAxiosRequestHeaders = {
-            ...utils.getHeadersFromRequest(req),
-            ...reqBodyHeaders,
-            ...config?.headers,
-            ...properties.headers,
-        };
-        if (reqBody == null) throw new Error("request body is required");
-        headers["Accept"] = "application/json";
-
-        headers["user-agent"] = this.sdkConfiguration.userAgent;
-
-        const httpRes: AxiosResponse = await client.request({
-            validateStatus: () => true,
-            url: url,
-            method: "post",
-            headers: headers,
-            responseType: "arraybuffer",
-            data: reqBody,
-            ...config,
-        });
-
-        const contentType: string = httpRes?.headers?.["content-type"] ?? "";
-
-        if (httpRes?.status == null) {
-            throw new Error(`status code not found in response: ${httpRes}`);
-        }
-
-        const res: operations.AccountAddPaymentMethodResponse =
-            new operations.AccountAddPaymentMethodResponse({
-                statusCode: httpRes.status,
-                contentType: contentType,
-                rawResponse: httpRes,
-            });
-        const decodedRes = new TextDecoder().decode(httpRes?.data);
-        switch (true) {
-            case httpRes?.status == 200:
-                if (utils.matchContentType(contentType, `application/json`)) {
-                    res.paymentMethod = JSON.parse(decodedRes);
-                } else {
-                    throw new errors.SDKError(
-                        "unknown content-type received: " + contentType,
-                        httpRes.status,
-                        decodedRes,
-                        httpRes
-                    );
-                }
-                break;
-            case (httpRes?.status >= 400 && httpRes?.status < 500) ||
-                (httpRes?.status >= 500 && httpRes?.status < 600):
-                throw new errors.SDKError(
-                    "API error occurred",
-                    httpRes.status,
-                    decodedRes,
-                    httpRes
-                );
-            default:
-                break;
-        }
-
-        return res;
-    }
-
-    /**
      * Add an address
      *
      * @remarks
      * Add an address to the shopper's account
      */
-    async accountAddressCreate(
+    async addAddress(
         req: operations.AccountAddressCreateRequest,
-        security: operations.AccountAddressCreateSecurity,
         config?: AxiosRequestConfig
     ): Promise<operations.AccountAddressCreateResponse> {
         if (!(req instanceof utils.SpeakeasyBase)) {
@@ -160,10 +58,14 @@ export class Account {
             }
         }
         const client: AxiosInstance = this.sdkConfiguration.defaultClient;
-        if (!(security instanceof utils.SpeakeasyBase)) {
-            security = new operations.AccountAddressCreateSecurity(security);
+        let globalSecurity = this.sdkConfiguration.security;
+        if (typeof globalSecurity === "function") {
+            globalSecurity = await globalSecurity();
         }
-        const properties = utils.parseSecurityProperties(security);
+        if (!(globalSecurity instanceof utils.SpeakeasyBase)) {
+            globalSecurity = new shared.Security(globalSecurity);
+        }
+        const properties = utils.parseSecurityProperties(globalSecurity);
         const headers: RawAxiosRequestHeaders = {
             ...utils.getHeadersFromRequest(req),
             ...reqBodyHeaders,
@@ -230,6 +132,110 @@ export class Account {
     }
 
     /**
+     * Add a payment method to a shopper's Bolt account Wallet.
+     *
+     * @remarks
+     * Add a payment method to a shopper's Bolt account Wallet. For security purposes, this request must come from
+     * your backend because authentication requires the use of your private key.<br />
+     * **Note**: Before using this API, the credit card details must be tokenized using Bolt's JavaScript library function,
+     * which is documented in [Install the Bolt Tokenizer](https://help.bolt.com/developers/references/bolt-tokenizer).
+     *
+     */
+    async addPaymentMethod(
+        req: operations.AccountAddPaymentMethodRequest,
+        config?: AxiosRequestConfig
+    ): Promise<operations.AccountAddPaymentMethodResponse> {
+        if (!(req instanceof utils.SpeakeasyBase)) {
+            req = new operations.AccountAddPaymentMethodRequest(req);
+        }
+
+        const baseURL: string = utils.templateUrl(
+            this.sdkConfiguration.serverURL,
+            this.sdkConfiguration.serverDefaults
+        );
+        const url: string = baseURL.replace(/\/$/, "") + "/account/payment-methods";
+
+        let [reqBodyHeaders, reqBody]: [object, any] = [{}, null];
+
+        try {
+            [reqBodyHeaders, reqBody] = utils.serializeRequestBody(req, "requestBody", "json");
+        } catch (e: unknown) {
+            if (e instanceof Error) {
+                throw new Error(`Error serializing request body, cause: ${e.message}`);
+            }
+        }
+        const client: AxiosInstance = this.sdkConfiguration.defaultClient;
+        let globalSecurity = this.sdkConfiguration.security;
+        if (typeof globalSecurity === "function") {
+            globalSecurity = await globalSecurity();
+        }
+        if (!(globalSecurity instanceof utils.SpeakeasyBase)) {
+            globalSecurity = new shared.Security(globalSecurity);
+        }
+        const properties = utils.parseSecurityProperties(globalSecurity);
+        const headers: RawAxiosRequestHeaders = {
+            ...utils.getHeadersFromRequest(req),
+            ...reqBodyHeaders,
+            ...config?.headers,
+            ...properties.headers,
+        };
+        if (reqBody == null) throw new Error("request body is required");
+        headers["Accept"] = "application/json";
+
+        headers["user-agent"] = this.sdkConfiguration.userAgent;
+
+        const httpRes: AxiosResponse = await client.request({
+            validateStatus: () => true,
+            url: url,
+            method: "post",
+            headers: headers,
+            responseType: "arraybuffer",
+            data: reqBody,
+            ...config,
+        });
+
+        const contentType: string = httpRes?.headers?.["content-type"] ?? "";
+
+        if (httpRes?.status == null) {
+            throw new Error(`status code not found in response: ${httpRes}`);
+        }
+
+        const res: operations.AccountAddPaymentMethodResponse =
+            new operations.AccountAddPaymentMethodResponse({
+                statusCode: httpRes.status,
+                contentType: contentType,
+                rawResponse: httpRes,
+            });
+        const decodedRes = new TextDecoder().decode(httpRes?.data);
+        switch (true) {
+            case httpRes?.status == 200:
+                if (utils.matchContentType(contentType, `application/json`)) {
+                    res.paymentMethod = JSON.parse(decodedRes);
+                } else {
+                    throw new errors.SDKError(
+                        "unknown content-type received: " + contentType,
+                        httpRes.status,
+                        decodedRes,
+                        httpRes
+                    );
+                }
+                break;
+            case (httpRes?.status >= 400 && httpRes?.status < 500) ||
+                (httpRes?.status >= 500 && httpRes?.status < 600):
+                throw new errors.SDKError(
+                    "API error occurred",
+                    httpRes.status,
+                    decodedRes,
+                    httpRes
+                );
+            default:
+                break;
+        }
+
+        return res;
+    }
+
+    /**
      * Delete an existing address
      *
      * @remarks
@@ -237,9 +243,8 @@ export class Account {
      * shipments that are associated with it.
      *
      */
-    async accountAddressDelete(
+    async deleteAddress(
         req: operations.AccountAddressDeleteRequest,
-        security: operations.AccountAddressDeleteSecurity,
         config?: AxiosRequestConfig
     ): Promise<operations.AccountAddressDeleteResponse> {
         if (!(req instanceof utils.SpeakeasyBase)) {
@@ -252,10 +257,14 @@ export class Account {
         );
         const url: string = utils.generateURL(baseURL, "/account/addresses/{id}", req);
         const client: AxiosInstance = this.sdkConfiguration.defaultClient;
-        if (!(security instanceof utils.SpeakeasyBase)) {
-            security = new operations.AccountAddressDeleteSecurity(security);
+        let globalSecurity = this.sdkConfiguration.security;
+        if (typeof globalSecurity === "function") {
+            globalSecurity = await globalSecurity();
         }
-        const properties = utils.parseSecurityProperties(security);
+        if (!(globalSecurity instanceof utils.SpeakeasyBase)) {
+            globalSecurity = new shared.Security(globalSecurity);
+        }
+        const properties = utils.parseSecurityProperties(globalSecurity);
         const headers: RawAxiosRequestHeaders = {
             ...utils.getHeadersFromRequest(req),
             ...config?.headers,
@@ -317,54 +326,40 @@ export class Account {
     }
 
     /**
-     * Edit an existing address
+     * Delete an existing payment method
      *
      * @remarks
-     * Edit an existing address on the shopper's account. This does not edit addresses
-     * that are already associated with other resources, such as transactions or
-     * shipments.
+     * Delete an existing payment method. Deleting a payment method does not invalidate transactions or
+     * orders that are associated with it.
      *
      */
-    async accountAddressEdit(
-        req: operations.AccountAddressEditRequest,
-        security: operations.AccountAddressEditSecurity,
+    async deletePaymentMethod(
+        req: operations.AccountPaymentMethodDeleteRequest,
         config?: AxiosRequestConfig
-    ): Promise<operations.AccountAddressEditResponse> {
+    ): Promise<operations.AccountPaymentMethodDeleteResponse> {
         if (!(req instanceof utils.SpeakeasyBase)) {
-            req = new operations.AccountAddressEditRequest(req);
+            req = new operations.AccountPaymentMethodDeleteRequest(req);
         }
 
         const baseURL: string = utils.templateUrl(
             this.sdkConfiguration.serverURL,
             this.sdkConfiguration.serverDefaults
         );
-        const url: string = utils.generateURL(baseURL, "/account/addresses/{id}", req);
-
-        let [reqBodyHeaders, reqBody]: [object, any] = [{}, null];
-
-        try {
-            [reqBodyHeaders, reqBody] = utils.serializeRequestBody(
-                req,
-                "addressListingInput",
-                "json"
-            );
-        } catch (e: unknown) {
-            if (e instanceof Error) {
-                throw new Error(`Error serializing request body, cause: ${e.message}`);
-            }
-        }
+        const url: string = utils.generateURL(baseURL, "/account/payment-methods/{id}", req);
         const client: AxiosInstance = this.sdkConfiguration.defaultClient;
-        if (!(security instanceof utils.SpeakeasyBase)) {
-            security = new operations.AccountAddressEditSecurity(security);
+        let globalSecurity = this.sdkConfiguration.security;
+        if (typeof globalSecurity === "function") {
+            globalSecurity = await globalSecurity();
         }
-        const properties = utils.parseSecurityProperties(security);
+        if (!(globalSecurity instanceof utils.SpeakeasyBase)) {
+            globalSecurity = new shared.Security(globalSecurity);
+        }
+        const properties = utils.parseSecurityProperties(globalSecurity);
         const headers: RawAxiosRequestHeaders = {
             ...utils.getHeadersFromRequest(req),
-            ...reqBodyHeaders,
             ...config?.headers,
             ...properties.headers,
         };
-        if (reqBody == null) throw new Error("request body is required");
         headers["Accept"] = "application/json";
 
         headers["user-agent"] = this.sdkConfiguration.userAgent;
@@ -372,10 +367,9 @@ export class Account {
         const httpRes: AxiosResponse = await client.request({
             validateStatus: () => true,
             url: url,
-            method: "put",
+            method: "delete",
             headers: headers,
             responseType: "arraybuffer",
-            data: reqBody,
             ...config,
         });
 
@@ -385,20 +379,19 @@ export class Account {
             throw new Error(`status code not found in response: ${httpRes}`);
         }
 
-        const res: operations.AccountAddressEditResponse =
-            new operations.AccountAddressEditResponse({
+        const res: operations.AccountPaymentMethodDeleteResponse =
+            new operations.AccountPaymentMethodDeleteResponse({
                 statusCode: httpRes.status,
                 contentType: contentType,
                 rawResponse: httpRes,
             });
         const decodedRes = new TextDecoder().decode(httpRes?.data);
         switch (true) {
-            case httpRes?.status == 200:
+            case httpRes?.status >= 400 && httpRes?.status < 500:
                 if (utils.matchContentType(contentType, `application/json`)) {
-                    res.addressListing = utils.objectToClass(
-                        JSON.parse(decodedRes),
-                        shared.AddressListing
-                    );
+                    const err = utils.objectToClass(JSON.parse(decodedRes), errors.ErrorT);
+                    err.rawResponse = httpRes;
+                    throw new errors.ErrorT(err);
                 } else {
                     throw new errors.SDKError(
                         "unknown content-type received: " + contentType,
@@ -408,8 +401,7 @@ export class Account {
                     );
                 }
                 break;
-            case (httpRes?.status >= 400 && httpRes?.status < 500) ||
-                (httpRes?.status >= 500 && httpRes?.status < 600):
+            case httpRes?.status >= 500 && httpRes?.status < 600:
                 throw new errors.SDKError(
                     "API error occurred",
                     httpRes.status,
@@ -429,7 +421,7 @@ export class Account {
      * @remarks
      * Determine whether or not an identifier is associated with an existing Bolt account.
      */
-    async accountExists(
+    async detect(
         req: operations.AccountExistsRequest,
         config?: AxiosRequestConfig
     ): Promise<operations.AccountExistsResponse> {
@@ -517,9 +509,8 @@ export class Account {
      * @remarks
      * Retrieve a shopper's account details, such as addresses and payment information
      */
-    async accountGet(
+    async getDetails(
         req: operations.AccountGetRequest,
-        security: operations.AccountGetSecurity,
         config?: AxiosRequestConfig
     ): Promise<operations.AccountGetResponse> {
         if (!(req instanceof utils.SpeakeasyBase)) {
@@ -532,10 +523,14 @@ export class Account {
         );
         const url: string = baseURL.replace(/\/$/, "") + "/account";
         const client: AxiosInstance = this.sdkConfiguration.defaultClient;
-        if (!(security instanceof utils.SpeakeasyBase)) {
-            security = new operations.AccountGetSecurity(security);
+        let globalSecurity = this.sdkConfiguration.security;
+        if (typeof globalSecurity === "function") {
+            globalSecurity = await globalSecurity();
         }
-        const properties = utils.parseSecurityProperties(security);
+        if (!(globalSecurity instanceof utils.SpeakeasyBase)) {
+            globalSecurity = new shared.Security(globalSecurity);
+        }
+        const properties = utils.parseSecurityProperties(globalSecurity);
         const headers: RawAxiosRequestHeaders = {
             ...utils.getHeadersFromRequest(req),
             ...config?.headers,
@@ -608,37 +603,57 @@ export class Account {
     }
 
     /**
-     * Delete an existing payment method
+     * Edit an existing address
      *
      * @remarks
-     * Delete an existing payment method. Deleting a payment method does not invalidate transactions or
-     * orders that are associated with it.
+     * Edit an existing address on the shopper's account. This does not edit addresses
+     * that are already associated with other resources, such as transactions or
+     * shipments.
      *
      */
-    async accountPaymentMethodDelete(
-        req: operations.AccountPaymentMethodDeleteRequest,
-        security: operations.AccountPaymentMethodDeleteSecurity,
+    async updateAddress(
+        req: operations.AccountAddressEditRequest,
         config?: AxiosRequestConfig
-    ): Promise<operations.AccountPaymentMethodDeleteResponse> {
+    ): Promise<operations.AccountAddressEditResponse> {
         if (!(req instanceof utils.SpeakeasyBase)) {
-            req = new operations.AccountPaymentMethodDeleteRequest(req);
+            req = new operations.AccountAddressEditRequest(req);
         }
 
         const baseURL: string = utils.templateUrl(
             this.sdkConfiguration.serverURL,
             this.sdkConfiguration.serverDefaults
         );
-        const url: string = utils.generateURL(baseURL, "/account/payment-methods/{id}", req);
-        const client: AxiosInstance = this.sdkConfiguration.defaultClient;
-        if (!(security instanceof utils.SpeakeasyBase)) {
-            security = new operations.AccountPaymentMethodDeleteSecurity(security);
+        const url: string = utils.generateURL(baseURL, "/account/addresses/{id}", req);
+
+        let [reqBodyHeaders, reqBody]: [object, any] = [{}, null];
+
+        try {
+            [reqBodyHeaders, reqBody] = utils.serializeRequestBody(
+                req,
+                "addressListingInput",
+                "json"
+            );
+        } catch (e: unknown) {
+            if (e instanceof Error) {
+                throw new Error(`Error serializing request body, cause: ${e.message}`);
+            }
         }
-        const properties = utils.parseSecurityProperties(security);
+        const client: AxiosInstance = this.sdkConfiguration.defaultClient;
+        let globalSecurity = this.sdkConfiguration.security;
+        if (typeof globalSecurity === "function") {
+            globalSecurity = await globalSecurity();
+        }
+        if (!(globalSecurity instanceof utils.SpeakeasyBase)) {
+            globalSecurity = new shared.Security(globalSecurity);
+        }
+        const properties = utils.parseSecurityProperties(globalSecurity);
         const headers: RawAxiosRequestHeaders = {
             ...utils.getHeadersFromRequest(req),
+            ...reqBodyHeaders,
             ...config?.headers,
             ...properties.headers,
         };
+        if (reqBody == null) throw new Error("request body is required");
         headers["Accept"] = "application/json";
 
         headers["user-agent"] = this.sdkConfiguration.userAgent;
@@ -646,9 +661,10 @@ export class Account {
         const httpRes: AxiosResponse = await client.request({
             validateStatus: () => true,
             url: url,
-            method: "delete",
+            method: "put",
             headers: headers,
             responseType: "arraybuffer",
+            data: reqBody,
             ...config,
         });
 
@@ -658,19 +674,20 @@ export class Account {
             throw new Error(`status code not found in response: ${httpRes}`);
         }
 
-        const res: operations.AccountPaymentMethodDeleteResponse =
-            new operations.AccountPaymentMethodDeleteResponse({
+        const res: operations.AccountAddressEditResponse =
+            new operations.AccountAddressEditResponse({
                 statusCode: httpRes.status,
                 contentType: contentType,
                 rawResponse: httpRes,
             });
         const decodedRes = new TextDecoder().decode(httpRes?.data);
         switch (true) {
-            case httpRes?.status >= 400 && httpRes?.status < 500:
+            case httpRes?.status == 200:
                 if (utils.matchContentType(contentType, `application/json`)) {
-                    const err = utils.objectToClass(JSON.parse(decodedRes), errors.ErrorT);
-                    err.rawResponse = httpRes;
-                    throw new errors.ErrorT(err);
+                    res.addressListing = utils.objectToClass(
+                        JSON.parse(decodedRes),
+                        shared.AddressListing
+                    );
                 } else {
                     throw new errors.SDKError(
                         "unknown content-type received: " + contentType,
@@ -680,7 +697,8 @@ export class Account {
                     );
                 }
                 break;
-            case httpRes?.status >= 500 && httpRes?.status < 600:
+            case (httpRes?.status >= 400 && httpRes?.status < 500) ||
+                (httpRes?.status >= 500 && httpRes?.status < 600):
                 throw new errors.SDKError(
                     "API error occurred",
                     httpRes.status,
