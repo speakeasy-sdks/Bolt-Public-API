@@ -25,11 +25,6 @@ tags:
     description: |
       Use the Payments API to tokenize and process alternative payment methods including Paypal with Bolt. This API is for the Bolt
       Accounts package.
-  - name: Transactions
-    description: |
-      Transaction endpoints allow you to manage transactions. For example, you can capture
-      funds, void transactions, or issue refunds. You can also update certain fields for existing
-      transactions.
   - name: Testing
     description: |
       Endpoints that allow you to generate and retrieve test data to verify certain
@@ -501,113 +496,6 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/payment-response'
-        4XX:
-          $ref: '#/components/responses/response-4xx'
-        default:
-          $ref: '#/components/responses/response-default'
-  /transactions/{id}:
-    get:
-      summary: Retrieve transaction details
-      operationId: transactionGet
-      x-speakeasy-name-override: GetDetails
-      description: Retrieve information for a specific transaction
-      tags:
-        - Transactions
-      security:
-        - api-key: []
-      parameters:
-        - $ref: '#/components/parameters/x-publishable-key'
-        - in: path
-          name: id
-          schema:
-            type: string
-            example: OBYG-X1PX-FN55
-          required: true
-          description: The transaction reference
-      responses:
-        '200':
-          description: The transaction details were successfully retrieved
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/transaction'
-        4XX:
-          $ref: '#/components/responses/response-4xx'
-        default:
-          $ref: '#/components/responses/response-default'
-    post:
-      summary: Perform an irreversible action (e.g. capture, refund, void) on a transaction
-      operationId: transactionAction
-      x-speakeasy-name-override: PerformAction
-      description: Perform an irreversible action (e.g. capture, refund, void) on a transaction
-      tags:
-        - Transactions
-      security:
-        - api-key: []
-      parameters:
-        - $ref: '#/components/parameters/x-publishable-key'
-        - in: path
-          name: id
-          schema:
-            type: string
-            example: OBYG-X1PX-FN55
-          required: true
-          description: The transaction reference
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/transaction-action-request'
-            examples:
-              capture:
-                $ref: '#/components/examples/transaction-action-capture'
-              refund:
-                $ref: '#/components/examples/transaction-action-refund'
-              void:
-                $ref: '#/components/examples/transaction-action-void'
-      responses:
-        '200':
-          description: The action was successfully applied
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/transaction'
-        4XX:
-          $ref: '#/components/responses/response-4xx'
-        default:
-          $ref: '#/components/responses/response-default'
-    patch:
-      summary: Update certain transaction details
-      operationId: transactionUpdate
-      x-speakeasy-name-override: Update
-      description: Update certain transaction details, such as the user-facing ID of its associate order
-      tags:
-        - Transactions
-      security:
-        - api-key: []
-      parameters:
-        - $ref: '#/components/parameters/x-publishable-key'
-        - in: path
-          name: id
-          schema:
-            type: string
-            example: OBYG-X1PX-FN55
-          required: true
-          description: The transaction reference
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/transaction-update-request'
-      responses:
-        '200':
-          description: The transaction was successfully updated
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/transaction'
         4XX:
           $ref: '#/components/responses/response-4xx'
         default:
@@ -1632,72 +1520,6 @@ components:
           $ref: '#/components/schemas/cart'
         payment_method:
           $ref: '#/components/schemas/payment-method'
-    transaction-action-capture:
-      type: object
-      required:
-        - .tag
-        - amount
-      properties:
-        .tag:
-          type: string
-          enum:
-            - capture
-          example: capture
-        amount:
-          $ref: '#/components/schemas/amount'
-    transaction-action-refund:
-      type: object
-      required:
-        - .tag
-        - amount
-      properties:
-        .tag:
-          type: string
-          enum:
-            - refund
-          example: refund
-        amount:
-          $ref: '#/components/schemas/amount'
-    transaction-action-void:
-      type: object
-      required:
-        - .tag
-      properties:
-        .tag:
-          type: string
-          enum:
-            - void
-          example: void
-    transaction-action-request:
-      type: object
-      required:
-        - action
-      properties:
-        action:
-          oneOf:
-            - $ref: '#/components/schemas/transaction-action-capture'
-            - $ref: '#/components/schemas/transaction-action-refund'
-            - $ref: '#/components/schemas/transaction-action-void'
-          discriminator:
-            propertyName: .tag
-            mapping:
-              capture: '#/components/schemas/transaction-action-capture'
-              refund: '#/components/schemas/transaction-action-refund'
-              void: '#/components/schemas/transaction-action-void'
-    transaction-update-request:
-      type: object
-      properties:
-        order:
-          type: object
-          properties:
-            cart:
-              type: object
-              properties:
-                display_id:
-                  type: string
-                  description: A shopper-facing identifier corresponding to the order reference associated with this transaction.
-                  maxLength: 128
-                  example: '215614191'
     account-test-creation-data:
       type: object
       required:
@@ -2060,24 +1882,3 @@ components:
           .tag: paypal
           success: www.example.com/handle_paypal_success
           cancel: www.example.com/handle_paypal_cancel
-    transaction-action-capture:
-      summary: Capture a specific amount for an authorized, but not yet fully captured, transaction
-      value:
-        action:
-          .tag: capture
-          amount:
-            currency: USD
-            units: 199
-    transaction-action-refund:
-      summary: Refund a specific amount
-      value:
-        action:
-          .tag: refund
-          amount:
-            currency: USD
-            units: 900
-    transaction-action-void:
-      summary: Void an authorized, but not yet captured, transaction
-      value:
-        action:
-          .tag: void
