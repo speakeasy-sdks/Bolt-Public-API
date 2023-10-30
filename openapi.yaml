@@ -34,6 +34,12 @@ tags:
     description: |
       Endpoints that allow you to generate and retrieve test data to verify certain
       flows in non-production environments.
+  - name: OAuth
+    description: |
+      Use this endpoint to retrieve an OAuth token. Use the token to allow your ecommerce server to make calls to the Account
+      endpoint and create a one-click checkout experience for shoppers.
+    externalDocs:
+      url: https://help.bolt.com/products/accounts/direct-api/oauth-guide/
 paths:
   /account:
     get:
