@@ -93,12 +93,6 @@ import { AddressListingCountryCode } from "Bolt-Public-API/dist/sdk/models/share
 
 * [createAccount](docs/sdks/testing/README.md#createaccount) - Create a test account
 * [getCreditCard](docs/sdks/testing/README.md#getcreditcard) - Retrieve a test credit card, including its token
-
-### [transactions](docs/sdks/transactions/README.md)
-
-* [getDetails](docs/sdks/transactions/README.md#getdetails) - Retrieve transaction details
-* [performAction](docs/sdks/transactions/README.md#performaction) - Perform an irreversible action (e.g. capture, refund, void) on a transaction
-* [update](docs/sdks/transactions/README.md#update) - Update certain transaction details
 <!-- End SDK Available Operations -->
 
 <!-- Start Dev Containers -->

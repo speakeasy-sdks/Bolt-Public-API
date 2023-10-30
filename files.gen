@@ -3,7 +3,6 @@ src/sdk/paymentsguest.ts
 src/sdk/paymentsloggedin.ts
 src/sdk/payments.ts
 src/sdk/testing.ts
-src/sdk/transactions.ts
 src/sdk/sdk.ts
 .eslintrc.yml
 jest.config.js
@@ -39,9 +38,6 @@ src/sdk/models/operations/paymentsaction.ts
 src/sdk/models/operations/paymentsupdate.ts
 src/sdk/models/operations/testingaccountcreate.ts
 src/sdk/models/operations/testingcreditcardget.ts
-src/sdk/models/operations/transactionget.ts
-src/sdk/models/operations/transactionaction.ts
-src/sdk/models/operations/transactionupdate.ts
 src/sdk/models/operations/index.ts
 src/sdk/models/shared/addresslisting.ts
 src/sdk/models/shared/identifier.ts
@@ -60,9 +56,6 @@ src/sdk/models/shared/paymentinitializerequest.ts
 src/sdk/models/shared/paymentmethodreference.ts
 src/sdk/models/shared/accounttestcreationdata.ts
 src/sdk/models/shared/creditcard.ts
-src/sdk/models/shared/transaction.ts
-src/sdk/models/shared/transactionactionrequest.ts
-src/sdk/models/shared/transactionupdaterequest.ts
 src/sdk/models/shared/security.ts
 src/sdk/models/shared/index.ts
 src/sdk/models/errors/error.ts
@@ -102,15 +95,6 @@ docs/models/operations/testingaccountcreaterequest.md
 docs/models/operations/testingaccountcreateresponse.md
 docs/models/operations/testingcreditcardgetsecurity.md
 docs/models/operations/testingcreditcardgetresponse.md
-docs/models/operations/transactiongetsecurity.md
-docs/models/operations/transactiongetrequest.md
-docs/models/operations/transactiongetresponse.md
-docs/models/operations/transactionactionsecurity.md
-docs/models/operations/transactionactionrequest.md
-docs/models/operations/transactionactionresponse.md
-docs/models/operations/transactionupdatesecurity.md
-docs/models/operations/transactionupdaterequest.md
-docs/models/operations/transactionupdateresponse.md
 docs/models/shared/addresslistingcountrycode.md
 docs/models/shared/addresslistinginput.md
 docs/models/shared/addresslisting.md
@@ -138,11 +122,6 @@ docs/models/shared/accounttestcreationdatainput.md
 docs/models/shared/accounttestcreationdataoutput.md
 docs/models/shared/creditcardnetwork.md
 docs/models/shared/creditcardoutput.md
-docs/models/shared/transaction.md
-docs/models/shared/transactionactionrequest.md
-docs/models/shared/transactionupdaterequestordercart.md
-docs/models/shared/transactionupdaterequestorder.md
-docs/models/shared/transactionupdaterequest.md
 docs/models/shared/security.md
 docs/models/errors/errortag.md
 docs/models/errors/errort.md
@@ -152,7 +131,6 @@ docs/sdks/payments/README.md
 docs/sdks/paymentsguest/README.md
 docs/sdks/paymentsloggedin/README.md
 docs/sdks/testing/README.md
-docs/sdks/transactions/README.md
 .gitattributes
 .devcontainer/README.md
 .devcontainer/devcontainer.json

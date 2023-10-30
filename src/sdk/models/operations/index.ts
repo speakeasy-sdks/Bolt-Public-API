@@ -17,6 +17,3 @@ export * from "./paymentsinitialize";
 export * from "./paymentsupdate";
 export * from "./testingaccountcreate";
 export * from "./testingcreditcardget";
-export * from "./transactionaction";
-export * from "./transactionget";
-export * from "./transactionupdate";

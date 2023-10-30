@@ -7,7 +7,6 @@ import { Account } from "./account";
 import * as shared from "./models/shared";
 import { Payments } from "./payments";
 import { Testing } from "./testing";
-import { Transactions } from "./transactions";
 import axios from "axios";
 import { AxiosInstance } from "axios";
 
@@ -62,9 +61,9 @@ export class SDKConfiguration {
     serverDefaults: any;
     language = "typescript";
     openapiDocVersion = "3.0.1";
-    sdkVersion = "0.6.5";
+    sdkVersion = "0.6.6";
     genVersion = "2.173.0";
-    userAgent = "speakeasy-sdk/typescript 0.6.5 2.173.0 3.0.1 Bolt-Public-API";
+    userAgent = "speakeasy-sdk/typescript 0.6.6 2.173.0 3.0.1 Bolt-Public-API";
     retryConfig?: utils.RetryConfig;
     public constructor(init?: Partial<SDKConfiguration>) {
         Object.assign(this, init);
@@ -92,15 +91,6 @@ export class BoltPublicAPI {
      *
      */
     public testing: Testing;
-    /**
-     * Transaction endpoints allow you to manage transactions. For example, you can capture
-     *
-     * @remarks
-     * funds, void transactions, or issue refunds. You can also update certain fields for existing
-     * transactions.
-     *
-     */
-    public transactions: Transactions;
 
     private sdkConfiguration: SDKConfiguration;
 
@@ -132,6 +122,5 @@ export class BoltPublicAPI {
         this.account = new Account(this.sdkConfiguration);
         this.payments = new Payments(this.sdkConfiguration);
         this.testing = new Testing(this.sdkConfiguration);
-        this.transactions = new Transactions(this.sdkConfiguration);
     }
 }
