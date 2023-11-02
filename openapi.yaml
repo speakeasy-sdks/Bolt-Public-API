@@ -556,9 +556,9 @@ paths:
   /oauth/token:
     post:
       summary: Get OAuth token
-      operationId: OAuthGetToken
+      operationId: oauthGetToken
       x-speakeasy-name-override: GetToken
-      description: Endpoint for receiving access, ID, and refresh tokens from Bolt's OAuth server.
+      description: Retrieve a new or refresh an existing OAuth token.
       tags:
         - OAuth
       requestBody:
@@ -567,6 +567,10 @@ paths:
           application/x-www-form-urlencoded:
             schema:
               $ref: '#/components/schemas/get-access-token-request'
+            encoding:
+              scope:
+                style: spaceDelimited
+                explode: false
       responses:
         '200':
           description: Access token is successfully fetched
@@ -1571,7 +1575,6 @@ components:
       required:
         - client_id
         - client_secret
-        - code
         - grant_type
         - scope
       properties:
@@ -1609,6 +1612,8 @@ components:
       type: object
       allOf:
         - type: object
+          required:
+            - code
           properties:
             code:
               description: Fetched value using OTP value from the Authorization Modal.
@@ -1628,12 +1633,24 @@ components:
           type: string
         refresh_token_scope:
           description: The scope granted to the refresh token. Currently this will always be bolt.account.view.
-          type: string
+          type: array
+          items:
+            type: string
+            enum:
+              - bolt.account.manage
+              - bolt.account.view
+              - openid
         scope:
           description: |
             The scope granted to access token, depending on the scope granted to the authorization code as well as the scope parameter.
             Options include `bolt.account.manage`, `bolt.account.view`, `openid`.'
-          type: string
+          type: array
+          items:
+            type: string
+            enum:
+              - bolt.account.manage
+              - bolt.account.view
+              - openid
         token_type:
           description: The token_type will always be bearer.
           type: string
