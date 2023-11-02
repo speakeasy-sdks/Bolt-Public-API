@@ -5,7 +5,6 @@
 import * as utils from "../internal/utils";
 import { Account } from "./account";
 import * as shared from "./models/shared";
-import { OAuth } from "./oauth";
 import { Payments } from "./payments";
 import { Testing } from "./testing";
 import axios from "axios";
@@ -62,9 +61,9 @@ export class SDKConfiguration {
     serverDefaults: any;
     language = "typescript";
     openapiDocVersion = "3.0.1";
-    sdkVersion = "0.10.0";
+    sdkVersion = "0.11.0";
     genVersion = "2.173.0";
-    userAgent = "speakeasy-sdk/typescript 0.10.0 2.173.0 3.0.1 Bolt-Public-API";
+    userAgent = "speakeasy-sdk/typescript 0.11.0 2.173.0 3.0.1 Bolt-Public-API";
     retryConfig?: utils.RetryConfig;
     public constructor(init?: Partial<SDKConfiguration>) {
         Object.assign(this, init);
@@ -83,16 +82,6 @@ export class BoltPublicAPI {
      *
      */
     public account: Account;
-    /**
-     * Use this endpoint to retrieve an OAuth token. Use the token to allow your ecommerce server to make calls to the Account
-     *
-     * @remarks
-     * endpoint and create a one-click checkout experience for shoppers.
-     *
-     *
-     * @see {@link https://help.bolt.com/products/accounts/direct-api/oauth-guide/}
-     */
-    public oAuth: OAuth;
     public payments: Payments;
     /**
      * Endpoints that allow you to generate and retrieve test data to verify certain
@@ -131,7 +120,6 @@ export class BoltPublicAPI {
         });
 
         this.account = new Account(this.sdkConfiguration);
-        this.oAuth = new OAuth(this.sdkConfiguration);
         this.payments = new Payments(this.sdkConfiguration);
         this.testing = new Testing(this.sdkConfiguration);
     }

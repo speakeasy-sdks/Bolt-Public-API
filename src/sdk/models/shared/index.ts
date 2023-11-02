@@ -11,8 +11,6 @@ export * from "./cartdiscount";
 export * from "./cartitem";
 export * from "./cartshipment";
 export * from "./creditcard";
-export * from "./getaccesstokenrequest";
-export * from "./getaccesstokenresponse";
 export * from "./guestpaymentinitializerequest";
 export * from "./identifier";
 export * from "./paymentactionrequest";
