@@ -76,6 +76,10 @@ import { AddressListingCountryCode } from "Bolt-Public-API/dist/sdk/models/share
 * [getDetails](docs/sdks/account/README.md#getdetails) - Retrieve account details
 * [updateAddress](docs/sdks/account/README.md#updateaddress) - Edit an existing address
 
+### [oAuth](docs/sdks/oauth/README.md)
+
+* [getToken](docs/sdks/oauth/README.md#gettoken) - Get OAuth token
+
 
 ### [payments.guest](docs/sdks/paymentsguest/README.md)
 

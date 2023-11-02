@@ -12,6 +12,7 @@ export * from "./accountpaymentmethoddelete";
 export * from "./guestpaymentsaction";
 export * from "./guestpaymentsinitialize";
 export * from "./guestpaymentsupdate";
+export * from "./oauthgettoken";
 export * from "./paymentsaction";
 export * from "./paymentsinitialize";
 export * from "./paymentsupdate";
