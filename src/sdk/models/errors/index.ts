@@ -3,5 +3,4 @@
  */
 
 export * from "./error";
-
 export * from "./sdkerror";

@@ -8,7 +8,7 @@ import { Expose } from "class-transformer";
 /**
  * A supported currency.
  */
-export enum AmountCurrency {
+export enum Currency {
     Aud = "AUD",
     Cad = "CAD",
     Eur = "EUR",
@@ -25,7 +25,7 @@ export class Amount extends SpeakeasyBase {
      */
     @SpeakeasyMetadata()
     @Expose({ name: "currency" })
-    currency: AmountCurrency;
+    currency: Currency;
 
     /**
      * A monetary amount, represented in its base units (e.g. USD/EUR cents).

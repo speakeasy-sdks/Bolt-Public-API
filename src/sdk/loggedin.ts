@@ -3,12 +3,13 @@
  */
 
 import * as utils from "../internal/utils";
-import * as errors from "./models/errors";
-import * as operations from "./models/operations";
+import * as errors from "../sdk/models/errors";
+import * as operations from "../sdk/models/operations";
+import * as shared from "../sdk/models/shared";
 import { SDKConfiguration } from "./sdk";
 import { AxiosInstance, AxiosRequestConfig, AxiosResponse, RawAxiosRequestHeaders } from "axios";
 
-export class PaymentsGuest {
+export class LoggedIn {
     private sdkConfiguration: SDKConfiguration;
 
     constructor(sdkConfig: SDKConfiguration) {
@@ -16,34 +17,33 @@ export class PaymentsGuest {
     }
 
     /**
-     * Initialize a Bolt payment for guest shoppers
+     * Initialize a Bolt payment for logged in shoppers
      *
      * @remarks
      * Initialize a Bolt payment token that will be used to reference this payment to
-     * Bolt when it is updated or finalized for guest shoppers.
+     * Bolt when it is updated or finalized for logged in shoppers.
      *
      */
     async initialize(
-        req: operations.GuestPaymentsInitializeRequest,
-        security: operations.GuestPaymentsInitializeSecurity,
+        req: operations.PaymentsInitializeRequest,
         config?: AxiosRequestConfig
-    ): Promise<operations.GuestPaymentsInitializeResponse> {
+    ): Promise<operations.PaymentsInitializeResponse> {
         if (!(req instanceof utils.SpeakeasyBase)) {
-            req = new operations.GuestPaymentsInitializeRequest(req);
+            req = new operations.PaymentsInitializeRequest(req);
         }
 
         const baseURL: string = utils.templateUrl(
             this.sdkConfiguration.serverURL,
             this.sdkConfiguration.serverDefaults
         );
-        const url: string = baseURL.replace(/\/$/, "") + "/guest/payments";
+        const url: string = baseURL.replace(/\/$/, "") + "/payments";
 
         let [reqBodyHeaders, reqBody]: [object, any] = [{}, null];
 
         try {
             [reqBodyHeaders, reqBody] = utils.serializeRequestBody(
                 req,
-                "guestPaymentInitializeRequest",
+                "paymentInitializeRequest",
                 "json"
             );
         } catch (e: unknown) {
@@ -52,10 +52,14 @@ export class PaymentsGuest {
             }
         }
         const client: AxiosInstance = this.sdkConfiguration.defaultClient;
-        if (!(security instanceof utils.SpeakeasyBase)) {
-            security = new operations.GuestPaymentsInitializeSecurity(security);
+        let globalSecurity = this.sdkConfiguration.security;
+        if (typeof globalSecurity === "function") {
+            globalSecurity = await globalSecurity();
         }
-        const properties = utils.parseSecurityProperties(security);
+        if (!(globalSecurity instanceof utils.SpeakeasyBase)) {
+            globalSecurity = new shared.Security(globalSecurity);
+        }
+        const properties = utils.parseSecurityProperties(globalSecurity);
         const headers: RawAxiosRequestHeaders = {
             ...utils.getHeadersFromRequest(req),
             ...reqBodyHeaders,
@@ -83,8 +87,8 @@ export class PaymentsGuest {
             throw new Error(`status code not found in response: ${httpRes}`);
         }
 
-        const res: operations.GuestPaymentsInitializeResponse =
-            new operations.GuestPaymentsInitializeResponse({
+        const res: operations.PaymentsInitializeResponse =
+            new operations.PaymentsInitializeResponse({
                 statusCode: httpRes.status,
                 contentType: contentType,
                 rawResponse: httpRes,
@@ -132,26 +136,25 @@ export class PaymentsGuest {
     }
 
     /**
-     * Perform an irreversible action (e.g. finalize) on a pending guest payment
+     * Perform an irreversible action (e.g. finalize) on a pending payment
      *
      * @remarks
-     * Perform an irreversible action on a pending guest payment, such as finalizing it.
+     * Perform an irreversible action on a pending payment, such as finalizing it.
      *
      */
     async performAction(
-        req: operations.GuestPaymentsActionRequest,
-        security: operations.GuestPaymentsActionSecurity,
+        req: operations.PaymentsActionRequest,
         config?: AxiosRequestConfig
-    ): Promise<operations.GuestPaymentsActionResponse> {
+    ): Promise<operations.PaymentsActionResponse> {
         if (!(req instanceof utils.SpeakeasyBase)) {
-            req = new operations.GuestPaymentsActionRequest(req);
+            req = new operations.PaymentsActionRequest(req);
         }
 
         const baseURL: string = utils.templateUrl(
             this.sdkConfiguration.serverURL,
             this.sdkConfiguration.serverDefaults
         );
-        const url: string = utils.generateURL(baseURL, "/guest/payments/{id}", req);
+        const url: string = utils.generateURL(baseURL, "/payments/{id}", req);
 
         let [reqBodyHeaders, reqBody]: [object, any] = [{}, null];
 
@@ -167,10 +170,14 @@ export class PaymentsGuest {
             }
         }
         const client: AxiosInstance = this.sdkConfiguration.defaultClient;
-        if (!(security instanceof utils.SpeakeasyBase)) {
-            security = new operations.GuestPaymentsActionSecurity(security);
+        let globalSecurity = this.sdkConfiguration.security;
+        if (typeof globalSecurity === "function") {
+            globalSecurity = await globalSecurity();
         }
-        const properties = utils.parseSecurityProperties(security);
+        if (!(globalSecurity instanceof utils.SpeakeasyBase)) {
+            globalSecurity = new shared.Security(globalSecurity);
+        }
+        const properties = utils.parseSecurityProperties(globalSecurity);
         const headers: RawAxiosRequestHeaders = {
             ...utils.getHeadersFromRequest(req),
             ...reqBodyHeaders,
@@ -198,12 +205,11 @@ export class PaymentsGuest {
             throw new Error(`status code not found in response: ${httpRes}`);
         }
 
-        const res: operations.GuestPaymentsActionResponse =
-            new operations.GuestPaymentsActionResponse({
-                statusCode: httpRes.status,
-                contentType: contentType,
-                rawResponse: httpRes,
-            });
+        const res: operations.PaymentsActionResponse = new operations.PaymentsActionResponse({
+            statusCode: httpRes.status,
+            contentType: contentType,
+            rawResponse: httpRes,
+        });
         const decodedRes = new TextDecoder().decode(httpRes?.data);
         switch (true) {
             case httpRes?.status == 200:
@@ -247,26 +253,25 @@ export class PaymentsGuest {
     }
 
     /**
-     * Update an existing guest payment
+     * Update an existing payment
      *
      * @remarks
-     * Update a pending guest payment
+     * Update a pending payment
      *
      */
     async update(
-        req: operations.GuestPaymentsUpdateRequest,
-        security: operations.GuestPaymentsUpdateSecurity,
+        req: operations.PaymentsUpdateRequest,
         config?: AxiosRequestConfig
-    ): Promise<operations.GuestPaymentsUpdateResponse> {
+    ): Promise<operations.PaymentsUpdateResponse> {
         if (!(req instanceof utils.SpeakeasyBase)) {
-            req = new operations.GuestPaymentsUpdateRequest(req);
+            req = new operations.PaymentsUpdateRequest(req);
         }
 
         const baseURL: string = utils.templateUrl(
             this.sdkConfiguration.serverURL,
             this.sdkConfiguration.serverDefaults
         );
-        const url: string = utils.generateURL(baseURL, "/guest/payments/{id}", req);
+        const url: string = utils.generateURL(baseURL, "/payments/{id}", req);
 
         let [reqBodyHeaders, reqBody]: [object, any] = [{}, null];
 
@@ -282,10 +287,14 @@ export class PaymentsGuest {
             }
         }
         const client: AxiosInstance = this.sdkConfiguration.defaultClient;
-        if (!(security instanceof utils.SpeakeasyBase)) {
-            security = new operations.GuestPaymentsUpdateSecurity(security);
+        let globalSecurity = this.sdkConfiguration.security;
+        if (typeof globalSecurity === "function") {
+            globalSecurity = await globalSecurity();
         }
-        const properties = utils.parseSecurityProperties(security);
+        if (!(globalSecurity instanceof utils.SpeakeasyBase)) {
+            globalSecurity = new shared.Security(globalSecurity);
+        }
+        const properties = utils.parseSecurityProperties(globalSecurity);
         const headers: RawAxiosRequestHeaders = {
             ...utils.getHeadersFromRequest(req),
             ...reqBodyHeaders,
@@ -313,12 +322,11 @@ export class PaymentsGuest {
             throw new Error(`status code not found in response: ${httpRes}`);
         }
 
-        const res: operations.GuestPaymentsUpdateResponse =
-            new operations.GuestPaymentsUpdateResponse({
-                statusCode: httpRes.status,
-                contentType: contentType,
-                rawResponse: httpRes,
-            });
+        const res: operations.PaymentsUpdateResponse = new operations.PaymentsUpdateResponse({
+            statusCode: httpRes.status,
+            contentType: contentType,
+            rawResponse: httpRes,
+        });
         const decodedRes = new TextDecoder().decode(httpRes?.data);
         switch (true) {
             case httpRes?.status == 200:

@@ -1,5 +1,5 @@
-# PaymentsGuest
-(*payments.guest*)
+# Guest
+(*.payments.guest*)
 
 ### Available Operations
 
@@ -18,7 +18,7 @@ Bolt when it is updated or finalized for guest shoppers.
 ```typescript
 import { BoltPublicAPI } from "Bolt-Public-API";
 import { GuestPaymentsInitializeSecurity } from "Bolt-Public-API/dist/sdk/models/operations";
-import { AmountCurrency } from "Bolt-Public-API/dist/sdk/models/shared";
+import { Currency } from "Bolt-Public-API/dist/sdk/models/shared";
 
 (async() => {
   const sdk = new BoltPublicAPI();
@@ -33,7 +33,7 @@ const operationSecurity: GuestPaymentsInitializeSecurity = {
         discounts: [
           {
             amount: {
-              currency: AmountCurrency.Usd,
+              currency: Currency.Usd,
               units: 900,
             },
             code: "SUMMER10DISCOUNT",
@@ -49,7 +49,7 @@ const operationSecurity: GuestPaymentsInitializeSecurity = {
             quantity: 1,
             reference: "item_100",
             totalAmount: {
-              currency: AmountCurrency.Usd,
+              currency: Currency.Usd,
               units: 900,
             },
             unitPrice: 1000,
@@ -62,17 +62,17 @@ const operationSecurity: GuestPaymentsInitializeSecurity = {
             address: "string",
             carrier: "FedEx",
             cost: {
-              currency: AmountCurrency.Usd,
+              currency: Currency.Usd,
               units: 900,
             },
           },
         ],
         tax: {
-          currency: AmountCurrency.Usd,
+          currency: Currency.Usd,
           units: 900,
         },
         total: {
-          currency: AmountCurrency.Usd,
+          currency: Currency.Usd,
           units: 900,
         },
       },
@@ -165,7 +165,7 @@ Update a pending guest payment
 ```typescript
 import { BoltPublicAPI } from "Bolt-Public-API";
 import { GuestPaymentsUpdateSecurity } from "Bolt-Public-API/dist/sdk/models/operations";
-import { AmountCurrency } from "Bolt-Public-API/dist/sdk/models/shared";
+import { Currency } from "Bolt-Public-API/dist/sdk/models/shared";
 
 (async() => {
   const sdk = new BoltPublicAPI();
@@ -181,7 +181,7 @@ const operationSecurity: GuestPaymentsUpdateSecurity = {
         discounts: [
           {
             amount: {
-              currency: AmountCurrency.Usd,
+              currency: Currency.Usd,
               units: 900,
             },
             code: "SUMMER10DISCOUNT",
@@ -197,7 +197,7 @@ const operationSecurity: GuestPaymentsUpdateSecurity = {
             quantity: 1,
             reference: "item_100",
             totalAmount: {
-              currency: AmountCurrency.Usd,
+              currency: Currency.Usd,
               units: 900,
             },
             unitPrice: 1000,
@@ -210,17 +210,17 @@ const operationSecurity: GuestPaymentsUpdateSecurity = {
             address: "string",
             carrier: "FedEx",
             cost: {
-              currency: AmountCurrency.Usd,
+              currency: Currency.Usd,
               units: 900,
             },
           },
         ],
         tax: {
-          currency: AmountCurrency.Usd,
+          currency: Currency.Usd,
           units: 900,
         },
         total: {
-          currency: AmountCurrency.Usd,
+          currency: Currency.Usd,
           units: 900,
         },
       },

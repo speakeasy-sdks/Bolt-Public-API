@@ -8,7 +8,7 @@ import { Expose } from "class-transformer";
 /**
  * The country (in its ISO 3166 alpha-2 format) associated with this address.
  */
-export enum AddressListingCountryCode {
+export enum CountryCode {
     Af = "AF",
     Ax = "AX",
     Al = "AL",
@@ -276,7 +276,7 @@ export class AddressListingInput extends SpeakeasyBase {
      */
     @SpeakeasyMetadata()
     @Expose({ name: "country_code" })
-    countryCode: AddressListingCountryCode;
+    countryCode: CountryCode;
 
     /**
      * The email address associated with this address.
@@ -365,7 +365,7 @@ export class AddressListing extends SpeakeasyBase {
      */
     @SpeakeasyMetadata()
     @Expose({ name: "country_code" })
-    countryCode: AddressListingCountryCode;
+    countryCode: CountryCode;
 
     /**
      * The email address associated with this address.

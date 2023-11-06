@@ -3,7 +3,7 @@
  */
 
 import { SpeakeasyBase, SpeakeasyMetadata } from "../../../internal/utils";
-import * as shared from "../shared";
+import * as shared from "../../../sdk/models/shared";
 import { AxiosResponse } from "axios";
 
 export class AccountAddressEditRequest extends SpeakeasyBase {
@@ -14,7 +14,7 @@ export class AccountAddressEditRequest extends SpeakeasyBase {
     xPublishableKey: string;
 
     @SpeakeasyMetadata({ data: "request, media_type=application/json" })
-    addressListingInput: shared.AddressListingInput;
+    addressListing: shared.AddressListingInput;
 
     /**
      * The ID of the address to edit

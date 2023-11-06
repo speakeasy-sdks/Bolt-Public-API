@@ -1,5 +1,5 @@
 # Testing
-(*testing*)
+(*.testing*)
 
 ## Overview
 
@@ -22,7 +22,7 @@ Create a Bolt shopper account for testing purposes.
 ```typescript
 import { BoltPublicAPI } from "Bolt-Public-API";
 import { TestingAccountCreateSecurity } from "Bolt-Public-API/dist/sdk/models/operations";
-import { AccountTestCreationDataEmailState, AccountTestCreationDataPhoneState } from "Bolt-Public-API/dist/sdk/models/shared";
+import { EmailState, PhoneState } from "Bolt-Public-API/dist/sdk/models/shared";
 
 (async() => {
   const sdk = new BoltPublicAPI();
@@ -32,11 +32,11 @@ const operationSecurity: TestingAccountCreateSecurity = {
 
   const res = await sdk.testing.createAccount({
     xPublishableKey: "string",
-    accountTestCreationDataInput: {
-      emailState: AccountTestCreationDataEmailState.Unverified,
+    accountTestCreationData: {
+      emailState: EmailState.Unverified,
       hasAddress: true,
       isMigrated: true,
-      phoneState: AccountTestCreationDataPhoneState.Verified,
+      phoneState: PhoneState.Verified,
     },
   }, operationSecurity);
 

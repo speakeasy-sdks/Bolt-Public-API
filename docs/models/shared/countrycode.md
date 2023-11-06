@@ -1,4 +1,4 @@
-# AddressListingCountryCode
+# CountryCode
 
 The country (in its ISO 3166 alpha-2 format) associated with this address.
 

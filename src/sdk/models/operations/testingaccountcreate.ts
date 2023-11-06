@@ -3,7 +3,7 @@
  */
 
 import { SpeakeasyBase, SpeakeasyMetadata } from "../../../internal/utils";
-import * as shared from "../shared";
+import * as shared from "../../../sdk/models/shared";
 import { AxiosResponse } from "axios";
 
 export class TestingAccountCreateSecurity extends SpeakeasyBase {
@@ -19,7 +19,7 @@ export class TestingAccountCreateRequest extends SpeakeasyBase {
     xPublishableKey: string;
 
     @SpeakeasyMetadata({ data: "request, media_type=application/json" })
-    accountTestCreationDataInput: shared.AccountTestCreationDataInput;
+    accountTestCreationData: shared.AccountTestCreationData;
 }
 
 export class TestingAccountCreateResponse extends SpeakeasyBase {

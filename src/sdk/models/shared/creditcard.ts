@@ -8,7 +8,7 @@ import { Expose } from "class-transformer";
 /**
  * The credit card's network.
  */
-export enum CreditCardNetwork {
+export enum Network {
     Visa = "visa",
     Mastercard = "mastercard",
     Amex = "amex",
@@ -19,7 +19,7 @@ export enum CreditCardNetwork {
     Citiplcc = "citiplcc",
 }
 
-export class CreditCardOutput extends SpeakeasyBase {
+export class CreditCard extends SpeakeasyBase {
     /**
      * The expiration date, in YYYY-MM format.
      */
@@ -39,5 +39,5 @@ export class CreditCardOutput extends SpeakeasyBase {
      */
     @SpeakeasyMetadata()
     @Expose({ name: "network" })
-    network: CreditCardNetwork;
+    network: Network;
 }

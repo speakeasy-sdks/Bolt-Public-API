@@ -1,4 +1,4 @@
-# GetAccessTokenResponseRefreshTokenScope
+# RefreshTokenScope
 
 
 ## Values

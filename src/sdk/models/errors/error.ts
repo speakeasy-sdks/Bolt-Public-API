@@ -8,7 +8,7 @@ import { classToPlain, Expose } from "class-transformer";
 /**
  * The type of error returned
  */
-export enum ErrorTag {
+export enum DotTag {
     MissingInputParameter = "missing_input_parameter",
     InvalidInputParameter = "invalid_input_parameter",
     NotFound = "not_found",
@@ -20,7 +20,7 @@ export class ErrorT extends Error {
      */
     @SpeakeasyMetadata()
     @Expose({ name: ".tag" })
-    dotTag: ErrorTag;
+    dotTag: DotTag;
 
     /**
      * A human-readable error message, which might include information specific to

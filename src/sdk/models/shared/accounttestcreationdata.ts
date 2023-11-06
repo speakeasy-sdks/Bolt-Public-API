@@ -5,22 +5,22 @@
 import { SpeakeasyBase, SpeakeasyMetadata } from "../../../internal/utils";
 import { Expose } from "class-transformer";
 
-export enum AccountTestCreationDataEmailState {
+export enum EmailState {
     Missing = "missing",
     Unverified = "unverified",
     Verified = "verified",
 }
 
-export enum AccountTestCreationDataPhoneState {
+export enum PhoneState {
     Missing = "missing",
     Unverified = "unverified",
     Verified = "verified",
 }
 
-export class AccountTestCreationDataInput extends SpeakeasyBase {
+export class AccountTestCreationData extends SpeakeasyBase {
     @SpeakeasyMetadata()
     @Expose({ name: "email_state" })
-    emailState: AccountTestCreationDataEmailState;
+    emailState: EmailState;
 
     @SpeakeasyMetadata()
     @Expose({ name: "has_address" })
@@ -32,7 +32,7 @@ export class AccountTestCreationDataInput extends SpeakeasyBase {
 
     @SpeakeasyMetadata()
     @Expose({ name: "phone_state" })
-    phoneState: AccountTestCreationDataPhoneState;
+    phoneState: PhoneState;
 }
 
 export class AccountTestCreationDataOutput extends SpeakeasyBase {
@@ -42,7 +42,7 @@ export class AccountTestCreationDataOutput extends SpeakeasyBase {
 
     @SpeakeasyMetadata()
     @Expose({ name: "email_state" })
-    emailState: AccountTestCreationDataEmailState;
+    emailState: EmailState;
 
     @SpeakeasyMetadata()
     @Expose({ name: "oauth_code" })
@@ -58,5 +58,5 @@ export class AccountTestCreationDataOutput extends SpeakeasyBase {
 
     @SpeakeasyMetadata()
     @Expose({ name: "phone_state" })
-    phoneState: AccountTestCreationDataPhoneState;
+    phoneState: PhoneState;
 }

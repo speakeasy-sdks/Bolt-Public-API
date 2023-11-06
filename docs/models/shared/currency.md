@@ -1,4 +1,4 @@
-# AmountCurrency
+# Currency
 
 A supported currency.
 

@@ -12,11 +12,11 @@ import { SpeakeasyBase, SpeakeasyMetadata } from "../../../internal/utils";
  * The value will always be `authorization_code` when exchanging an authorization code for an access token.
  *
  */
-export enum GetAccessTokenRequestGrantType {
+export enum GrantType {
     AuthorizationCode = "authorization_code",
 }
 
-export enum GetAccessTokenRequestScope {
+export enum Scope {
     BoltAccountManage = "bolt.account.manage",
     BoltAccountView = "bolt.account.view",
     Openid = "openid",
@@ -50,7 +50,7 @@ export class GetAccessTokenRequest extends SpeakeasyBase {
      *
      */
     @SpeakeasyMetadata({ data: "form, name=grant_type" })
-    grantType: GetAccessTokenRequestGrantType;
+    grantType: GrantType;
 
     /**
      * The scope issued to the merchant when receiving an authorization code.
@@ -62,7 +62,7 @@ export class GetAccessTokenRequest extends SpeakeasyBase {
      *
      */
     @SpeakeasyMetadata({ data: "form, name=scope" })
-    scope: GetAccessTokenRequestScope[];
+    scope: Scope[];
 
     /**
      * A randomly generated string issued to the merchant when receiving an authorization code used to prevent CSRF attacks

@@ -2,24 +2,18 @@ configVersion: 1.0.0
 management:
   docChecksum: efdcbfe221bf82e21b50a0c82fbd5349
   docVersion: 3.0.1
-  speakeasyVersion: 1.111.1
-  generationVersion: 2.173.0
+  speakeasyVersion: 1.114.1
+  generationVersion: 2.181.1
 generation:
-  comments:
-    disableComments: false
-    omitDescriptionIfSummaryPresent: false
+  comments: {}
   devContainers:
     enabled: true
     schemaPath: ./openapi.yaml
-  baseServerURL: ""
-  flattenGlobalSecurity: true
-  repoURL: https://github.com/speakeasy-sdks/Bolt-Public-API.git
   sdkClassName: Bolt-Public-API
-  singleTagPerOp: false
-  tagNamespacingDisabled: false
+  repoURL: https://github.com/speakeasy-sdks/Bolt-Public-API.git
 features:
   typescript:
-    core: 2.94.0
+    core: 3.1.0
     devContainers: 2.88.0
     globalSecurity: 2.82.0
     globalServerURLs: 2.82.0
@@ -28,10 +22,18 @@ features:
     methodSecurity: 2.82.0
     nameOverrides: 2.81.1
 typescript:
-  version: 0.12.0
+  version: 0.13.0
   author: Bolt
   clientServerStatusCodesAsErrors: true
   flattenGlobalSecurity: false
+  imports:
+    option: openapi
+    paths:
+      callbacks: sdk/models/callbacks
+      errors: sdk/models/errors
+      operations: sdk/models/operations
+      shared: sdk/models/shared
+      webhooks: sdk/models/webhooks
   installationURL: https://github.com/speakeasy-sdks/Bolt-Public-API
   maxMethodParams: 0
   packageName: Bolt-Public-API

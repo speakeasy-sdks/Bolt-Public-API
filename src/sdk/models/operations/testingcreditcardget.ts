@@ -3,7 +3,7 @@
  */
 
 import { SpeakeasyBase, SpeakeasyMetadata } from "../../../internal/utils";
-import * as shared from "../shared";
+import * as shared from "../../../sdk/models/shared";
 import { AxiosResponse } from "axios";
 
 export class TestingCreditCardGetSecurity extends SpeakeasyBase {
@@ -34,5 +34,5 @@ export class TestingCreditCardGetResponse extends SpeakeasyBase {
      * Successfully generated test credit card details
      */
     @SpeakeasyMetadata()
-    creditCard?: shared.CreditCardOutput;
+    creditCard?: shared.CreditCard;
 }

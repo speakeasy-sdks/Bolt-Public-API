@@ -1,5 +1,5 @@
 # OAuth
-(*oAuth*)
+(*.oAuth*)
 
 ## Overview
 
@@ -20,7 +20,7 @@ Retrieve a new or refresh an existing OAuth token.
 
 ```typescript
 import { BoltPublicAPI } from "Bolt-Public-API";
-import { GetAccessTokenRequestGrantType, GetAccessTokenRequestScope } from "Bolt-Public-API/dist/sdk/models/shared";
+import { GrantType, Scope } from "Bolt-Public-API/dist/sdk/models/shared";
 
 (async() => {
   const sdk = new BoltPublicAPI({
@@ -34,9 +34,9 @@ import { GetAccessTokenRequestGrantType, GetAccessTokenRequestScope } from "Bolt
     clientId: "string",
     clientSecret: "string",
     code: "string",
-    grantType: GetAccessTokenRequestGrantType.AuthorizationCode,
+    grantType: GrantType.AuthorizationCode,
     scope: [
-      GetAccessTokenRequestScope.BoltAccountManage,
+      Scope.BoltAccountManage,
     ],
   });
 

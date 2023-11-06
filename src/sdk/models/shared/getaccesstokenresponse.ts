@@ -5,7 +5,7 @@
 import { SpeakeasyBase, SpeakeasyMetadata } from "../../../internal/utils";
 import { Expose } from "class-transformer";
 
-export enum GetAccessTokenResponseRefreshTokenScope {
+export enum RefreshTokenScope {
     BoltAccountManage = "bolt.account.manage",
     BoltAccountView = "bolt.account.view",
     Openid = "openid",
@@ -51,7 +51,7 @@ export class GetAccessTokenResponse extends SpeakeasyBase {
      */
     @SpeakeasyMetadata()
     @Expose({ name: "refresh_token_scope" })
-    refreshTokenScope?: GetAccessTokenResponseRefreshTokenScope[];
+    refreshTokenScope?: RefreshTokenScope[];
 
     /**
      * The scope granted to access token, depending on the scope granted to the authorization code as well as the scope parameter.

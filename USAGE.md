@@ -3,7 +3,7 @@
 
 ```typescript
 import { BoltPublicAPI } from "Bolt-Public-API";
-import { AddressListingCountryCode } from "Bolt-Public-API/dist/sdk/models/shared";
+import { CountryCode } from "Bolt-Public-API/dist/sdk/models/shared";
 
 (async () => {
     const sdk = new BoltPublicAPI({
@@ -15,9 +15,9 @@ import { AddressListingCountryCode } from "Bolt-Public-API/dist/sdk/models/share
 
     const res = await sdk.account.addAddress({
         xPublishableKey: "string",
-        addressListingInput: {
+        addressListing: {
             company: "ACME Corporation",
-            countryCode: AddressListingCountryCode.Us,
+            countryCode: CountryCode.Us,
             email: "alice@example.com",
             firstName: "Alice",
             isDefault: true,

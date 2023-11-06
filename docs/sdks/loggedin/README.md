@@ -1,5 +1,5 @@
-# PaymentsLoggedIn
-(*payments.loggedIn*)
+# LoggedIn
+(*.payments.loggedIn*)
 
 ### Available Operations
 
@@ -17,7 +17,7 @@ Bolt when it is updated or finalized for logged in shoppers.
 
 ```typescript
 import { BoltPublicAPI } from "Bolt-Public-API";
-import { AmountCurrency, PaymentMethodReferenceTag } from "Bolt-Public-API/dist/sdk/models/shared";
+import { Currency, PaymentMethodReferenceTag } from "Bolt-Public-API/dist/sdk/models/shared";
 
 (async() => {
   const sdk = new BoltPublicAPI({
@@ -34,7 +34,7 @@ import { AmountCurrency, PaymentMethodReferenceTag } from "Bolt-Public-API/dist/
         discounts: [
           {
             amount: {
-              currency: AmountCurrency.Usd,
+              currency: Currency.Usd,
               units: 900,
             },
             code: "SUMMER10DISCOUNT",
@@ -50,7 +50,7 @@ import { AmountCurrency, PaymentMethodReferenceTag } from "Bolt-Public-API/dist/
             quantity: 1,
             reference: "item_100",
             totalAmount: {
-              currency: AmountCurrency.Usd,
+              currency: Currency.Usd,
               units: 900,
             },
             unitPrice: 1000,
@@ -63,17 +63,17 @@ import { AmountCurrency, PaymentMethodReferenceTag } from "Bolt-Public-API/dist/
             address: "string",
             carrier: "FedEx",
             cost: {
-              currency: AmountCurrency.Usd,
+              currency: Currency.Usd,
               units: 900,
             },
           },
         ],
         tax: {
-          currency: AmountCurrency.Usd,
+          currency: Currency.Usd,
           units: 900,
         },
         total: {
-          currency: AmountCurrency.Usd,
+          currency: Currency.Usd,
           units: 900,
         },
       },
@@ -160,7 +160,7 @@ Update a pending payment
 
 ```typescript
 import { BoltPublicAPI } from "Bolt-Public-API";
-import { AmountCurrency } from "Bolt-Public-API/dist/sdk/models/shared";
+import { Currency } from "Bolt-Public-API/dist/sdk/models/shared";
 
 (async() => {
   const sdk = new BoltPublicAPI({
@@ -178,7 +178,7 @@ import { AmountCurrency } from "Bolt-Public-API/dist/sdk/models/shared";
         discounts: [
           {
             amount: {
-              currency: AmountCurrency.Usd,
+              currency: Currency.Usd,
               units: 900,
             },
             code: "SUMMER10DISCOUNT",
@@ -194,7 +194,7 @@ import { AmountCurrency } from "Bolt-Public-API/dist/sdk/models/shared";
             quantity: 1,
             reference: "item_100",
             totalAmount: {
-              currency: AmountCurrency.Usd,
+              currency: Currency.Usd,
               units: 900,
             },
             unitPrice: 1000,
@@ -207,17 +207,17 @@ import { AmountCurrency } from "Bolt-Public-API/dist/sdk/models/shared";
             address: "string",
             carrier: "FedEx",
             cost: {
-              currency: AmountCurrency.Usd,
+              currency: Currency.Usd,
               units: 900,
             },
           },
         ],
         tax: {
-          currency: AmountCurrency.Usd,
+          currency: Currency.Usd,
           units: 900,
         },
         total: {
-          currency: AmountCurrency.Usd,
+          currency: Currency.Usd,
           units: 900,
         },
       },
