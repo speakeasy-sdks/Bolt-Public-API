@@ -26,5 +26,5 @@ jobs:
       speakeasy_version: latest
       # token: ${{ secrets.SPEAKEASY_BOT_TOKEN }}
     secrets:
-      github_access_token: ${{ secrets.GITHUB_TOKEN }}
+      github_access_token: ${{ secrets.SPEAKEASY_BOT_TOKEN }}
       speakeasy_api_key: ${{ secrets.SPEAKEASY_API_KEY }}
