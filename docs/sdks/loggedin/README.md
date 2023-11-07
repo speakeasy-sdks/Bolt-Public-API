@@ -84,7 +84,6 @@ import { Currency, PaymentMethodReferenceTag } from "Bolt-Public-API/dist/sdk/mo
     },
   });
 
-
   if (res.statusCode == 200) {
     // handle response
   }
@@ -102,7 +101,12 @@ import { Currency, PaymentMethodReferenceTag } from "Bolt-Public-API/dist/sdk/mo
 ### Response
 
 **Promise<[operations.PaymentsInitializeResponse](../../models/operations/paymentsinitializeresponse.md)>**
+### Errors
 
+| Error Object     | Status Code      | Content Type     |
+| ---------------- | ---------------- | ---------------- |
+| errors.ErrorT    | 4XX              | application/json |
+| errors.SDKError  | 400-600          | */*              |
 
 ## performAction
 
@@ -131,7 +135,6 @@ import { PaymentActionRequestTag } from "Bolt-Public-API/dist/sdk/models/shared"
     },
   });
 
-
   if (res.statusCode == 200) {
     // handle response
   }
@@ -149,7 +152,12 @@ import { PaymentActionRequestTag } from "Bolt-Public-API/dist/sdk/models/shared"
 ### Response
 
 **Promise<[operations.PaymentsActionResponse](../../models/operations/paymentsactionresponse.md)>**
+### Errors
 
+| Error Object     | Status Code      | Content Type     |
+| ---------------- | ---------------- | ---------------- |
+| errors.ErrorT    | 4XX              | application/json |
+| errors.SDKError  | 400-600          | */*              |
 
 ## update
 
@@ -224,7 +232,6 @@ import { Currency } from "Bolt-Public-API/dist/sdk/models/shared";
     },
   });
 
-
   if (res.statusCode == 200) {
     // handle response
   }
@@ -242,4 +249,9 @@ import { Currency } from "Bolt-Public-API/dist/sdk/models/shared";
 ### Response
 
 **Promise<[operations.PaymentsUpdateResponse](../../models/operations/paymentsupdateresponse.md)>**
+### Errors
 
+| Error Object     | Status Code      | Content Type     |
+| ---------------- | ---------------- | ---------------- |
+| errors.ErrorT    | 4XX              | application/json |
+| errors.SDKError  | 400-600          | */*              |

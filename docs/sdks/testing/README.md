@@ -40,7 +40,6 @@ const operationSecurity: TestingAccountCreateSecurity = {
     },
   }, operationSecurity);
 
-
   if (res.statusCode == 200) {
     // handle response
   }
@@ -59,7 +58,12 @@ const operationSecurity: TestingAccountCreateSecurity = {
 ### Response
 
 **Promise<[operations.TestingAccountCreateResponse](../../models/operations/testingaccountcreateresponse.md)>**
+### Errors
 
+| Error Object     | Status Code      | Content Type     |
+| ---------------- | ---------------- | ---------------- |
+| errors.ErrorT    | 4XX              | application/json |
+| errors.SDKError  | 400-600          | */*              |
 
 ## getCreditCard
 
@@ -81,7 +85,6 @@ const operationSecurity: TestingCreditCardGetSecurity = {
 
   const res = await sdk.testing.getCreditCard(operationSecurity);
 
-
   if (res.statusCode == 200) {
     // handle response
   }
@@ -99,4 +102,9 @@ const operationSecurity: TestingCreditCardGetSecurity = {
 ### Response
 
 **Promise<[operations.TestingCreditCardGetResponse](../../models/operations/testingcreditcardgetresponse.md)>**
+### Errors
 
+| Error Object     | Status Code      | Content Type     |
+| ---------------- | ---------------- | ---------------- |
+| errors.ErrorT    | 4XX              | application/json |
+| errors.SDKError  | 400-600          | */*              |

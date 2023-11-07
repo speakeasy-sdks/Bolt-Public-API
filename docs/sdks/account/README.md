@@ -53,7 +53,6 @@ import { CountryCode } from "Bolt-Public-API/dist/sdk/models/shared";
     },
   });
 
-
   if (res.statusCode == 200) {
     // handle response
   }
@@ -71,7 +70,11 @@ import { CountryCode } from "Bolt-Public-API/dist/sdk/models/shared";
 ### Response
 
 **Promise<[operations.AccountAddressCreateResponse](../../models/operations/accountaddresscreateresponse.md)>**
+### Errors
 
+| Error Object    | Status Code     | Content Type    |
+| --------------- | --------------- | --------------- |
+| errors.SDKError | 400-600         | */*             |
 
 ## addPaymentMethod
 
@@ -99,7 +102,6 @@ import { BoltPublicAPI } from "Bolt-Public-API";
     xPublishableKey: "string",
   });
 
-
   if (res.statusCode == 200) {
     // handle response
   }
@@ -117,7 +119,11 @@ import { BoltPublicAPI } from "Bolt-Public-API";
 ### Response
 
 **Promise<[operations.AccountAddPaymentMethodResponse](../../models/operations/accountaddpaymentmethodresponse.md)>**
+### Errors
 
+| Error Object    | Status Code     | Content Type    |
+| --------------- | --------------- | --------------- |
+| errors.SDKError | 400-600         | */*             |
 
 ## deleteAddress
 
@@ -143,7 +149,6 @@ import { BoltPublicAPI } from "Bolt-Public-API";
     id: "D4g3h5tBuVYK9",
   });
 
-
   if (res.statusCode == 200) {
     // handle response
   }
@@ -161,7 +166,12 @@ import { BoltPublicAPI } from "Bolt-Public-API";
 ### Response
 
 **Promise<[operations.AccountAddressDeleteResponse](../../models/operations/accountaddressdeleteresponse.md)>**
+### Errors
 
+| Error Object     | Status Code      | Content Type     |
+| ---------------- | ---------------- | ---------------- |
+| errors.ErrorT    | 4XX              | application/json |
+| errors.SDKError  | 400-600          | */*              |
 
 ## deletePaymentMethod
 
@@ -187,7 +197,6 @@ import { BoltPublicAPI } from "Bolt-Public-API";
     id: "D4g3h5tBuVYK9",
   });
 
-
   if (res.statusCode == 200) {
     // handle response
   }
@@ -205,7 +214,12 @@ import { BoltPublicAPI } from "Bolt-Public-API";
 ### Response
 
 **Promise<[operations.AccountPaymentMethodDeleteResponse](../../models/operations/accountpaymentmethoddeleteresponse.md)>**
+### Errors
 
+| Error Object     | Status Code      | Content Type     |
+| ---------------- | ---------------- | ---------------- |
+| errors.ErrorT    | 4XX              | application/json |
+| errors.SDKError  | 400-600          | */*              |
 
 ## detect
 
@@ -233,7 +247,6 @@ import { IdentifierType } from "Bolt-Public-API/dist/sdk/models/shared";
     },
   });
 
-
   if (res.statusCode == 200) {
     // handle response
   }
@@ -251,7 +264,12 @@ import { IdentifierType } from "Bolt-Public-API/dist/sdk/models/shared";
 ### Response
 
 **Promise<[operations.AccountExistsResponse](../../models/operations/accountexistsresponse.md)>**
+### Errors
 
+| Error Object     | Status Code      | Content Type     |
+| ---------------- | ---------------- | ---------------- |
+| errors.ErrorT    | 4XX              | application/json |
+| errors.SDKError  | 400-600          | */*              |
 
 ## getDetails
 
@@ -274,7 +292,6 @@ import { BoltPublicAPI } from "Bolt-Public-API";
     xPublishableKey: "string",
   });
 
-
   if (res.statusCode == 200) {
     // handle response
   }
@@ -292,7 +309,12 @@ import { BoltPublicAPI } from "Bolt-Public-API";
 ### Response
 
 **Promise<[operations.AccountGetResponse](../../models/operations/accountgetresponse.md)>**
+### Errors
 
+| Error Object     | Status Code      | Content Type     |
+| ---------------- | ---------------- | ---------------- |
+| errors.ErrorT    | 4XX              | application/json |
+| errors.SDKError  | 400-600          | */*              |
 
 ## updateAddress
 
@@ -334,7 +356,6 @@ import { CountryCode } from "Bolt-Public-API/dist/sdk/models/shared";
     id: "D4g3h5tBuVYK9",
   });
 
-
   if (res.statusCode == 200) {
     // handle response
   }
@@ -352,4 +373,8 @@ import { CountryCode } from "Bolt-Public-API/dist/sdk/models/shared";
 ### Response
 
 **Promise<[operations.AccountAddressEditResponse](../../models/operations/accountaddresseditresponse.md)>**
+### Errors
 
+| Error Object    | Status Code     | Content Type    |
+| --------------- | --------------- | --------------- |
+| errors.SDKError | 400-600         | */*             |

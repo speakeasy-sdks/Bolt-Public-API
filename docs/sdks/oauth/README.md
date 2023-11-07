@@ -40,7 +40,6 @@ import { GrantType, Scope } from "Bolt-Public-API/dist/sdk/models/shared";
     ],
   });
 
-
   if (res.statusCode == 200) {
     // handle response
   }
@@ -58,4 +57,9 @@ import { GrantType, Scope } from "Bolt-Public-API/dist/sdk/models/shared";
 ### Response
 
 **Promise<[operations.OauthGetTokenResponse](../../models/operations/oauthgettokenresponse.md)>**
+### Errors
 
+| Error Object     | Status Code      | Content Type     |
+| ---------------- | ---------------- | ---------------- |
+| errors.ErrorT    | 4XX              | application/json |
+| errors.SDKError  | 400-600          | */*              |

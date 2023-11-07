@@ -87,7 +87,6 @@ const operationSecurity: GuestPaymentsInitializeSecurity = {
     },
   }, operationSecurity);
 
-
   if (res.statusCode == 200) {
     // handle response
   }
@@ -106,7 +105,12 @@ const operationSecurity: GuestPaymentsInitializeSecurity = {
 ### Response
 
 **Promise<[operations.GuestPaymentsInitializeResponse](../../models/operations/guestpaymentsinitializeresponse.md)>**
+### Errors
 
+| Error Object     | Status Code      | Content Type     |
+| ---------------- | ---------------- | ---------------- |
+| errors.ErrorT    | 4XX              | application/json |
+| errors.SDKError  | 400-600          | */*              |
 
 ## performAction
 
@@ -134,7 +138,6 @@ const operationSecurity: GuestPaymentsActionSecurity = {
     },
   }, operationSecurity);
 
-
   if (res.statusCode == 200) {
     // handle response
   }
@@ -153,7 +156,12 @@ const operationSecurity: GuestPaymentsActionSecurity = {
 ### Response
 
 **Promise<[operations.GuestPaymentsActionResponse](../../models/operations/guestpaymentsactionresponse.md)>**
+### Errors
 
+| Error Object     | Status Code      | Content Type     |
+| ---------------- | ---------------- | ---------------- |
+| errors.ErrorT    | 4XX              | application/json |
+| errors.SDKError  | 400-600          | */*              |
 
 ## update
 
@@ -227,7 +235,6 @@ const operationSecurity: GuestPaymentsUpdateSecurity = {
     },
   }, operationSecurity);
 
-
   if (res.statusCode == 200) {
     // handle response
   }
@@ -246,4 +253,9 @@ const operationSecurity: GuestPaymentsUpdateSecurity = {
 ### Response
 
 **Promise<[operations.GuestPaymentsUpdateResponse](../../models/operations/guestpaymentsupdateresponse.md)>**
+### Errors
 
+| Error Object     | Status Code      | Content Type     |
+| ---------------- | ---------------- | ---------------- |
+| errors.ErrorT    | 4XX              | application/json |
+| errors.SDKError  | 400-600          | */*              |
