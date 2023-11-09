@@ -1,5 +1,5 @@
 # OAuth
-(*.oAuth*)
+(*oAuth*)
 
 ## Overview
 
@@ -48,15 +48,15 @@ import { GrantType, Scope } from "Bolt-Public-API/dist/sdk/models/shared";
 
 ### Parameters
 
-| Parameter                                                                    | Type                                                                         | Required                                                                     | Description                                                                  |
-| ---------------------------------------------------------------------------- | ---------------------------------------------------------------------------- | ---------------------------------------------------------------------------- | ---------------------------------------------------------------------------- |
-| `request`                                                                    | [shared.GetAccessTokenRequest](../../models/shared/getaccesstokenrequest.md) | :heavy_check_mark:                                                           | The request object to use for the request.                                   |
-| `config`                                                                     | [AxiosRequestConfig](https://axios-http.com/docs/req_config)                 | :heavy_minus_sign:                                                           | Available config options for making requests.                                |
+| Parameter                                                                        | Type                                                                             | Required                                                                         | Description                                                                      |
+| -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- |
+| `request`                                                                        | [shared.GetAccessTokenRequest](../../sdk/models/shared/getaccesstokenrequest.md) | :heavy_check_mark:                                                               | The request object to use for the request.                                       |
+| `config`                                                                         | [AxiosRequestConfig](https://axios-http.com/docs/req_config)                     | :heavy_minus_sign:                                                               | Available config options for making requests.                                    |
 
 
 ### Response
 
-**Promise<[operations.OauthGetTokenResponse](../../models/operations/oauthgettokenresponse.md)>**
+**Promise<[operations.OauthGetTokenResponse](../../sdk/models/operations/oauthgettokenresponse.md)>**
 ### Errors
 
 | Error Object     | Status Code      | Content Type     |

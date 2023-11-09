@@ -263,7 +263,7 @@ export enum CountryCode {
 /**
  * A physical address.
  */
-export class AddressListingInput extends SpeakeasyBase {
+export class AddressListing extends SpeakeasyBase {
     /**
      * The company associated with this address.
      */
@@ -291,6 +291,13 @@ export class AddressListingInput extends SpeakeasyBase {
     @SpeakeasyMetadata()
     @Expose({ name: "first_name" })
     firstName: string;
+
+    /**
+     * The address's unique identifier.
+     */
+    @SpeakeasyMetadata()
+    @Expose({ name: "id" })
+    id: string;
 
     /**
      * Whether or not this is the default address saved.
@@ -352,7 +359,7 @@ export class AddressListingInput extends SpeakeasyBase {
 /**
  * A physical address.
  */
-export class AddressListing extends SpeakeasyBase {
+export class AddressListingInput extends SpeakeasyBase {
     /**
      * The company associated with this address.
      */
@@ -380,13 +387,6 @@ export class AddressListing extends SpeakeasyBase {
     @SpeakeasyMetadata()
     @Expose({ name: "first_name" })
     firstName: string;
-
-    /**
-     * The address's unique identifier.
-     */
-    @SpeakeasyMetadata()
-    @Expose({ name: "id" })
-    id: string;
 
     /**
      * Whether or not this is the default address saved.

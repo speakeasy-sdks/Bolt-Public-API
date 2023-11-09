@@ -44,7 +44,7 @@ export class Testing {
             this.sdkConfiguration.serverURL,
             this.sdkConfiguration.serverDefaults
         );
-        const url: string = baseURL.replace(/\/$/, "") + "/testing/accounts";
+        const operationUrl: string = baseURL.replace(/\/$/, "") + "/testing/accounts";
 
         let [reqBodyHeaders, reqBody]: [object, any] = [{}, null];
 
@@ -77,7 +77,7 @@ export class Testing {
 
         const httpRes: AxiosResponse = await client.request({
             validateStatus: () => true,
-            url: url,
+            url: operationUrl,
             method: "post",
             headers: headers,
             responseType: "arraybuffer",
@@ -158,7 +158,7 @@ export class Testing {
             this.sdkConfiguration.serverURL,
             this.sdkConfiguration.serverDefaults
         );
-        const url: string = baseURL.replace(/\/$/, "") + "/testing/credit-cards";
+        const operationUrl: string = baseURL.replace(/\/$/, "") + "/testing/credit-cards";
         const client: AxiosInstance = this.sdkConfiguration.defaultClient;
         if (!(security instanceof utils.SpeakeasyBase)) {
             security = new operations.TestingCreditCardGetSecurity(security);
@@ -171,7 +171,7 @@ export class Testing {
 
         const httpRes: AxiosResponse = await client.request({
             validateStatus: () => true,
-            url: url,
+            url: operationUrl,
             method: "get",
             headers: headers,
             responseType: "arraybuffer",

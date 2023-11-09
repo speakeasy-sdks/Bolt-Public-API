@@ -3,7 +3,7 @@
  */
 
 export * from "./account";
-export * from "./accounttestcreationdata";
+export * from "./accounttestcreationdataoutput";
 export * from "./addresslisting";
 export * from "./amount";
 export * from "./cart";

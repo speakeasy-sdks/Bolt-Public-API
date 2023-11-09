@@ -36,7 +36,7 @@ export class LoggedIn {
             this.sdkConfiguration.serverURL,
             this.sdkConfiguration.serverDefaults
         );
-        const url: string = baseURL.replace(/\/$/, "") + "/payments";
+        const operationUrl: string = baseURL.replace(/\/$/, "") + "/payments";
 
         let [reqBodyHeaders, reqBody]: [object, any] = [{}, null];
 
@@ -73,7 +73,7 @@ export class LoggedIn {
 
         const httpRes: AxiosResponse = await client.request({
             validateStatus: () => true,
-            url: url,
+            url: operationUrl,
             method: "post",
             headers: headers,
             responseType: "arraybuffer",
@@ -154,7 +154,7 @@ export class LoggedIn {
             this.sdkConfiguration.serverURL,
             this.sdkConfiguration.serverDefaults
         );
-        const url: string = utils.generateURL(baseURL, "/payments/{id}", req);
+        const operationUrl: string = utils.generateURL(baseURL, "/payments/{id}", req);
 
         let [reqBodyHeaders, reqBody]: [object, any] = [{}, null];
 
@@ -191,7 +191,7 @@ export class LoggedIn {
 
         const httpRes: AxiosResponse = await client.request({
             validateStatus: () => true,
-            url: url,
+            url: operationUrl,
             method: "post",
             headers: headers,
             responseType: "arraybuffer",
@@ -271,7 +271,7 @@ export class LoggedIn {
             this.sdkConfiguration.serverURL,
             this.sdkConfiguration.serverDefaults
         );
-        const url: string = utils.generateURL(baseURL, "/payments/{id}", req);
+        const operationUrl: string = utils.generateURL(baseURL, "/payments/{id}", req);
 
         let [reqBodyHeaders, reqBody]: [object, any] = [{}, null];
 
@@ -308,7 +308,7 @@ export class LoggedIn {
 
         const httpRes: AxiosResponse = await client.request({
             validateStatus: () => true,
-            url: url,
+            url: operationUrl,
             method: "patch",
             headers: headers,
             responseType: "arraybuffer",

@@ -62,9 +62,9 @@ export class SDKConfiguration {
     serverDefaults: any;
     language = "typescript";
     openapiDocVersion = "3.0.1";
-    sdkVersion = "0.17.0";
-    genVersion = "2.183.0";
-    userAgent = "speakeasy-sdk/typescript 0.17.0 2.183.0 3.0.1 Bolt-Public-API";
+    sdkVersion = "0.18.0";
+    genVersion = "2.185.0";
+    userAgent = "speakeasy-sdk/typescript 0.18.0 2.185.0 3.0.1 Bolt-Public-API";
     retryConfig?: utils.RetryConfig;
     public constructor(init?: Partial<SDKConfiguration>) {
         Object.assign(this, init);
@@ -121,7 +121,7 @@ export class BoltPublicAPI {
             defaults = serverDefaults[serverIdx];
         }
 
-        const defaultClient = props?.defaultClient ?? axios.create({ baseURL: serverURL });
+        const defaultClient = props?.defaultClient ?? axios.create();
         this.sdkConfiguration = new SDKConfiguration({
             defaultClient: defaultClient,
             security: props?.security,
