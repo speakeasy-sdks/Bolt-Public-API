@@ -1,6 +1,4 @@
 <!-- Start SDK Example Usage -->
-
-
 ```typescript
 import { BoltPublicAPI } from "Bolt-Public-API";
 import { CountryCode } from "Bolt-Public-API/dist/sdk/models/shared";
