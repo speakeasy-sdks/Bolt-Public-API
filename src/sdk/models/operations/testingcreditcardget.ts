@@ -34,5 +34,5 @@ export class TestingCreditCardGetResponse extends SpeakeasyBase {
      * Successfully generated test credit card details
      */
     @SpeakeasyMetadata()
-    creditCard?: shared.CreditCard;
+    testCreditCard?: shared.TestCreditCard;
 }

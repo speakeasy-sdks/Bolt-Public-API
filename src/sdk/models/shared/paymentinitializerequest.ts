@@ -4,7 +4,6 @@
 
 import { SpeakeasyBase, SpeakeasyMetadata } from "../../../internal/utils";
 import { Cart } from "./cart";
-import { PaymentMethodReference } from "./paymentmethodreference";
 import { Expose, Type } from "class-transformer";
 
 export class PaymentInitializeRequest extends SpeakeasyBase {
@@ -15,6 +14,5 @@ export class PaymentInitializeRequest extends SpeakeasyBase {
 
     @SpeakeasyMetadata()
     @Expose({ name: "payment_method" })
-    @Type(() => PaymentMethodReference)
-    paymentMethod: PaymentMethodReference;
+    paymentMethod: any;
 }

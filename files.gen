@@ -54,11 +54,10 @@ src/sdk/models/shared/cartdiscount.ts
 src/sdk/models/shared/paymentactionrequest.ts
 src/sdk/models/shared/paymentupdaterequest.ts
 src/sdk/models/shared/paymentinitializerequest.ts
-src/sdk/models/shared/paymentmethodreference.ts
 src/sdk/models/shared/getaccesstokenresponse.ts
 src/sdk/models/shared/getaccesstokenrequest.ts
 src/sdk/models/shared/accounttestcreationdataoutput.ts
-src/sdk/models/shared/creditcard.ts
+src/sdk/models/shared/testcreditcard.ts
 src/sdk/models/shared/security.ts
 src/sdk/models/errors/error.ts
 src/sdk/models/errors/index.ts
@@ -119,8 +118,6 @@ docs/sdk/models/shared/paymentactionrequesttag.md
 docs/sdk/models/shared/paymentactionrequest.md
 docs/sdk/models/shared/paymentupdaterequest.md
 docs/sdk/models/shared/paymentinitializerequest.md
-docs/sdk/models/shared/paymentmethodreferencetag.md
-docs/sdk/models/shared/paymentmethodreference.md
 docs/sdk/models/shared/refreshtokenscope.md
 docs/sdk/models/shared/getaccesstokenresponsescope.md
 docs/sdk/models/shared/getaccesstokenresponse.md
@@ -132,7 +129,7 @@ docs/sdk/models/shared/phonestate.md
 docs/sdk/models/shared/accounttestcreationdataoutput.md
 docs/sdk/models/shared/accounttestcreationdata.md
 docs/sdk/models/shared/network.md
-docs/sdk/models/shared/creditcard.md
+docs/sdk/models/shared/testcreditcard.md
 docs/sdk/models/shared/security.md
 docs/sdk/models/errors/dottag.md
 docs/sdk/models/errors/errort.md

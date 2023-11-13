@@ -3,7 +3,7 @@
  */
 
 import { SpeakeasyBase, SpeakeasyMetadata } from "../../../internal/utils";
-import { Expose } from "class-transformer";
+import { Expose, Transform } from "class-transformer";
 
 /**
  * The credit card's network.
@@ -19,13 +19,21 @@ export enum Network {
     Citiplcc = "citiplcc",
 }
 
-export class CreditCard extends SpeakeasyBase {
+export class TestCreditCard extends SpeakeasyBase {
     /**
-     * The expiration date, in YYYY-MM format.
+     * The Bank Identification Number (BIN). This is typically the first 4 to 6 digits of the account number.
+     */
+    @SpeakeasyMetadata()
+    @Expose({ name: "bin" })
+    bin: string;
+
+    /**
+     * The token's expiration date. Tokens used past their expiration will be rejected.
      */
     @SpeakeasyMetadata()
     @Expose({ name: "expiration" })
-    expiration: string;
+    @Transform(({ value }) => new Date(value), { toClassOnly: true })
+    expiration: Date;
 
     /**
      * The account number's last four digits.
@@ -40,4 +48,11 @@ export class CreditCard extends SpeakeasyBase {
     @SpeakeasyMetadata()
     @Expose({ name: "network" })
     network: Network;
+
+    /**
+     * The Bolt token associated with the credit card.
+     */
+    @SpeakeasyMetadata()
+    @Expose({ name: "token" })
+    token: string;
 }

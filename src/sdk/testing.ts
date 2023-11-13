@@ -194,7 +194,10 @@ export class Testing {
         switch (true) {
             case httpRes?.status == 200:
                 if (utils.matchContentType(responseContentType, `application/json`)) {
-                    res.creditCard = utils.objectToClass(JSON.parse(decodedRes), shared.CreditCard);
+                    res.testCreditCard = utils.objectToClass(
+                        JSON.parse(decodedRes),
+                        shared.TestCreditCard
+                    );
                 } else {
                     throw new errors.SDKError(
                         "unknown content-type received: " + responseContentType,

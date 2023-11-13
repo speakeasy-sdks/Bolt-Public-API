@@ -17,7 +17,7 @@ Bolt when it is updated or finalized for logged in shoppers.
 
 ```typescript
 import { BoltPublicAPI } from "Bolt-Public-API";
-import { Currency, PaymentMethodReferenceTag } from "Bolt-Public-API/dist/sdk/models/shared";
+import { Currency } from "Bolt-Public-API/dist/sdk/models/shared";
 
 (async() => {
   const sdk = new BoltPublicAPI({
@@ -77,10 +77,7 @@ import { Currency, PaymentMethodReferenceTag } from "Bolt-Public-API/dist/sdk/mo
           units: 900,
         },
       },
-      paymentMethod: {
-        dotTag: PaymentMethodReferenceTag.Id,
-        id: "id",
-      },
+      paymentMethod: "string",
     },
   });
 
