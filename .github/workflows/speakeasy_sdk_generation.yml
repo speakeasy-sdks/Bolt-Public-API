@@ -22,9 +22,8 @@ jobs:
         - typescript
       mode: direct
       openapi_docs: |
-        - ./openapi.yaml
+        - https://api-docs.bolt.com/api-bundle.yaml
       speakeasy_version: latest
-      # token: ${{ secrets.SPEAKEASY_BOT_TOKEN }}
     secrets:
-      github_access_token: ${{ secrets.SPEAKEASY_BOT_TOKEN }}
+      github_access_token: ${{ secrets.GITHUB_TOKEN }}
       speakeasy_api_key: ${{ secrets.SPEAKEASY_API_KEY }}
