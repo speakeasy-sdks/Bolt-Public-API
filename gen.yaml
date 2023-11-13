@@ -5,12 +5,18 @@ management:
   speakeasyVersion: 1.118.3
   generationVersion: 2.187.7
 generation:
-  comments: {}
+  comments:
+    disableComments: false
+    omitDescriptionIfSummaryPresent: false
   devContainers:
     enabled: true
     schemaPath: ./openapi.yaml
-  sdkClassName: Bolt-Public-API
+  baseServerURL: ""
+  flattenGlobalSecurity: true
   repoURL: https://github.com/speakeasy-sdks/Bolt-Public-API.git
+  sdkClassName: Bolt-Public-API
+  singleTagPerOp: false
+  tagNamespacingDisabled: false
   usageSnippets:
     optionalPropertyRendering: withExample
 features:
