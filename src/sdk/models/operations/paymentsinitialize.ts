@@ -34,7 +34,7 @@ export class PaymentsInitializeResponse extends SpeakeasyBase {
      * Raw HTTP response; suitable for custom response parsing
      */
     @SpeakeasyMetadata()
-    rawResponse?: AxiosResponse;
+    rawResponse: AxiosResponse;
 
     /**
      * The payment was successfully initialized, and was either immediately finalized or is pending
