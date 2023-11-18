@@ -14,6 +14,9 @@ export enum DotTag {
     NotFound = "not_found",
 }
 
+/**
+ * An error has occurred, and further details are contained in the response
+ */
 export class ErrorT extends Error {
     /**
      * The type of error returned

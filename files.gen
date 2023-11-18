@@ -114,7 +114,7 @@ docs/sdk/models/shared/amount.md
 docs/sdk/models/shared/cartshipment.md
 docs/sdk/models/shared/cartitem.md
 docs/sdk/models/shared/cartdiscount.md
-docs/sdk/models/shared/paymentactionrequesttag.md
+docs/sdk/models/shared/dottag.md
 docs/sdk/models/shared/paymentactionrequest.md
 docs/sdk/models/shared/paymentupdaterequest.md
 docs/sdk/models/shared/paymentinitializerequest.md

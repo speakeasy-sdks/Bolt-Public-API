@@ -122,7 +122,7 @@ Perform an irreversible action on a pending guest payment, such as finalizing it
 ```typescript
 import { BoltPublicAPI } from "Bolt-Public-API";
 import { GuestPaymentsActionSecurity } from "Bolt-Public-API/dist/sdk/models/operations";
-import { PaymentActionRequestTag } from "Bolt-Public-API/dist/sdk/models/shared";
+import { DotTag } from "Bolt-Public-API/dist/sdk/models/shared";
 
 (async() => {
   const sdk = new BoltPublicAPI();
@@ -134,7 +134,7 @@ const operationSecurity: GuestPaymentsActionSecurity = {
     xPublishableKey: "string",
     id: "iKv7t5bgt1gg",
     paymentActionRequest: {
-      dotTag: PaymentActionRequestTag.Finalize,
+      dotTag: DotTag.Finalize,
     },
   }, operationSecurity);
 

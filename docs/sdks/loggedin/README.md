@@ -114,7 +114,7 @@ Perform an irreversible action on a pending payment, such as finalizing it.
 
 ```typescript
 import { BoltPublicAPI } from "Bolt-Public-API";
-import { PaymentActionRequestTag } from "Bolt-Public-API/dist/sdk/models/shared";
+import { DotTag } from "Bolt-Public-API/dist/sdk/models/shared";
 
 (async() => {
   const sdk = new BoltPublicAPI({
@@ -128,7 +128,7 @@ import { PaymentActionRequestTag } from "Bolt-Public-API/dist/sdk/models/shared"
     xPublishableKey: "string",
     id: "iKv7t5bgt1gg",
     paymentActionRequest: {
-      dotTag: PaymentActionRequestTag.Finalize,
+      dotTag: DotTag.Finalize,
     },
   });
 
