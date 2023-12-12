@@ -20,10 +20,10 @@ import { BoltPublicAPI } from "Bolt-Public-API";
 import { GuestPaymentsInitializeSecurity } from "Bolt-Public-API/dist/sdk/models/operations";
 import { Currency } from "Bolt-Public-API/dist/sdk/models/shared";
 
-(async() => {
+async function run() {
   const sdk = new BoltPublicAPI();
 const operationSecurity: GuestPaymentsInitializeSecurity = {
-  apiKey: "",
+  apiKey: "<YOUR_API_KEY_HERE>",
 };
 
   const res = await sdk.payments.guest.initialize({
@@ -90,7 +90,9 @@ const operationSecurity: GuestPaymentsInitializeSecurity = {
   if (res.statusCode == 200) {
     // handle response
   }
-})();
+}
+
+run();
 ```
 
 ### Parameters
@@ -124,10 +126,10 @@ import { BoltPublicAPI } from "Bolt-Public-API";
 import { GuestPaymentsActionSecurity } from "Bolt-Public-API/dist/sdk/models/operations";
 import { DotTag } from "Bolt-Public-API/dist/sdk/models/shared";
 
-(async() => {
+async function run() {
   const sdk = new BoltPublicAPI();
 const operationSecurity: GuestPaymentsActionSecurity = {
-  apiKey: "",
+  apiKey: "<YOUR_API_KEY_HERE>",
 };
 
   const res = await sdk.payments.guest.performAction({
@@ -141,7 +143,9 @@ const operationSecurity: GuestPaymentsActionSecurity = {
   if (res.statusCode == 200) {
     // handle response
   }
-})();
+}
+
+run();
 ```
 
 ### Parameters
@@ -175,10 +179,10 @@ import { BoltPublicAPI } from "Bolt-Public-API";
 import { GuestPaymentsUpdateSecurity } from "Bolt-Public-API/dist/sdk/models/operations";
 import { Currency } from "Bolt-Public-API/dist/sdk/models/shared";
 
-(async() => {
+async function run() {
   const sdk = new BoltPublicAPI();
 const operationSecurity: GuestPaymentsUpdateSecurity = {
-  apiKey: "",
+  apiKey: "<YOUR_API_KEY_HERE>",
 };
 
   const res = await sdk.payments.guest.update({
@@ -238,7 +242,9 @@ const operationSecurity: GuestPaymentsUpdateSecurity = {
   if (res.statusCode == 200) {
     // handle response
   }
-})();
+}
+
+run();
 ```
 
 ### Parameters

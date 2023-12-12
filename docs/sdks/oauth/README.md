@@ -22,11 +22,10 @@ Retrieve a new or refresh an existing OAuth token.
 import { BoltPublicAPI } from "Bolt-Public-API";
 import { GrantType, Scope } from "Bolt-Public-API/dist/sdk/models/shared";
 
-(async() => {
+async function run() {
   const sdk = new BoltPublicAPI({
     security: {
-      apiKey: "",
-      oauth: "",
+      apiKey: "<YOUR_API_KEY_HERE>",
     },
   });
 
@@ -43,7 +42,9 @@ import { GrantType, Scope } from "Bolt-Public-API/dist/sdk/models/shared";
   if (res.statusCode == 200) {
     // handle response
   }
-})();
+}
+
+run();
 ```
 
 ### Parameters

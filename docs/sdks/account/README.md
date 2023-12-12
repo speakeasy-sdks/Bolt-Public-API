@@ -27,11 +27,10 @@ Add an address to the shopper's account
 import { BoltPublicAPI } from "Bolt-Public-API";
 import { CountryCode } from "Bolt-Public-API/dist/sdk/models/shared";
 
-(async() => {
+async function run() {
   const sdk = new BoltPublicAPI({
     security: {
-      apiKey: "",
-      oauth: "",
+      apiKey: "<YOUR_API_KEY_HERE>",
     },
   });
 
@@ -56,7 +55,9 @@ import { CountryCode } from "Bolt-Public-API/dist/sdk/models/shared";
   if (res.statusCode == 200) {
     // handle response
   }
-})();
+}
+
+run();
 ```
 
 ### Parameters
@@ -89,11 +90,10 @@ which is documented in [Install the Bolt Tokenizer](https://help.bolt.com/develo
 ```typescript
 import { BoltPublicAPI } from "Bolt-Public-API";
 
-(async() => {
+async function run() {
   const sdk = new BoltPublicAPI({
     security: {
-      apiKey: "",
-      oauth: "",
+      apiKey: "<YOUR_API_KEY_HERE>",
     },
   });
 
@@ -105,7 +105,9 @@ import { BoltPublicAPI } from "Bolt-Public-API";
   if (res.statusCode == 200) {
     // handle response
   }
-})();
+}
+
+run();
 ```
 
 ### Parameters
@@ -136,11 +138,10 @@ shipments that are associated with it.
 ```typescript
 import { BoltPublicAPI } from "Bolt-Public-API";
 
-(async() => {
+async function run() {
   const sdk = new BoltPublicAPI({
     security: {
-      apiKey: "",
-      oauth: "",
+      apiKey: "<YOUR_API_KEY_HERE>",
     },
   });
 
@@ -152,7 +153,9 @@ import { BoltPublicAPI } from "Bolt-Public-API";
   if (res.statusCode == 200) {
     // handle response
   }
-})();
+}
+
+run();
 ```
 
 ### Parameters
@@ -184,11 +187,10 @@ orders that are associated with it.
 ```typescript
 import { BoltPublicAPI } from "Bolt-Public-API";
 
-(async() => {
+async function run() {
   const sdk = new BoltPublicAPI({
     security: {
-      apiKey: "",
-      oauth: "",
+      apiKey: "<YOUR_API_KEY_HERE>",
     },
   });
 
@@ -200,7 +202,9 @@ import { BoltPublicAPI } from "Bolt-Public-API";
   if (res.statusCode == 200) {
     // handle response
   }
-})();
+}
+
+run();
 ```
 
 ### Parameters
@@ -231,11 +235,10 @@ Determine whether or not an identifier is associated with an existing Bolt accou
 import { BoltPublicAPI } from "Bolt-Public-API";
 import { IdentifierType } from "Bolt-Public-API/dist/sdk/models/shared";
 
-(async() => {
+async function run() {
   const sdk = new BoltPublicAPI({
     security: {
-      apiKey: "",
-      oauth: "",
+      apiKey: "<YOUR_API_KEY_HERE>",
     },
   });
 
@@ -250,7 +253,9 @@ import { IdentifierType } from "Bolt-Public-API/dist/sdk/models/shared";
   if (res.statusCode == 200) {
     // handle response
   }
-})();
+}
+
+run();
 ```
 
 ### Parameters
@@ -280,11 +285,10 @@ Retrieve a shopper's account details, such as addresses and payment information
 ```typescript
 import { BoltPublicAPI } from "Bolt-Public-API";
 
-(async() => {
+async function run() {
   const sdk = new BoltPublicAPI({
     security: {
-      apiKey: "",
-      oauth: "",
+      apiKey: "<YOUR_API_KEY_HERE>",
     },
   });
 
@@ -295,7 +299,9 @@ import { BoltPublicAPI } from "Bolt-Public-API";
   if (res.statusCode == 200) {
     // handle response
   }
-})();
+}
+
+run();
 ```
 
 ### Parameters
@@ -329,11 +335,10 @@ shipments.
 import { BoltPublicAPI } from "Bolt-Public-API";
 import { CountryCode } from "Bolt-Public-API/dist/sdk/models/shared";
 
-(async() => {
+async function run() {
   const sdk = new BoltPublicAPI({
     security: {
-      apiKey: "",
-      oauth: "",
+      apiKey: "<YOUR_API_KEY_HERE>",
     },
   });
 
@@ -359,7 +364,9 @@ import { CountryCode } from "Bolt-Public-API/dist/sdk/models/shared";
   if (res.statusCode == 200) {
     // handle response
   }
-})();
+}
+
+run();
 ```
 
 ### Parameters

@@ -19,11 +19,10 @@ Bolt when it is updated or finalized for logged in shoppers.
 import { BoltPublicAPI } from "Bolt-Public-API";
 import { Currency } from "Bolt-Public-API/dist/sdk/models/shared";
 
-(async() => {
+async function run() {
   const sdk = new BoltPublicAPI({
     security: {
-      apiKey: "",
-      oauth: "",
+      apiKey: "<YOUR_API_KEY_HERE>",
     },
   });
 
@@ -84,7 +83,9 @@ import { Currency } from "Bolt-Public-API/dist/sdk/models/shared";
   if (res.statusCode == 200) {
     // handle response
   }
-})();
+}
+
+run();
 ```
 
 ### Parameters
@@ -116,11 +117,10 @@ Perform an irreversible action on a pending payment, such as finalizing it.
 import { BoltPublicAPI } from "Bolt-Public-API";
 import { DotTag } from "Bolt-Public-API/dist/sdk/models/shared";
 
-(async() => {
+async function run() {
   const sdk = new BoltPublicAPI({
     security: {
-      apiKey: "",
-      oauth: "",
+      apiKey: "<YOUR_API_KEY_HERE>",
     },
   });
 
@@ -135,7 +135,9 @@ import { DotTag } from "Bolt-Public-API/dist/sdk/models/shared";
   if (res.statusCode == 200) {
     // handle response
   }
-})();
+}
+
+run();
 ```
 
 ### Parameters
@@ -167,11 +169,10 @@ Update a pending payment
 import { BoltPublicAPI } from "Bolt-Public-API";
 import { Currency } from "Bolt-Public-API/dist/sdk/models/shared";
 
-(async() => {
+async function run() {
   const sdk = new BoltPublicAPI({
     security: {
-      apiKey: "",
-      oauth: "",
+      apiKey: "<YOUR_API_KEY_HERE>",
     },
   });
 
@@ -232,7 +233,9 @@ import { Currency } from "Bolt-Public-API/dist/sdk/models/shared";
   if (res.statusCode == 200) {
     // handle response
   }
-})();
+}
+
+run();
 ```
 
 ### Parameters

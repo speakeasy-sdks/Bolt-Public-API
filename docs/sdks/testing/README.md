@@ -24,10 +24,10 @@ import { BoltPublicAPI } from "Bolt-Public-API";
 import { TestingAccountCreateSecurity } from "Bolt-Public-API/dist/sdk/models/operations";
 import { EmailState, PhoneState } from "Bolt-Public-API/dist/sdk/models/shared";
 
-(async() => {
+async function run() {
   const sdk = new BoltPublicAPI();
 const operationSecurity: TestingAccountCreateSecurity = {
-  apiKey: "",
+  apiKey: "<YOUR_API_KEY_HERE>",
 };
 
   const res = await sdk.testing.createAccount({
@@ -43,7 +43,9 @@ const operationSecurity: TestingAccountCreateSecurity = {
   if (res.statusCode == 200) {
     // handle response
   }
-})();
+}
+
+run();
 ```
 
 ### Parameters
@@ -77,10 +79,10 @@ generated against the `4111 1111 1111 1004` test card.
 import { BoltPublicAPI } from "Bolt-Public-API";
 import { TestingCreditCardGetSecurity } from "Bolt-Public-API/dist/sdk/models/operations";
 
-(async() => {
+async function run() {
   const sdk = new BoltPublicAPI();
 const operationSecurity: TestingCreditCardGetSecurity = {
-  apiKey: "",
+  apiKey: "<YOUR_API_KEY_HERE>",
 };
 
   const res = await sdk.testing.getCreditCard(operationSecurity);
@@ -88,7 +90,9 @@ const operationSecurity: TestingCreditCardGetSecurity = {
   if (res.statusCode == 200) {
     // handle response
   }
-})();
+}
+
+run();
 ```
 
 ### Parameters

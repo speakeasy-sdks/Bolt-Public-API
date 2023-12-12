@@ -63,7 +63,6 @@ src/sdk/models/errors/error.ts
 src/sdk/models/errors/index.ts
 src/sdk/models/operations/index.ts
 src/sdk/models/shared/index.ts
-USAGE.md
 docs/sdk/models/operations/accountaddresscreaterequest.md
 docs/sdk/models/operations/accountaddresscreateresponse.md
 docs/sdk/models/operations/accountaddpaymentmethodrequest.md
@@ -140,6 +139,7 @@ docs/sdks/guest/README.md
 docs/sdks/loggedin/README.md
 docs/sdks/oauth/README.md
 docs/sdks/testing/README.md
+USAGE.md
 .gitattributes
 .devcontainer/README.md
 .devcontainer/devcontainer.json

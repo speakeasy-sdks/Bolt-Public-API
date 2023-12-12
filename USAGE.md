@@ -1,13 +1,12 @@
-<!-- Start SDK Example Usage -->
+<!-- Start SDK Example Usage [usage] -->
 ```typescript
 import { BoltPublicAPI } from "Bolt-Public-API";
 import { CountryCode } from "Bolt-Public-API/dist/sdk/models/shared";
 
-(async () => {
+async function run() {
     const sdk = new BoltPublicAPI({
         security: {
-            apiKey: "",
-            oauth: "",
+            apiKey: "<YOUR_API_KEY_HERE>",
         },
     });
 
@@ -32,7 +31,9 @@ import { CountryCode } from "Bolt-Public-API/dist/sdk/models/shared";
     if (res.statusCode == 200) {
         // handle response
     }
-})();
+}
+
+run();
 
 ```
-<!-- End SDK Example Usage -->
+<!-- End SDK Example Usage [usage] -->

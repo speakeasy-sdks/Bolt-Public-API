@@ -6,7 +6,7 @@
     
 </div>
 
-<!-- Start SDK Installation -->
+<!-- Start SDK Installation [installation] -->
 ## SDK Installation
 
 ### NPM
@@ -20,21 +20,21 @@ npm add https://github.com/speakeasy-sdks/Bolt-Public-API
 ```bash
 yarn add https://github.com/speakeasy-sdks/Bolt-Public-API
 ```
-<!-- End SDK Installation -->
+<!-- End SDK Installation [installation] -->
 
+<!-- Start SDK Example Usage [usage] -->
 ## SDK Example Usage
-<!-- Start SDK Example Usage -->
+
 ### Example
 
 ```typescript
 import { BoltPublicAPI } from "Bolt-Public-API";
 import { CountryCode } from "Bolt-Public-API/dist/sdk/models/shared";
 
-(async () => {
+async function run() {
     const sdk = new BoltPublicAPI({
         security: {
-            apiKey: "",
-            oauth: "",
+            apiKey: "<YOUR_API_KEY_HERE>",
         },
     });
 
@@ -59,14 +59,15 @@ import { CountryCode } from "Bolt-Public-API/dist/sdk/models/shared";
     if (res.statusCode == 200) {
         // handle response
     }
-})();
+}
+
+run();
 
 ```
-<!-- End SDK Example Usage -->
+<!-- End SDK Example Usage [usage] -->
 
-<!-- Start SDK Available Operations -->
+<!-- Start Available Resources and Operations [operations] -->
 ## Available Resources and Operations
-
 
 ### [account](docs/sdks/account/README.md)
 
@@ -99,33 +100,11 @@ import { CountryCode } from "Bolt-Public-API/dist/sdk/models/shared";
 
 * [createAccount](docs/sdks/testing/README.md#createaccount) - Create a test account
 * [getCreditCard](docs/sdks/testing/README.md#getcreditcard) - Retrieve a test credit card, including its token
-<!-- End SDK Available Operations -->
-
-<!-- Start Dev Containers -->
-# Dev Containers
-<div align="left">
-    <a href="https://codespaces.new/speakeasy-sdks/Bolt-Public-API.git/tree/main"><img src="https://github.com/codespaces/badge.svg" /></a>
-    
-</div>
-
-Experience our SDK in an enhanced sandbox environment. Try it now in **GitHub Codespaces**!
-
-* [Explore Dev Containers](.devcontainer/README.md)
-<!-- End Dev Containers -->
-
-<!-- Start Pagination -->
-# Pagination
-
-Some of the endpoints in this SDK support pagination. To use pagination, you make your SDK calls as usual, but the
-returned response object will have a `next` method that can be called to pull down the next group of results. If the
-return value of `next` is `null`, then there are no more pages to be fetched.
-
-Here's an example of one such pagination call:
-<!-- End Pagination -->
+<!-- End Available Resources and Operations [operations] -->
 
 
 
-<!-- Start Error Handling -->
+<!-- Start Error Handling [errors] -->
 ## Error Handling
 
 Handling errors in this SDK should largely match your expectations.  All operations return a response object or throw an error.  If Error objects are specified in your OpenAPI Spec, the SDK will throw the appropriate Error type.
@@ -140,46 +119,51 @@ Example
 ```typescript
 import { BoltPublicAPI } from "Bolt-Public-API";
 
-(async() => {
-  const sdk = new BoltPublicAPI({
-    security: {
-      apiKey: "",
-      oauth: "",
-    },
-  });
+async function run() {
+    const sdk = new BoltPublicAPI({
+        security: {
+            apiKey: "<YOUR_API_KEY_HERE>",
+        },
+    });
 
-  
-  let res;
-  try {
-    res = await sdk.account.deleteAddress({
-    xPublishableKey: "string",
-    id: "D4g3h5tBuVYK9",
-  });
-  } catch (e) { 
-    if (e instanceof errors.ErrorT) {
-      console.error(e) // handle exception 
-    
-  }
+    let res;
+    try {
+        res = await sdk.account.deleteAddress({
+            xPublishableKey: "string",
+            id: "D4g3h5tBuVYK9",
+        });
+    } catch (err) {
+        if (err instanceof errors.ErrorT) {
+            console.error(err); // handle exception
+            throw err;
+        } else if (err instanceof errors.SDKError) {
+            console.error(err); // handle exception
+            throw err;
+        }
+    }
 
-  if (res.statusCode == 200) {
-    // handle response
-  }
-})();
+    if (res.statusCode == 200) {
+        // handle response
+    }
+}
+
+run();
+
 ```
-<!-- End Error Handling -->
+<!-- End Error Handling [errors] -->
 
 
 
-<!-- Start Custom HTTP Client -->
+<!-- Start Custom HTTP Client [http-client] -->
 ## Custom HTTP Client
 
-The Typescript SDK makes API calls using the (axios)[https://axios-http.com/docs/intro] HTTP library.  In order to provide a convenient way to configure timeouts, cookies, proxies, custom headers, and other low-level configuration, you can initialize the SDK client with a custom `AxiosInstance` object.
+The Typescript SDK makes API calls using the [axios](https://axios-http.com/docs/intro) HTTP library.  In order to provide a convenient way to configure timeouts, cookies, proxies, custom headers, and other low-level configuration, you can initialize the SDK client with a custom `AxiosInstance` object.
 
 For example, you could specify a header for every request that your sdk makes as follows:
 
 ```typescript
-from Bolt-Public-API import BoltPublicAPI;
-import axios;
+import { Bolt-Public-API } from "BoltPublicAPI";
+import axios from "axios";
 
 const httpClient = axios.create({
     headers: {'x-custom-header': 'someValue'}
@@ -187,11 +171,11 @@ const httpClient = axios.create({
 
 const sdk = new BoltPublicAPI({defaultClient: httpClient});
 ```
-<!-- End Custom HTTP Client -->
+<!-- End Custom HTTP Client [http-client] -->
 
 
 
-<!-- Start Server Selection -->
+<!-- Start Server Selection [server] -->
 ## Server Selection
 
 ### Select Server by Index
@@ -208,12 +192,11 @@ You can override the default server globally by passing a server index to the `s
 import { BoltPublicAPI } from "Bolt-Public-API";
 import { CountryCode } from "Bolt-Public-API/dist/sdk/models/shared";
 
-(async () => {
+async function run() {
     const sdk = new BoltPublicAPI({
         serverIdx: 0,
         security: {
-            apiKey: "",
-            oauth: "",
+            apiKey: "<YOUR_API_KEY_HERE>",
         },
     });
 
@@ -238,7 +221,9 @@ import { CountryCode } from "Bolt-Public-API/dist/sdk/models/shared";
     if (res.statusCode == 200) {
         // handle response
     }
-})();
+}
+
+run();
 
 ```
 
@@ -254,12 +239,11 @@ The default server can also be overridden globally by passing a URL to the `serv
 import { BoltPublicAPI } from "Bolt-Public-API";
 import { CountryCode } from "Bolt-Public-API/dist/sdk/models/shared";
 
-(async () => {
+async function run() {
     const sdk = new BoltPublicAPI({
         serverURL: "https://{environment}.bolt.com/v3",
         security: {
-            apiKey: "",
-            oauth: "",
+            apiKey: "<YOUR_API_KEY_HERE>",
         },
     });
 
@@ -284,14 +268,16 @@ import { CountryCode } from "Bolt-Public-API/dist/sdk/models/shared";
     if (res.statusCode == 200) {
         // handle response
     }
-})();
+}
+
+run();
 
 ```
-<!-- End Server Selection -->
+<!-- End Server Selection [server] -->
 
 
 
-<!-- Start Authentication -->
+<!-- Start Authentication [security] -->
 ## Authentication
 
 ### Per-Client Security Schemes
@@ -308,11 +294,10 @@ You can set the security parameters through the `security` optional parameter wh
 import { BoltPublicAPI } from "Bolt-Public-API";
 import { CountryCode } from "Bolt-Public-API/dist/sdk/models/shared";
 
-(async () => {
+async function run() {
     const sdk = new BoltPublicAPI({
         security: {
-            apiKey: "",
-            oauth: "",
+            apiKey: "<YOUR_API_KEY_HERE>",
         },
     });
 
@@ -337,7 +322,9 @@ import { CountryCode } from "Bolt-Public-API/dist/sdk/models/shared";
     if (res.statusCode == 200) {
         // handle response
     }
-})();
+}
+
+run();
 
 ```
 
@@ -349,10 +336,10 @@ import { BoltPublicAPI } from "Bolt-Public-API";
 import { GuestPaymentsInitializeSecurity } from "Bolt-Public-API/dist/sdk/models/operations";
 import { Currency } from "Bolt-Public-API/dist/sdk/models/shared";
 
-(async () => {
+async function run() {
     const sdk = new BoltPublicAPI();
     const operationSecurity: GuestPaymentsInitializeSecurity = {
-        apiKey: "",
+        apiKey: "<YOUR_API_KEY_HERE>",
     };
 
     const res = await sdk.payments.guest.initialize(
@@ -422,10 +409,12 @@ import { Currency } from "Bolt-Public-API/dist/sdk/models/shared";
     if (res.statusCode == 200) {
         // handle response
     }
-})();
+}
+
+run();
 
 ```
-<!-- End Authentication -->
+<!-- End Authentication [security] -->
 
 <!-- Placeholder for Future Speakeasy SDK Sections -->
 
