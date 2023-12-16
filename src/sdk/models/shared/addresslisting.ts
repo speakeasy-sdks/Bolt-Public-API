@@ -261,7 +261,7 @@ export enum CountryCode {
 }
 
 /**
- * A physical address.
+ * An address saved on an account, i.e. a physical address plus any additional account-specific metadata.
  */
 export class AddressListing extends SpeakeasyBase {
     /**
@@ -357,7 +357,7 @@ export class AddressListing extends SpeakeasyBase {
 }
 
 /**
- * A physical address.
+ * An address saved on an account, i.e. a physical address plus any additional account-specific metadata.
  */
 export class AddressListingInput extends SpeakeasyBase {
     /**

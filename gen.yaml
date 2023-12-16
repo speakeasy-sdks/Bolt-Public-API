@@ -2,8 +2,8 @@ configVersion: 1.0.0
 management:
   docChecksum: 4ffd4942026558444f933f9c092631c9
   docVersion: 3.0.1
-  speakeasyVersion: 1.126.0
-  generationVersion: 2.213.3
+  speakeasyVersion: 1.126.4
+  generationVersion: 2.214.10
 generation:
   comments: {}
   devContainers:
@@ -14,20 +14,22 @@ generation:
   usageSnippets:
     optionalPropertyRendering: withExample
   baseServerURL: ""
+  fixes:
+    nameResolutionDec2023: false
   flattenGlobalSecurity: true
 features:
   typescript:
-    core: 3.3.0
+    core: 3.3.8
     devContainers: 2.88.0
-    globalSecurity: 2.82.1
+    globalSecurity: 2.82.2
     globalServerURLs: 2.82.1
     groups: 2.81.2
     ignores: 2.81.1
-    inputOutputModels: 2.82.0
+    inputOutputModels: 2.83.0
     methodSecurity: 2.82.0
     nameOverrides: 2.81.1
 typescript:
-  version: 0.19.0
+  version: 0.20.0
   author: Bolt
   clientServerStatusCodesAsErrors: true
   flattenGlobalSecurity: false
