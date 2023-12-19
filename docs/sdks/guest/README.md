@@ -112,7 +112,7 @@ run();
 | Error Object     | Status Code      | Content Type     |
 | ---------------- | ---------------- | ---------------- |
 | errors.ErrorT    | 4XX              | application/json |
-| errors.SDKError  | 400-600          | */*              |
+| errors.SDKError  | 4xx-5xx          | */*              |
 
 ## performAction
 
@@ -165,7 +165,7 @@ run();
 | Error Object     | Status Code      | Content Type     |
 | ---------------- | ---------------- | ---------------- |
 | errors.ErrorT    | 4XX              | application/json |
-| errors.SDKError  | 400-600          | */*              |
+| errors.SDKError  | 4xx-5xx          | */*              |
 
 ## update
 
@@ -264,4 +264,4 @@ run();
 | Error Object     | Status Code      | Content Type     |
 | ---------------- | ---------------- | ---------------- |
 | errors.ErrorT    | 4XX              | application/json |
-| errors.SDKError  | 400-600          | */*              |
+| errors.SDKError  | 4xx-5xx          | */*              |

@@ -75,7 +75,7 @@ run();
 
 | Error Object    | Status Code     | Content Type    |
 | --------------- | --------------- | --------------- |
-| errors.SDKError | 400-600         | */*             |
+| errors.SDKError | 4xx-5xx         | */*             |
 
 ## addPaymentMethod
 
@@ -125,7 +125,7 @@ run();
 
 | Error Object    | Status Code     | Content Type    |
 | --------------- | --------------- | --------------- |
-| errors.SDKError | 400-600         | */*             |
+| errors.SDKError | 4xx-5xx         | */*             |
 
 ## deleteAddress
 
@@ -174,7 +174,7 @@ run();
 | Error Object     | Status Code      | Content Type     |
 | ---------------- | ---------------- | ---------------- |
 | errors.ErrorT    | 4XX              | application/json |
-| errors.SDKError  | 400-600          | */*              |
+| errors.SDKError  | 4xx-5xx          | */*              |
 
 ## deletePaymentMethod
 
@@ -223,7 +223,7 @@ run();
 | Error Object     | Status Code      | Content Type     |
 | ---------------- | ---------------- | ---------------- |
 | errors.ErrorT    | 4XX              | application/json |
-| errors.SDKError  | 400-600          | */*              |
+| errors.SDKError  | 4xx-5xx          | */*              |
 
 ## detect
 
@@ -274,7 +274,7 @@ run();
 | Error Object     | Status Code      | Content Type     |
 | ---------------- | ---------------- | ---------------- |
 | errors.ErrorT    | 4XX              | application/json |
-| errors.SDKError  | 400-600          | */*              |
+| errors.SDKError  | 4xx-5xx          | */*              |
 
 ## getDetails
 
@@ -320,7 +320,7 @@ run();
 | Error Object     | Status Code      | Content Type     |
 | ---------------- | ---------------- | ---------------- |
 | errors.ErrorT    | 4XX              | application/json |
-| errors.SDKError  | 400-600          | */*              |
+| errors.SDKError  | 4xx-5xx          | */*              |
 
 ## updateAddress
 
@@ -384,4 +384,4 @@ run();
 
 | Error Object    | Status Code     | Content Type    |
 | --------------- | --------------- | --------------- |
-| errors.SDKError | 400-600         | */*             |
+| errors.SDKError | 4xx-5xx         | */*             |
