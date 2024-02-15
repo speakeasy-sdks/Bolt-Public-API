@@ -39,7 +39,7 @@ async function run() {
     });
 
     const res = await sdk.account.addAddress({
-        xPublishableKey: "string",
+        xPublishableKey: "<value>",
         addressListing: {
             company: "ACME Corporation",
             countryCode: CountryCode.Us,
@@ -129,7 +129,7 @@ async function run() {
     let res;
     try {
         res = await sdk.account.deleteAddress({
-            xPublishableKey: "string",
+            xPublishableKey: "<value>",
             id: "D4g3h5tBuVYK9",
         });
     } catch (err) {
@@ -201,7 +201,7 @@ async function run() {
     });
 
     const res = await sdk.account.addAddress({
-        xPublishableKey: "string",
+        xPublishableKey: "<value>",
         addressListing: {
             company: "ACME Corporation",
             countryCode: CountryCode.Us,
@@ -248,7 +248,7 @@ async function run() {
     });
 
     const res = await sdk.account.addAddress({
-        xPublishableKey: "string",
+        xPublishableKey: "<value>",
         addressListing: {
             company: "ACME Corporation",
             countryCode: CountryCode.Us,
@@ -302,7 +302,7 @@ async function run() {
     });
 
     const res = await sdk.account.addAddress({
-        xPublishableKey: "string",
+        xPublishableKey: "<value>",
         addressListing: {
             company: "ACME Corporation",
             countryCode: CountryCode.Us,
@@ -344,7 +344,7 @@ async function run() {
 
     const res = await sdk.payments.guest.initialize(
         {
-            xPublishableKey: "string",
+            xPublishableKey: "<value>",
             guestPaymentInitializeRequest: {
                 cart: {
                     discounts: [
@@ -376,7 +376,7 @@ async function run() {
                     orderReference: "order_100",
                     shipments: [
                         {
-                            address: "string",
+                            address: "<value>",
                             carrier: "FedEx",
                             cost: {
                                 currency: Currency.Usd,
@@ -393,7 +393,7 @@ async function run() {
                         units: 900,
                     },
                 },
-                paymentMethod: "string",
+                paymentMethod: "<value>",
                 profile: {
                     createAccount: true,
                     email: "alice@example.com",

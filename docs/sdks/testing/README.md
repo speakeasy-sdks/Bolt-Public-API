@@ -31,7 +31,7 @@ const operationSecurity: TestingAccountCreateSecurity = {
 };
 
   const res = await sdk.testing.createAccount({
-    xPublishableKey: "string",
+    xPublishableKey: "<value>",
     accountTestCreationData: {
       emailState: EmailState.Unverified,
       hasAddress: true,

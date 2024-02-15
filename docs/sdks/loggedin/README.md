@@ -27,7 +27,7 @@ async function run() {
   });
 
   const res = await sdk.payments.loggedIn.initialize({
-    xPublishableKey: "string",
+    xPublishableKey: "<value>",
     paymentInitializeRequest: {
       cart: {
         discounts: [
@@ -59,7 +59,7 @@ async function run() {
         orderReference: "order_100",
         shipments: [
           {
-            address: "string",
+            address: "<value>",
             carrier: "FedEx",
             cost: {
               currency: Currency.Usd,
@@ -76,7 +76,7 @@ async function run() {
           units: 900,
         },
       },
-      paymentMethod: "string",
+      paymentMethod: "<value>",
     },
   });
 
@@ -125,7 +125,7 @@ async function run() {
   });
 
   const res = await sdk.payments.loggedIn.performAction({
-    xPublishableKey: "string",
+    xPublishableKey: "<value>",
     id: "iKv7t5bgt1gg",
     paymentActionRequest: {
       dotTag: DotTag.Finalize,
@@ -177,7 +177,7 @@ async function run() {
   });
 
   const res = await sdk.payments.loggedIn.update({
-    xPublishableKey: "string",
+    xPublishableKey: "<value>",
     id: "iKv7t5bgt1gg",
     paymentUpdateRequest: {
       cart: {
@@ -210,7 +210,7 @@ async function run() {
         orderReference: "order_100",
         shipments: [
           {
-            address: "string",
+            address: "<value>",
             carrier: "FedEx",
             cost: {
               currency: Currency.Usd,

@@ -8,10 +8,12 @@ generation:
     optionalPropertyRendering: withExample
   fixes:
     nameResolutionDec2023: false
+    parameterOrderingFeb2024: false
+    requestResponseComponentNamesFeb2024: false
   baseServerURL: ""
   flattenGlobalSecurity: true
 typescript:
-  version: 0.20.1
+  version: 0.20.2
   author: Bolt
   clientServerStatusCodesAsErrors: true
   flattenGlobalSecurity: false

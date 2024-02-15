@@ -35,7 +35,7 @@ async function run() {
   });
 
   const res = await sdk.account.addAddress({
-    xPublishableKey: "string",
+    xPublishableKey: "<value>",
     addressListing: {
       company: "ACME Corporation",
       countryCode: CountryCode.Us,
@@ -98,8 +98,8 @@ async function run() {
   });
 
   const res = await sdk.account.addPaymentMethod({
-    requestBody: "string",
-    xPublishableKey: "string",
+    requestBody: "<value>",
+    xPublishableKey: "<value>",
   });
 
   if (res.statusCode == 200) {
@@ -146,7 +146,7 @@ async function run() {
   });
 
   const res = await sdk.account.deleteAddress({
-    xPublishableKey: "string",
+    xPublishableKey: "<value>",
     id: "D4g3h5tBuVYK9",
   });
 
@@ -195,7 +195,7 @@ async function run() {
   });
 
   const res = await sdk.account.deletePaymentMethod({
-    xPublishableKey: "string",
+    xPublishableKey: "<value>",
     id: "D4g3h5tBuVYK9",
   });
 
@@ -243,7 +243,7 @@ async function run() {
   });
 
   const res = await sdk.account.detect({
-    xPublishableKey: "string",
+    xPublishableKey: "<value>",
     identifier: {
       identifierType: IdentifierType.Email,
       identifierValue: "alice@example.com",
@@ -293,7 +293,7 @@ async function run() {
   });
 
   const res = await sdk.account.getDetails({
-    xPublishableKey: "string",
+    xPublishableKey: "<value>",
   });
 
   if (res.statusCode == 200) {
@@ -343,7 +343,7 @@ async function run() {
   });
 
   const res = await sdk.account.updateAddress({
-    xPublishableKey: "string",
+    xPublishableKey: "<value>",
     addressListing: {
       company: "ACME Corporation",
       countryCode: CountryCode.Us,

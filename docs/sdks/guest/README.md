@@ -27,7 +27,7 @@ const operationSecurity: GuestPaymentsInitializeSecurity = {
 };
 
   const res = await sdk.payments.guest.initialize({
-    xPublishableKey: "string",
+    xPublishableKey: "<value>",
     guestPaymentInitializeRequest: {
       cart: {
         discounts: [
@@ -59,7 +59,7 @@ const operationSecurity: GuestPaymentsInitializeSecurity = {
         orderReference: "order_100",
         shipments: [
           {
-            address: "string",
+            address: "<value>",
             carrier: "FedEx",
             cost: {
               currency: Currency.Usd,
@@ -76,7 +76,7 @@ const operationSecurity: GuestPaymentsInitializeSecurity = {
           units: 900,
         },
       },
-      paymentMethod: "string",
+      paymentMethod: "<value>",
       profile: {
         createAccount: true,
         email: "alice@example.com",
@@ -133,7 +133,7 @@ const operationSecurity: GuestPaymentsActionSecurity = {
 };
 
   const res = await sdk.payments.guest.performAction({
-    xPublishableKey: "string",
+    xPublishableKey: "<value>",
     id: "iKv7t5bgt1gg",
     paymentActionRequest: {
       dotTag: DotTag.Finalize,
@@ -186,7 +186,7 @@ const operationSecurity: GuestPaymentsUpdateSecurity = {
 };
 
   const res = await sdk.payments.guest.update({
-    xPublishableKey: "string",
+    xPublishableKey: "<value>",
     id: "iKv7t5bgt1gg",
     paymentUpdateRequest: {
       cart: {
@@ -219,7 +219,7 @@ const operationSecurity: GuestPaymentsUpdateSecurity = {
         orderReference: "order_100",
         shipments: [
           {
-            address: "string",
+            address: "<value>",
             carrier: "FedEx",
             cost: {
               currency: Currency.Usd,

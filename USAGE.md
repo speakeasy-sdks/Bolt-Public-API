@@ -11,7 +11,7 @@ async function run() {
     });
 
     const res = await sdk.account.addAddress({
-        xPublishableKey: "string",
+        xPublishableKey: "<value>",
         addressListing: {
             company: "ACME Corporation",
             countryCode: CountryCode.Us,

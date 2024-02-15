@@ -30,9 +30,9 @@ async function run() {
   });
 
   const res = await sdk.oAuth.getToken({
-    clientId: "string",
-    clientSecret: "string",
-    code: "string",
+    clientId: "<value>",
+    clientSecret: "<value>",
+    code: "<value>",
     grantType: GrantType.AuthorizationCode,
     scope: [
       Scope.BoltAccountManage,
