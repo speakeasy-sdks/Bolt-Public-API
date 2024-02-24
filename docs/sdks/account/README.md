@@ -236,11 +236,7 @@ import { BoltPublicAPI } from "Bolt-Public-API";
 import { IdentifierType } from "Bolt-Public-API/dist/sdk/models/shared";
 
 async function run() {
-  const sdk = new BoltPublicAPI({
-    security: {
-      apiKey: "<YOUR_API_KEY_HERE>",
-    },
-  });
+  const sdk = new BoltPublicAPI();
 
   const res = await sdk.account.detect({
     xPublishableKey: "<value>",

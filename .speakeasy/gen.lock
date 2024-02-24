@@ -4,17 +4,17 @@ management:
   docChecksum: 4ffd4942026558444f933f9c092631c9
   docVersion: 3.0.1
   speakeasyVersion: internal
-  generationVersion: 2.258.0
-  releaseVersion: 0.20.2
-  configChecksum: 252dddf986c89ae1dc655659a1f9c9ea
+  generationVersion: 2.272.4
+  releaseVersion: 0.20.3
+  configChecksum: ffdd5c0037b1a48a16c63bb63d622d77
   repoURL: https://github.com/speakeasy-sdks/Bolt-Public-API.git
   repoSubDirectory: .
   installationURL: https://github.com/speakeasy-sdks/Bolt-Public-API
 features:
   typescript:
-    core: 3.4.7
+    core: 3.4.8
     devContainers: 2.88.0
-    globalSecurity: 2.82.2
+    globalSecurity: 2.82.3
     globalServerURLs: 2.82.1
     groups: 2.81.2
     ignores: 2.81.1
