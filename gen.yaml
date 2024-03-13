@@ -15,7 +15,7 @@ generation:
   baseServerURL: ""
   flattenGlobalSecurity: true
 typescript:
-  version: 0.20.4
+  version: 0.20.5
   author: Bolt
   clientServerStatusCodesAsErrors: true
   flattenGlobalSecurity: false

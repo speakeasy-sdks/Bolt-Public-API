@@ -3,10 +3,10 @@ id: e027010a-eac5-461c-b9c9-20d1e66410d3
 management:
   docChecksum: 4ffd4942026558444f933f9c092631c9
   docVersion: 3.0.1
-  speakeasyVersion: internal
-  generationVersion: 2.272.7
-  releaseVersion: 0.20.4
-  configChecksum: 4068d2a699bce7fdda60263898ad67f8
+  speakeasyVersion: 1.207.1
+  generationVersion: 2.280.6
+  releaseVersion: 0.20.5
+  configChecksum: 6cb255375c2b12c5dc6b6d2da259856d
   repoURL: https://github.com/speakeasy-sdks/Bolt-Public-API.git
   repoSubDirectory: .
   installationURL: https://github.com/speakeasy-sdks/Bolt-Public-API
@@ -15,7 +15,7 @@ features:
     core: 3.4.8
     devContainers: 2.88.0
     globalSecurity: 2.82.4
-    globalServerURLs: 2.82.1
+    globalServerURLs: 2.82.2
     groups: 2.81.2
     ignores: 2.81.1
     inputOutputModels: 2.83.0
